@@ -92,13 +92,15 @@ This app will allow users to find more information regarding any book they encou
 <img src="https://i.imgur.com/O53ve9a.png" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
-<img src="https://i.imgur.com/UTdV8qS.png" width=75 style="padding:10px;">
-<img src="https://i.imgur.com/v2WQCFA.png" width=75 style="padding:10px;">
-<img src="https://i.imgur.com/r5DHG3g.png" width=75 style="padding:10px;">
-<img src="https://i.imgur.com/ic3qjrU.png" width=75 style="padding:10px;">
-<img src="https://i.imgur.com/5qURfsy.png" width=75 style="padding:10px;">
-<img src="https://i.imgur.com/xVOEpp7.png" width=75 style="padding:10px;">
-<img src="https://i.imgur.com/ubgj1he.png" width=75>
+<p float="left">
+   <img src="https://i.imgur.com/UTdV8qS.png" width=75 style="padding:10px;">
+   <img src="https://i.imgur.com/v2WQCFA.png" width=75 style="padding:10px;">
+   <img src="https://i.imgur.com/r5DHG3g.png" width=75 style="padding:10px;">
+   <img src="https://i.imgur.com/ic3qjrU.png" width=75 style="padding:10px;">
+   <img src="https://i.imgur.com/5qURfsy.png" width=75 style="padding:10px;">
+   <img src="https://i.imgur.com/xVOEpp7.png" width=75 style="padding:10px;">
+   <img src="https://i.imgur.com/ubgj1he.png" width=75>
+ </p>
 
 ## Schema 
 ### Models
