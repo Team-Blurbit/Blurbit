@@ -27,12 +27,11 @@ This app will allow users to find more information regarding any book they encou
 
 **Required Must-have Stories**
 * AS A user, I WANT to scan a barcode, SO THAT I can read reviews.
-* AS A user, I WANT to "expand" to long reviews, SO THAT I can read them easily.
+* AS A user, I WANT to "expand" long reviews, SO THAT I can read them easily.
 * AS A user, I WANT to view my search history, SO THAT I can recall past results.
-* AS A user, I WANT to view nearby stores, SO THAT I may purchase the product.
+* AS A user, I WANT to view nearby stores, SO THAT I may visit the store.
 * AS A user, I WANT to view store details, SO THAT I can determine if the store meets my criteria.
 * AS A system, I WANT to present the user with recommendations, SO THAT sales increase.
-* AS A user, I WANT to find nearby bookstores by location, SO THAT I can find a bookstore to go to.
 
 **Optional Nice-to-have Stories** 
 
@@ -93,23 +92,166 @@ This app will allow users to find more information regarding any book they encou
 <img src="https://i.imgur.com/O53ve9a.png" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
-<p float="left>
-   <img src="https://i.imgur.com/UTdV8qS.png" width=75 style="padding:10px;">
-   <img src="https://i.imgur.com/v2WQCFA.png" width=75 style="padding:10px;">
-   <img src="https://i.imgur.com/r5DHG3g.png" width=75 style="padding:10px;">
-   <img src="https://i.imgur.com/ic3qjrU.png" width=75 style="padding:10px;">
-   <img src="https://i.imgur.com/5qURfsy.png" width=75 style="padding:10px;">
-   <img src="https://i.imgur.com/xVOEpp7.png" width=75 style="padding:10px;">
-   <img src="https://i.imgur.com/ubgj1he.png" width=75>
-</p>
-
-### [BONUS] Interactive Prototype
+<img src="https://i.imgur.com/UTdV8qS.png" width=75 style="padding:10px;">
+<img src="https://i.imgur.com/v2WQCFA.png" width=75 style="padding:10px;">
+<img src="https://i.imgur.com/r5DHG3g.png" width=75 style="padding:10px;">
+<img src="https://i.imgur.com/ic3qjrU.png" width=75 style="padding:10px;">
+<img src="https://i.imgur.com/5qURfsy.png" width=75 style="padding:10px;">
+<img src="https://i.imgur.com/xVOEpp7.png" width=75 style="padding:10px;">
+<img src="https://i.imgur.com/ubgj1he.png" width=75>
 
 ## Schema 
-[This section will be completed in Unit 9]
 ### Models
-[Add table of models]
+#### User 
+| Property      | Type     | Description |
+   | ------------- | -------- | ------------|
+   | userId      | String   | unique id for the user (default field) |
+   | username    | String   |unique name for the user |
+   | password    | String   |password for the user |
+   | profilePicture    |File  |profile picture of the user|
+#### Search 
+   | Property      | Type     | Description |
+   | ------------- | -------- | ------------|
+   | searchId      | String   | unique id for the search (default field) |
+   | bookId        | String   |book searched |
+   | userId        | Pointer to User   |user that conducted the search |
+   | createdAt    |DateTime  |timestamp for the time of the search (default field) |
+#### Review 
+   | Property      | Type     | Description |
+   | ------------- | -------- | ------------|
+   | reviewId      | String   | unique id for the search (default field) |
+   | bookId        | String   |book to review |
+   | userId        | Pointer to User|review author |
+   | review        | String|review content |
+   | createdAt    |DateTime  |timestamp for the time the review is created (default field) |
 ### Networking
-- [Add list of network requests by screen ]
-- [Create basic snippets for each Parse network request]
-- [OPTIONAL: List endpoints if using existing API such as Yelp]
+#### List of network requests by screen
+   - User login/signup screen
+      - (Create/POST) Create a new user object
+        ```swift
+        let user = PFUser()
+        user.username = usernameField.text
+        user.password = passwordField.text
+        user.signUpInBackground{ (success,error) in
+            if success{
+                print("Successfully signed up.")
+            }
+            else{
+                print("Error: \(error?.localizedDescription)")
+            }
+        }
+        ```
+      - (Read/GET) Query user object by username and password
+         ```swift
+        let username = usernameField.text
+        let password = passwordField.text
+        PFUser.logInWithUsername(inBackground: username, password: password) 
+        { (user, error) in
+            if user != nil{
+                print("Successfully logged in.")
+                // TODO: Go to barcode scanner screen
+            }
+            else{
+                print("Error: \(error?.localizedDescription)")
+            }
+        }
+         ```
+   - Barcode Scanner Screen
+      - (Create/POST) Create a new search object
+          ```swift
+        let search=PFObject(className:"Searches")
+        var bookId = "book ID String"
+        search["userId"]=PFUser.current()!
+        search["bookId"]=bookId
+        selectedPost.saveInBackground { (success, error) in
+            if success{
+                print("Search saved")
+            }
+            else{
+                print("Search could not be saved")
+            }
+        }
+          ```
+   - Create Review Screen
+      - (Create/POST) Create a new review object
+          ```swift
+        let review=PFObject(className:"Reviews")
+        var bookId = "book ID String"
+        var text = "text from user input"
+        review["userId"]=PFUser.current()!
+        review["bookId"]=bookId
+        review["text"]=text
+        selectedPost.saveInBackground { (success, error) in
+            if success{
+                print("Review saved")
+            }
+            else{
+                print("Review could not be saved")
+            }
+        }
+          ```
+   - Search History Screen
+      - (Read/GET) Query searches by user
+          ```swift
+        let currentUser=PFUser.current()!
+        let query = PFQuery(className:"Searches")
+        query.whereKey("userId", equalTo: currentUser)
+        query.order(byDescending: "createdAt")
+        query.findObjectsInBackground {(searches: [PFObject]?, error: Error?) in
+           if let error = error { 
+              print(error.localizedDescription)
+           } else if let searches = searches {
+              print("Successfully retrieved \(searches.count) posts.")
+          // TODO: Do something with searches...
+           }
+        }
+          ```
+      - (Delete) Delete existing search
+          ```swift
+        var bookId = "book ID string"
+        let query = PFQuery(className:"Followers")
+        query.whereKey("follower", equalTo: bookId)
+        query.findObjectsInBackgroundWithBlock {
+        (searchesToDelete: [PFObject]?, error: Error?) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                for search in searchesToDelete as! [PFObject] {
+                    search.deleteInBackground()
+                }
+            }
+        }
+          ```
+   - Profile Screen
+      - (Update/PUT) Update user profile image
+          ```swift
+        var userId=PFUser.current()!.objectId
+        let imageData=imageView.image!.pngData()
+        let file=PFFileObject(name:"image.png", data:imageData!)
+        var query = PFQuery(className:"Users")
+        query.getObjectInBackgroundWithId(userId) {
+          (user: PFUser?, error: Error?) in
+              if error != nil {
+                println(error)
+              } else if let user = user {
+                user["image"]=file
+                user.saveInBackground()
+              }
+        }
+          ```
+#### [OPTIONAL:] Existing API Endpoints
+##### Rainforest API
+- Base URL - [https://api.rainforestapi.com/](https://api.rainforestapi.com/)
+
+   HTTP Verb | Endpoint | Description
+   ----------|----------|------------
+    `GET`    | /request?api_key=[API KEY]&type=reviews&amazon_domain=amazon.com&gtin=updcode | get all reviews with detailed info for a specific book as well as author info|
+    `GET`    | /request?api_key=[API KEY]&type=bestsellers&url=https://www.amazon.com/best-sellers-books-Amazon/zgbs/books/ref=zg_bs_nav_0 | get best selling books of Amazon|
+    
+##### Google Places API
+- Base URL - [https://maps.googleapis.com/maps/api/place](https://maps.googleapis.com/maps/api/place)
+
+   HTTP Verb | Endpoint | Description
+   ----------|----------|------------
+    `GET`    | /nearbysearch/json?location=latutude,longitude&radius=500&types=book_store&key=YOUR_API_KEY | get all nearby bookstores|
+    `GET`    | /details/output?key=YOUR_API_KEY&place_id=place_id | get detailed information about a bookstore|
