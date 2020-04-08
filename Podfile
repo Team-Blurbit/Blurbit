@@ -8,6 +8,7 @@ target 'Blurbit' do
   # Pods for Blurbit
   pod "AlamofireImage"
   pod "Parse"
+  pod "MTBBarcodeScanner"
 
   target 'BlurbitTests' do
     inherit! :search_paths
