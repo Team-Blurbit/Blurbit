@@ -42,11 +42,19 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I9p-M5-ygO">
+                                <rect key="frame" x="10" y="54" width="394" height="371"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="I9p-M5-ygO" firstAttribute="leading" secondItem="AYZ-Xv-vAe" secondAttribute="leading" constant="10" id="1pJ-zX-uRy"/>
                             <constraint firstItem="s7j-ww-Mj2" firstAttribute="leading" secondItem="AYZ-Xv-vAe" secondAttribute="leading" constant="23" id="8ZB-aW-qgM"/>
+                            <constraint firstItem="I9p-M5-ygO" firstAttribute="top" secondItem="AYZ-Xv-vAe" secondAttribute="top" constant="10" id="KTp-kD-xfO"/>
+                            <constraint firstAttribute="bottom" secondItem="I9p-M5-ygO" secondAttribute="bottom" constant="471" id="fcL-As-9GQ"/>
                             <constraint firstItem="AYZ-Xv-vAe" firstAttribute="bottom" secondItem="s7j-ww-Mj2" secondAttribute="bottom" constant="23" id="sbf-EL-6Dg"/>
+                            <constraint firstItem="AYZ-Xv-vAe" firstAttribute="trailing" secondItem="I9p-M5-ygO" secondAttribute="trailing" constant="10" id="x3H-0o-F3G"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="AYZ-Xv-vAe"/>
                     </view>
@@ -55,7 +63,7 @@
                     </tabBarItem>
                     <connections>
                         <outlet property="isbn" destination="s7j-ww-Mj2" id="BZA-aR-mVp"/>
-                        <outlet property="previewView" destination="i74-NC-sOW" id="GpZ-pA-NIF"/>
+                        <outlet property="previewView" destination="I9p-M5-ygO" id="2SS-dV-WgT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rr1-UK-ADl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

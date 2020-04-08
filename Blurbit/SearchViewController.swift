@@ -26,6 +26,8 @@ class SearchViewController: UIViewController {
         // scanner?.allowTapToFocus = true
         // Do any additional setup after loading the view.
         scanner = MTBBarcodeScanner(metadataObjectTypes: [AVMetadataObject.ObjectType.ean13.rawValue], previewView: previewView)
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
