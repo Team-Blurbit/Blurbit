@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FoM-M1-Jjw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FoM-M1-Jjw">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -31,20 +31,36 @@
         <!--Search-->
         <scene sceneID="qu9-tn-XCY">
             <objects>
-                <viewController id="WTr-Sd-qvF" sceneMemberID="viewController">
+                <viewController id="WTr-Sd-qvF" customClass="SearchViewController" customModule="Blurbit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="i74-NC-sOW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ISBN:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s7j-ww-Mj2">
+                                <rect key="frame" x="23" y="768.5" width="48.5" height="21.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="s7j-ww-Mj2" firstAttribute="leading" secondItem="AYZ-Xv-vAe" secondAttribute="leading" constant="23" id="8ZB-aW-qgM"/>
+                            <constraint firstItem="AYZ-Xv-vAe" firstAttribute="bottom" secondItem="s7j-ww-Mj2" secondAttribute="bottom" constant="23" id="sbf-EL-6Dg"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="AYZ-Xv-vAe"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass.circle" catalog="system" selectedImage="magnifyingglass.circle.fill" id="tDf-Yb-svb" userLabel="Search">
                         <color key="badgeColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBarItem>
+                    <connections>
+                        <outlet property="isbn" destination="s7j-ww-Mj2" id="BZA-aR-mVp"/>
+                        <outlet property="previewView" destination="i74-NC-sOW" id="GpZ-pA-NIF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rr1-UK-ADl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-513" y="419"/>
+            <point key="canvasLocation" x="-513.04347826086962" y="418.52678571428572"/>
         </scene>
         <!--Recents-->
         <scene sceneID="2iX-4V-fAw">
@@ -96,13 +112,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="clock" catalog="system" width="64" height="60"/>
-        <image name="clock.fill" catalog="system" width="64" height="60"/>
-        <image name="magnifyingglass.circle" catalog="system" width="64" height="60"/>
-        <image name="magnifyingglass.circle.fill" catalog="system" width="64" height="60"/>
-        <image name="map" catalog="system" width="64" height="56"/>
-        <image name="map.fill" catalog="system" width="64" height="56"/>
-        <image name="star" catalog="system" width="64" height="58"/>
-        <image name="star.fill" catalog="system" width="64" height="58"/>
+        <image name="clock" catalog="system" width="128" height="121"/>
+        <image name="clock.fill" catalog="system" width="128" height="121"/>
+        <image name="magnifyingglass.circle" catalog="system" width="128" height="121"/>
+        <image name="magnifyingglass.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="map" catalog="system" width="128" height="113"/>
+        <image name="map.fill" catalog="system" width="128" height="113"/>
+        <image name="star" catalog="system" width="128" height="116"/>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
     </resources>
 </document>
