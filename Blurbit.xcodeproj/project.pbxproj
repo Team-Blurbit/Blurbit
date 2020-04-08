@@ -1,0 +1,744 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		313DBC8DFD8822DECB2B1598 /* Pods_Blurbit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB02BC846CE5301A248E34B3 /* Pods_Blurbit.framework */; };
+		3A7DC0C964922E6EEA857935 /* Pods_BlurbitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3B854C9BF2D2C52B4CF37A /* Pods_BlurbitTests.framework */; };
+		84EAF1A3242980D3001EADA0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EAF1A2242980D3001EADA0 /* AppDelegate.swift */; };
+		84EAF1A5242980D3001EADA0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EAF1A4242980D3001EADA0 /* SceneDelegate.swift */; };
+		84EAF1A7242980D3001EADA0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EAF1A6242980D3001EADA0 /* ViewController.swift */; };
+		84EAF1AA242980D3001EADA0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84EAF1A8242980D3001EADA0 /* Main.storyboard */; };
+		84EAF1AC242980D4001EADA0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84EAF1AB242980D4001EADA0 /* Assets.xcassets */; };
+		84EAF1AF242980D4001EADA0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84EAF1AD242980D4001EADA0 /* LaunchScreen.storyboard */; };
+		84EAF1BA242980D4001EADA0 /* BlurbitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EAF1B9242980D4001EADA0 /* BlurbitTests.swift */; };
+		84EAF1C5242980D4001EADA0 /* BlurbitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EAF1C4242980D4001EADA0 /* BlurbitUITests.swift */; };
+		DA356292A594F0420A794C5F /* Pods_Blurbit_BlurbitUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B114ADA75A2027E630FEE5C7 /* Pods_Blurbit_BlurbitUITests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		84EAF1B6242980D4001EADA0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84EAF197242980D3001EADA0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84EAF19E242980D3001EADA0;
+			remoteInfo = Blurbit;
+		};
+		84EAF1C1242980D4001EADA0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84EAF197242980D3001EADA0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84EAF19E242980D3001EADA0;
+			remoteInfo = Blurbit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		02A48FCC1F360D32BE3A8B79 /* Pods-Blurbit-BlurbitUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Blurbit-BlurbitUITests.debug.xcconfig"; path = "Target Support Files/Pods-Blurbit-BlurbitUITests/Pods-Blurbit-BlurbitUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		507FD7A94F94976619F21FEE /* Pods-BlurbitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlurbitTests.debug.xcconfig"; path = "Target Support Files/Pods-BlurbitTests/Pods-BlurbitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		58E3FC2CBD19317AEA549994 /* Pods-BlurbitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlurbitTests.release.xcconfig"; path = "Target Support Files/Pods-BlurbitTests/Pods-BlurbitTests.release.xcconfig"; sourceTree = "<group>"; };
+		847702C41E851A884F927436 /* Pods-Blurbit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Blurbit.debug.xcconfig"; path = "Target Support Files/Pods-Blurbit/Pods-Blurbit.debug.xcconfig"; sourceTree = "<group>"; };
+		84EAF19F242980D3001EADA0 /* Blurbit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blurbit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		84EAF1A2242980D3001EADA0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		84EAF1A4242980D3001EADA0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		84EAF1A6242980D3001EADA0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		84EAF1A9242980D3001EADA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		84EAF1AB242980D4001EADA0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		84EAF1AE242980D4001EADA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		84EAF1B0242980D4001EADA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84EAF1B5242980D4001EADA0 /* BlurbitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlurbitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		84EAF1B9242980D4001EADA0 /* BlurbitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurbitTests.swift; sourceTree = "<group>"; };
+		84EAF1BB242980D4001EADA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84EAF1C0242980D4001EADA0 /* BlurbitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlurbitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		84EAF1C4242980D4001EADA0 /* BlurbitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurbitUITests.swift; sourceTree = "<group>"; };
+		84EAF1C6242980D4001EADA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8E3B854C9BF2D2C52B4CF37A /* Pods_BlurbitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BlurbitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		924266E172AE7EF8F566D987 /* Pods-Blurbit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Blurbit.release.xcconfig"; path = "Target Support Files/Pods-Blurbit/Pods-Blurbit.release.xcconfig"; sourceTree = "<group>"; };
+		9E3972EB4C80EE7BD64447D1 /* Pods-Blurbit-BlurbitUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Blurbit-BlurbitUITests.release.xcconfig"; path = "Target Support Files/Pods-Blurbit-BlurbitUITests/Pods-Blurbit-BlurbitUITests.release.xcconfig"; sourceTree = "<group>"; };
+		B114ADA75A2027E630FEE5C7 /* Pods_Blurbit_BlurbitUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Blurbit_BlurbitUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB02BC846CE5301A248E34B3 /* Pods_Blurbit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Blurbit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		84EAF19C242980D3001EADA0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				313DBC8DFD8822DECB2B1598 /* Pods_Blurbit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84EAF1B2242980D4001EADA0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A7DC0C964922E6EEA857935 /* Pods_BlurbitTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84EAF1BD242980D4001EADA0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA356292A594F0420A794C5F /* Pods_Blurbit_BlurbitUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		12134643B4FB98929C830749 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				847702C41E851A884F927436 /* Pods-Blurbit.debug.xcconfig */,
+				924266E172AE7EF8F566D987 /* Pods-Blurbit.release.xcconfig */,
+				02A48FCC1F360D32BE3A8B79 /* Pods-Blurbit-BlurbitUITests.debug.xcconfig */,
+				9E3972EB4C80EE7BD64447D1 /* Pods-Blurbit-BlurbitUITests.release.xcconfig */,
+				507FD7A94F94976619F21FEE /* Pods-BlurbitTests.debug.xcconfig */,
+				58E3FC2CBD19317AEA549994 /* Pods-BlurbitTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		84EAF196242980D3001EADA0 = {
+			isa = PBXGroup;
+			children = (
+				84EAF1A1242980D3001EADA0 /* Blurbit */,
+				84EAF1B8242980D4001EADA0 /* BlurbitTests */,
+				84EAF1C3242980D4001EADA0 /* BlurbitUITests */,
+				84EAF1A0242980D3001EADA0 /* Products */,
+				12134643B4FB98929C830749 /* Pods */,
+				C7660CF533A74D56E8EE80C1 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		84EAF1A0242980D3001EADA0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				84EAF19F242980D3001EADA0 /* Blurbit.app */,
+				84EAF1B5242980D4001EADA0 /* BlurbitTests.xctest */,
+				84EAF1C0242980D4001EADA0 /* BlurbitUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		84EAF1A1242980D3001EADA0 /* Blurbit */ = {
+			isa = PBXGroup;
+			children = (
+				84EAF1A2242980D3001EADA0 /* AppDelegate.swift */,
+				84EAF1A4242980D3001EADA0 /* SceneDelegate.swift */,
+				84EAF1A6242980D3001EADA0 /* ViewController.swift */,
+				84EAF1A8242980D3001EADA0 /* Main.storyboard */,
+				84EAF1AB242980D4001EADA0 /* Assets.xcassets */,
+				84EAF1AD242980D4001EADA0 /* LaunchScreen.storyboard */,
+				84EAF1B0242980D4001EADA0 /* Info.plist */,
+			);
+			path = Blurbit;
+			sourceTree = "<group>";
+		};
+		84EAF1B8242980D4001EADA0 /* BlurbitTests */ = {
+			isa = PBXGroup;
+			children = (
+				84EAF1B9242980D4001EADA0 /* BlurbitTests.swift */,
+				84EAF1BB242980D4001EADA0 /* Info.plist */,
+			);
+			path = BlurbitTests;
+			sourceTree = "<group>";
+		};
+		84EAF1C3242980D4001EADA0 /* BlurbitUITests */ = {
+			isa = PBXGroup;
+			children = (
+				84EAF1C4242980D4001EADA0 /* BlurbitUITests.swift */,
+				84EAF1C6242980D4001EADA0 /* Info.plist */,
+			);
+			path = BlurbitUITests;
+			sourceTree = "<group>";
+		};
+		C7660CF533A74D56E8EE80C1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CB02BC846CE5301A248E34B3 /* Pods_Blurbit.framework */,
+				B114ADA75A2027E630FEE5C7 /* Pods_Blurbit_BlurbitUITests.framework */,
+				8E3B854C9BF2D2C52B4CF37A /* Pods_BlurbitTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		84EAF19E242980D3001EADA0 /* Blurbit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84EAF1C9242980D4001EADA0 /* Build configuration list for PBXNativeTarget "Blurbit" */;
+			buildPhases = (
+				61ED45BD21D7FF65EFFC81D2 /* [CP] Check Pods Manifest.lock */,
+				84EAF19B242980D3001EADA0 /* Sources */,
+				84EAF19C242980D3001EADA0 /* Frameworks */,
+				84EAF19D242980D3001EADA0 /* Resources */,
+				E2F700684F98E405BB58EB64 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Blurbit;
+			productName = Blurbit;
+			productReference = 84EAF19F242980D3001EADA0 /* Blurbit.app */;
+			productType = "com.apple.product-type.application";
+		};
+		84EAF1B4242980D4001EADA0 /* BlurbitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84EAF1CC242980D4001EADA0 /* Build configuration list for PBXNativeTarget "BlurbitTests" */;
+			buildPhases = (
+				D16A9C8D83ED3FEE45905B52 /* [CP] Check Pods Manifest.lock */,
+				84EAF1B1242980D4001EADA0 /* Sources */,
+				84EAF1B2242980D4001EADA0 /* Frameworks */,
+				84EAF1B3242980D4001EADA0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				84EAF1B7242980D4001EADA0 /* PBXTargetDependency */,
+			);
+			name = BlurbitTests;
+			productName = BlurbitTests;
+			productReference = 84EAF1B5242980D4001EADA0 /* BlurbitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		84EAF1BF242980D4001EADA0 /* BlurbitUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84EAF1CF242980D4001EADA0 /* Build configuration list for PBXNativeTarget "BlurbitUITests" */;
+			buildPhases = (
+				48F39071C37C9842245835E6 /* [CP] Check Pods Manifest.lock */,
+				84EAF1BC242980D4001EADA0 /* Sources */,
+				84EAF1BD242980D4001EADA0 /* Frameworks */,
+				84EAF1BE242980D4001EADA0 /* Resources */,
+				2F0154B1B4126AA600E4F496 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				84EAF1C2242980D4001EADA0 /* PBXTargetDependency */,
+			);
+			name = BlurbitUITests;
+			productName = BlurbitUITests;
+			productReference = 84EAF1C0242980D4001EADA0 /* BlurbitUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		84EAF197242980D3001EADA0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = "Team-Blurbit";
+				TargetAttributes = {
+					84EAF19E242980D3001EADA0 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+					84EAF1B4242980D4001EADA0 = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 84EAF19E242980D3001EADA0;
+					};
+					84EAF1BF242980D4001EADA0 = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 84EAF19E242980D3001EADA0;
+					};
+				};
+			};
+			buildConfigurationList = 84EAF19A242980D3001EADA0 /* Build configuration list for PBXProject "Blurbit" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 84EAF196242980D3001EADA0;
+			productRefGroup = 84EAF1A0242980D3001EADA0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				84EAF19E242980D3001EADA0 /* Blurbit */,
+				84EAF1B4242980D4001EADA0 /* BlurbitTests */,
+				84EAF1BF242980D4001EADA0 /* BlurbitUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		84EAF19D242980D3001EADA0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84EAF1AF242980D4001EADA0 /* LaunchScreen.storyboard in Resources */,
+				84EAF1AC242980D4001EADA0 /* Assets.xcassets in Resources */,
+				84EAF1AA242980D3001EADA0 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84EAF1B3242980D4001EADA0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84EAF1BE242980D4001EADA0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2F0154B1B4126AA600E4F496 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Blurbit-BlurbitUITests/Pods-Blurbit-BlurbitUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Blurbit-BlurbitUITests/Pods-Blurbit-BlurbitUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Blurbit-BlurbitUITests/Pods-Blurbit-BlurbitUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		48F39071C37C9842245835E6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Blurbit-BlurbitUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		61ED45BD21D7FF65EFFC81D2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Blurbit-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D16A9C8D83ED3FEE45905B52 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BlurbitTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E2F700684F98E405BB58EB64 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Blurbit/Pods-Blurbit-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Blurbit/Pods-Blurbit-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Blurbit/Pods-Blurbit-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		84EAF19B242980D3001EADA0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84EAF1A7242980D3001EADA0 /* ViewController.swift in Sources */,
+				84EAF1A3242980D3001EADA0 /* AppDelegate.swift in Sources */,
+				84EAF1A5242980D3001EADA0 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84EAF1B1242980D4001EADA0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84EAF1BA242980D4001EADA0 /* BlurbitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84EAF1BC242980D4001EADA0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84EAF1C5242980D4001EADA0 /* BlurbitUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		84EAF1B7242980D4001EADA0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84EAF19E242980D3001EADA0 /* Blurbit */;
+			targetProxy = 84EAF1B6242980D4001EADA0 /* PBXContainerItemProxy */;
+		};
+		84EAF1C2242980D4001EADA0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84EAF19E242980D3001EADA0 /* Blurbit */;
+			targetProxy = 84EAF1C1242980D4001EADA0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		84EAF1A8242980D3001EADA0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				84EAF1A9242980D3001EADA0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		84EAF1AD242980D4001EADA0 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				84EAF1AE242980D4001EADA0 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		84EAF1C7242980D4001EADA0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		84EAF1C8242980D4001EADA0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		84EAF1CA242980D4001EADA0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 847702C41E851A884F927436 /* Pods-Blurbit.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = Blurbit/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Team-Blurbit.Blurbit";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		84EAF1CB242980D4001EADA0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 924266E172AE7EF8F566D987 /* Pods-Blurbit.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = Blurbit/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Team-Blurbit.Blurbit";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		84EAF1CD242980D4001EADA0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 507FD7A94F94976619F21FEE /* Pods-BlurbitTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = BlurbitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Team-Blurbit.BlurbitTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Blurbit.app/Blurbit";
+			};
+			name = Debug;
+		};
+		84EAF1CE242980D4001EADA0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 58E3FC2CBD19317AEA549994 /* Pods-BlurbitTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = BlurbitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Team-Blurbit.BlurbitTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Blurbit.app/Blurbit";
+			};
+			name = Release;
+		};
+		84EAF1D0242980D4001EADA0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 02A48FCC1F360D32BE3A8B79 /* Pods-Blurbit-BlurbitUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = BlurbitUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Team-Blurbit.BlurbitUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Blurbit;
+			};
+			name = Debug;
+		};
+		84EAF1D1242980D4001EADA0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9E3972EB4C80EE7BD64447D1 /* Pods-Blurbit-BlurbitUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = BlurbitUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Team-Blurbit.BlurbitUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Blurbit;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		84EAF19A242980D3001EADA0 /* Build configuration list for PBXProject "Blurbit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84EAF1C7242980D4001EADA0 /* Debug */,
+				84EAF1C8242980D4001EADA0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		84EAF1C9242980D4001EADA0 /* Build configuration list for PBXNativeTarget "Blurbit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84EAF1CA242980D4001EADA0 /* Debug */,
+				84EAF1CB242980D4001EADA0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		84EAF1CC242980D4001EADA0 /* Build configuration list for PBXNativeTarget "BlurbitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84EAF1CD242980D4001EADA0 /* Debug */,
+				84EAF1CE242980D4001EADA0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		84EAF1CF242980D4001EADA0 /* Build configuration list for PBXNativeTarget "BlurbitUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84EAF1D0242980D4001EADA0 /* Debug */,
+				84EAF1D1242980D4001EADA0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 84EAF197242980D3001EADA0 /* Project object */;
+}
