@@ -14,8 +14,10 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
     
     var gtin=""
     var imageURL=URL(string:"https://camo.githubusercontent.com/e69c2fe22d071aa6c93355e008fe56a9aff0a14a/68747470733a2f2f692e696d6775722e636f6d2f763257514346412e706e67")!
-    var bookTitle = ""
+    var bookTitle = "unknown title"
     var authorName="unknown"
+    var ratingNum = 0
+    var ratingsTotal = 0
     var reviews=[[String:Any]]()
     
     @IBOutlet weak var tableView: UITableView!
@@ -28,6 +30,7 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
     }
     
     func startSetup(){
+        print(self.gtin)
         tableView.delegate=self
         tableView.dataSource=self
         loadReviews()
@@ -35,7 +38,8 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
     }
     
     func loadReviews(){
-        let url = URL(string: "https://api.rainforestapi.com/request?api_key=379913B5856E4E079E13E66CDD814EB9&type=reviews&amazon_domain=amazon.com&gtin=9780141362250")!
+        //test GTIN:9780141362250
+        let url = URL(string: "https://api.rainforestapi.com/request?api_key=379913B5856E4E079E13E66CDD814EB9&type=reviews&amazon_domain=amazon.com&gtin="+self.gtin)!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
         let task = session.dataTask(with: request) { (data, response, error) in
@@ -45,47 +49,70 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
             } else if let data = data {
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
             
-            self.reviews=dataDictionary["results"] as! [[String:Any]]
-                let product=dataDictionary["product"] as! [[String:Any]]
-                /*if let imageData=product["image"] as! String{
-                let imageUrl=URL(imageData)
+            self.reviews=dataDictionary["reviews"] as! [[String:Any]]
+                let product=dataDictionary["product"] as! [String:Any]
+                if let imageData=product["image"] as? String{
+                    let imageUrl=URL(string:imageData)!
                 self.imageURL=imageUrl
             }
             if let title=product["title"] as? String{
                 self.bookTitle=title
             }
-                if let bookAuthor=product["self.subtitle"]. as? String{
+                let author=product["sub_title"] as! [String:Any]
+                if let bookAuthor=author["text"] as? String{
                 self.authorName=bookAuthor
-            }*/
-                print(self.reviews)
-                print(product)
+                    if self.authorName.contains(","){
+                        let splitChars=self.authorName.split(separator: ",")
+                        let lastName=splitChars[0]
+                        let firstName=splitChars[1]
+                        self.authorName=firstName+" "+lastName as String
+                    }
+            }
+                let ratings=dataDictionary["summary"] as! [String:Any]
+                if let ratingNumber=ratings["rating"] as? Double{
+                    self.ratingNum=Int(ratingNumber)
+                }
+                if let ratingtotal=ratings["ratings_total"] as? Int{
+                    self.ratingsTotal=ratingtotal
+                }
+                print(self.reviews[0])
+                //print(product)
             self.tableView.reloadData()
             }
         }
         task.resume()
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return reviews.count+1
+        return reviews.count
    }
    
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
    if indexPath.row == 0 {
        let cell=tableView.dequeueReusableCell(withIdentifier: "BookCell") as! BookViewCell
        cell.bookTitle.text=self.bookTitle
-       cell.bookAuthor.text=self.authorName
-       let urlString=self.imageURL
-       //let url=URL(string:urlString)!
-       cell.bookImage.af_setImage(withURL: imageURL)
+       cell.bookAuthor.text="By "+self.authorName
+    print(self.ratingNum)
+    let ratingImageName="stars_\(self.ratingNum).png" as String
+    cell.ratingView.image=UIImage(named:ratingImageName)
+    let ratingText="\(self.ratingsTotal) customer ratings"
+    cell.ratingLabel.text=ratingText
+    cell.bookImage.af_setImage(withURL: self.imageURL)
        return cell
    }
-   else   {
+   else {
        let cell=tableView.dequeueReusableCell(withIdentifier: "ReviewCell") as! ReviewViewCell
        let review=reviews[indexPath.row]
-       cell.ratingLabel.text=review["rating"] as? String
-       //cell.authorLabel.text=review["profile"]["name"] as? String
+    print(review)
+    let ratingNumb=review["rating"] as! Int
+    cell.titleLabel.text=review["title"] as? String
+    let imageName="stars_\(ratingNumb).png" as String
+    cell.ratingView.image=UIImage(named:imageName)!
+    let profile=review["profile"] as! [String:Any]
+       cell.usernameLabel.text=profile["name"] as? String
        cell.reviewLabel.text=review["body"] as? String
        return cell
-   }   }
+   }
+}
 
     /*
     // MARK: - Navigation
