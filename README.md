@@ -25,6 +25,15 @@ This app will allow users to find more information regarding any book they encou
 
 ### 1. User Stories (Required and Optional)
 
+**Completed User Stories**
+- [x] User can scan a book's barcode get its ISBN number.
+- [x] User can search a book by ISBN or UPC code and view its Amazon reviews. The ISBN can be retrieved from the barcode scanner.
+- [x] User can view recent searches.
+- [x] User can log in to view reviews and recent searches.
+- [x] User can stay logged in.
+- [x] User can log out on the search page.
+- [ ] User can search a book by title.
+
 **Required Must-have Stories**
 * AS A user, I WANT to scan a barcode, SO THAT I can read reviews.
 * AS A user, I WANT to "expand" long reviews, SO THAT I can read them easily.
