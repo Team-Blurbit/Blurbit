@@ -54,6 +54,12 @@ This app will allow users to find more information regarding any book they encou
     * User can login
     * User can stay logged in
     * User can log out
+    
+### Video Walkthrough
+
+Here's a walkthrough of implemented user stories:
+
+<img src='http://g.recordit.co/R7myl9gQWR.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 ### 2. Screen Archetypes
 
