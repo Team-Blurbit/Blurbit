@@ -22,6 +22,8 @@
 		84EAF1AF242980D4001EADA0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84EAF1AD242980D4001EADA0 /* LaunchScreen.storyboard */; };
 		84EAF1BA242980D4001EADA0 /* BlurbitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EAF1B9242980D4001EADA0 /* BlurbitTests.swift */; };
 		84EAF1C5242980D4001EADA0 /* BlurbitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EAF1C4242980D4001EADA0 /* BlurbitUITests.swift */; };
+		C391C1CD24442571006454BC /* RecentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C391C1CC24442571006454BC /* RecentViewController.swift */; };
+		C391C1CF24442658006454BC /* RecentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C391C1CE24442658006454BC /* RecentTableViewCell.swift */; };
 		DA356292A594F0420A794C5F /* Pods_Blurbit_BlurbitUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B114ADA75A2027E630FEE5C7 /* Pods_Blurbit_BlurbitUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +72,8 @@
 		924266E172AE7EF8F566D987 /* Pods-Blurbit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Blurbit.release.xcconfig"; path = "Target Support Files/Pods-Blurbit/Pods-Blurbit.release.xcconfig"; sourceTree = "<group>"; };
 		9E3972EB4C80EE7BD64447D1 /* Pods-Blurbit-BlurbitUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Blurbit-BlurbitUITests.release.xcconfig"; path = "Target Support Files/Pods-Blurbit-BlurbitUITests/Pods-Blurbit-BlurbitUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B114ADA75A2027E630FEE5C7 /* Pods_Blurbit_BlurbitUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Blurbit_BlurbitUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C391C1CC24442571006454BC /* RecentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentViewController.swift; sourceTree = "<group>"; };
+		C391C1CE24442658006454BC /* RecentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentTableViewCell.swift; sourceTree = "<group>"; };
 		CB02BC846CE5301A248E34B3 /* Pods_Blurbit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Blurbit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -151,6 +155,8 @@
 				4E5A008A243DA93A0059BC53 /* ReviewViewCell.swift */,
 				4E5A008C243DABA30059BC53 /* Assets.xcassets */,
 				4E4D0B93244426B000308364 /* LoginViewController.swift */,
+				C391C1CC24442571006454BC /* RecentViewController.swift */,
+				C391C1CE24442658006454BC /* RecentTableViewCell.swift */,
 			);
 			path = Blurbit;
 			sourceTree = "<group>";
@@ -427,7 +433,9 @@
 				84EAF1A3242980D3001EADA0 /* AppDelegate.swift in Sources */,
 				4E5A0089243DA91C0059BC53 /* BookViewCell.swift in Sources */,
 				4E4D0B94244426B000308364 /* LoginViewController.swift in Sources */,
+				C391C1CF24442658006454BC /* RecentTableViewCell.swift in Sources */,
 				4E5A0085243D9F1C0059BC53 /* SearchViewController.swift in Sources */,
+				C391C1CD24442571006454BC /* RecentViewController.swift in Sources */,
 				4E5A008B243DA93A0059BC53 /* ReviewViewCell.swift in Sources */,
 				84EAF1A5242980D3001EADA0 /* SceneDelegate.swift in Sources */,
 			);

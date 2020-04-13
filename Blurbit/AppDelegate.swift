@@ -6,6 +6,7 @@
 //  Copyright © 2020 Team-Blurbit. All rights reserved.
 //
 
+import Parse
 import UIKit
 import Parse
 
