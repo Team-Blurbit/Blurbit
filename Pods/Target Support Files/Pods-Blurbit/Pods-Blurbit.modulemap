@@ -1,0 +1,6 @@
+framework module Pods_Blurbit {
+  umbrella header "Pods-Blurbit-umbrella.h"
+
+  export *
+  module * { export * }
+}
