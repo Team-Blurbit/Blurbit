@@ -2,22 +2,23 @@
 //  SearchViewController.swift
 //  Blurbit
 //
-//  Created by Marco Aguilera on 4/8/20.
+//  Created by user163612 on 4/7/20.
 //  Copyright © 2020 Team-Blurbit. All rights reserved.
 //
-// SETUP CODE FOUND HERE: https://github.com/mikebuss/MTBBarcodeScanner/blob/develop/README.md
-
 
 import UIKit
 import MTBBarcodeScanner
 
 class SearchViewController: UIViewController {
 
+    @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet var previewView: UIView!
+    @IBOutlet weak var searchButton: UIButton!
+    
     @IBOutlet weak var isbn: UILabel!
     var isbn_value: String = ""
-    
     var scanner: MTBBarcodeScanner?
+    var selection: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,33 +27,44 @@ class SearchViewController: UIViewController {
         // scanner?.allowTapToFocus = true
         // Do any additional setup after loading the view.
         scanner = MTBBarcodeScanner(metadataObjectTypes: [AVMetadataObject.ObjectType.ean13.rawValue], previewView: previewView)
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         var stringValue = ""
         var counter = 0;
-        let colors = [UIColor.red, UIColor.white]
+        
         MTBBarcodeScanner.requestCameraPermission(success: { success in
+            stringValue = ""
+            self.isbn_value = ""
+            self.selection = false
+            
             if success {
                 do {
                     try self.scanner?.startScanning(with: .back, resultBlock: { codes in
                         if let codes = codes {
                             
                             for code in codes {
-                                if(code.stringValue != stringValue) {
+                                if(self.isbn_value != code.stringValue) {
                                     self.isbn_value = code.stringValue!
                                     stringValue = code.stringValue!
-                                                                   
-                                    self.isbn.text = "ISBN: " + (stringValue as String)
-                                    self.isbn.textColor = colors[counter]
                                     
-                                    if(counter == 0) {counter+=1}
-                                    else {counter-=1}
-                                }
+                                    // We need to performSegue, send over the isbn number
+                                    self.selection = true
+                                    self.performSegue(withIdentifier: "searchSegue", sender: "selection")
+                                    
+//                                    if(counter == 0) {
+//                                        //
+//                                        print(stringValue)
+//                                        counter+=1
+//                                    }
+//                                    else {
+//                                        print(stringValue)
+//                                        counter-=1
+//                                    }
+                                
                                 // self.scanner?.stopScanning()
+                                }
                             }
                         }
                     })
@@ -71,14 +83,31 @@ class SearchViewController: UIViewController {
         
     }
     
-    /** Commented Out For Later Use ***
-    /*******************************/
-    override func viewWillDisappear(_ animated: Bool) {
-        self.scanner?.stopScanning()
+    func startSetup(){
         
-        super.viewWillDisappear(animated)
     }
-    **/
     
-}
+    @IBAction func onTap(_ sender: Any) {
+        view.endEditing(true)
+    }
+    
 
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+        var reviewsViewController=segue.destination as! ReviewsViewController
+        
+        if(selection == true) {
+            reviewsViewController.gtin = isbn_value as! String
+        }
+        else {
+            reviewsViewController.gtin=searchTextField.text as! String
+        }
+    
+        
+        // reviewsViewController.gtin=searchTextField.text as! String
+    }
+
+}
