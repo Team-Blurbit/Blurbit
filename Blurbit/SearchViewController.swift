@@ -77,7 +77,10 @@ class SearchViewController: UIViewController {
             } else {
                 let alert = UIAlertController(title: "Scanning Unavailable", message:  "This app does not have permission to access the camera", preferredStyle: UIAlertController.Style.alert)
                 self.present(alert, animated: true, completion: nil)
-            
+                let when=DispatchTime.now()+5
+                DispatchQueue.main.asyncAfter(deadline:when){
+                    alert.dismiss(animated: true, completion: nil)
+                }
             }
         })
         
