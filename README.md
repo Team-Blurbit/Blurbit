@@ -59,7 +59,7 @@ This app will allow users to find more information regarding any book they encou
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://g.recordit.co/R7myl9gQWR.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://g.recordit.co/jlPQgLzTmt.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 ### 2. Screen Archetypes
 
