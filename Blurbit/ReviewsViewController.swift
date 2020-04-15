@@ -77,6 +77,9 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
                 }
                 // print(self.reviews[0])
                 // print(product)
+                // create new Searche record
+                self.createSearch()
+                
                 self.tableView.reloadData()
             }
         }
@@ -94,8 +97,7 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
             let cell=tableView.dequeueReusableCell(withIdentifier: "BookCell") as! BookViewCell
             cell.bookTitle.text=self.bookTitle
             cell.bookAuthor.text="By "+self.authorName
-            // create new Searche record
-            self.createSearch()
+            
             // print(self.ratingNum)
             let ratingImageName="stars_\(self.ratingNum).png" as String
             cell.ratingView.image=UIImage(named:ratingImageName)
@@ -119,12 +121,21 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
         }
     }
 
+    @IBAction func onLogout(_ sender: Any) {
+        PFUser.logOut()
+        let main=UIStoryboard(name: "Main", bundle: nil)
+        let loginViewController=main.instantiateViewController(withIdentifier: "LoginViewController")
+        let delegate = self.view.window?.windowScene?.delegate as! SceneDelegate
+        delegate.window?.rootViewController=loginViewController
+    }
+    
     func createSearch() {
         print("ReviewsViewController.swift: createSearch()")
         let search = PFObject(className: "Search")
         search["author"] = self.authorName
         search["title"] = self.bookTitle
         search["user"] = PFUser.current()!
+        search["isbn"]=self.gtin
         search.saveInBackground { (success, error) in
             if (success) {
                 print("ReviewsViewController.swift: search record saved")

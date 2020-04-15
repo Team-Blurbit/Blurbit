@@ -57,5 +57,22 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
             }
         }
     }
-
+    
+    @IBAction func onLogout(_ sender: Any) {
+        PFUser.logOut()
+        let main=UIStoryboard(name: "Main", bundle: nil)
+        let loginViewController=main.instantiateViewController(withIdentifier: "LoginViewController")
+        let delegate = self.view.window?.windowScene?.delegate as! SceneDelegate
+        delegate.window?.rootViewController=loginViewController    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //find the selected search
+        let cell=sender as! RecentTableViewCell
+        let indexPath=recentTableView.indexPath(for: cell)!
+        let search=searches[indexPath.row]
+        //pass the selected search's isbn to the reviews view controller
+        let reviewsViewController=segue.destination as! ReviewsViewController
+        reviewsViewController.gtin=search["isbn"] as! String
+        recentTableView.deselectRow(at: indexPath, animated: true)
+    }
 }
