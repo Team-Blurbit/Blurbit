@@ -172,7 +172,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Search by UPC Code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4cP-Kh-dMG">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Search by ISBN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4cP-Kh-dMG">
                                 <rect key="frame" x="100" y="512" width="214" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
@@ -215,7 +215,7 @@
                             <constraint firstItem="wds-zp-kxF" firstAttribute="leading" secondItem="AYZ-Xv-vAe" secondAttribute="leading" constant="20" id="VXC-Wh-rTc"/>
                             <constraint firstAttribute="bottom" secondItem="Eut-kx-CxP" secondAttribute="bottom" constant="414" id="WTh-H0-1jc"/>
                             <constraint firstItem="wds-zp-kxF" firstAttribute="top" secondItem="4cP-Kh-dMG" secondAttribute="bottom" constant="62" id="bil-iN-UAb"/>
-                            <constraint firstItem="4cP-Kh-dMG" firstAttribute="leading" secondItem="AYZ-Xv-vAe" secondAttribute="leading" constant="100" id="pby-eC-ODh"/>
+                            <constraint firstItem="4cP-Kh-dMG" firstAttribute="leading" secondItem="AYZ-Xv-vAe" secondAttribute="leading" constant="130" id="pby-eC-ODh"/>
                             <constraint firstItem="Eut-kx-CxP" firstAttribute="trailing" secondItem="wds-zp-kxF" secondAttribute="trailing" id="smp-l7-Pb4"/>
                             <constraint firstItem="Eut-kx-CxP" firstAttribute="top" secondItem="vHZ-TJ-hmf" secondAttribute="bottom" constant="8" id="wHv-3m-oAg"/>
                             <constraint firstItem="vHZ-TJ-hmf" firstAttribute="top" secondItem="AYZ-Xv-vAe" secondAttribute="top" constant="19" id="wSE-Yk-GVf"/>
@@ -507,10 +507,27 @@
         <!--Map-->
         <scene sceneID="ffh-oS-GR6">
             <objects>
-                <viewController id="Bfr-0K-3IQ" sceneMemberID="viewController">
+                <viewController id="Bfr-0K-3IQ" customClass="MapViewController" customModule="Blurbit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Jeo-uS-NaH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z1K-gi-nHa">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="barTintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <items>
+                                    <navigationItem id="1zG-Es-m5S">
+                                        <barButtonItem key="rightBarButtonItem" title="Log out" id="UbN-y5-gph">
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <connections>
+                                                <action selector="onLogout:" destination="Bfr-0K-3IQ" id="ICU-QJ-x6m"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="XTf-Wt-kHo"/>
                     </view>
@@ -541,10 +558,27 @@
         <!--Featured-->
         <scene sceneID="Kfw-Qu-zvX">
             <objects>
-                <viewController id="oeI-kK-Hla" sceneMemberID="viewController">
+                <viewController id="oeI-kK-Hla" customClass="FeaturedViewController" customModule="Blurbit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RWR-ub-xWP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z4s-Tm-FrF">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="barTintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <items>
+                                    <navigationItem id="tAb-HX-4wo">
+                                        <barButtonItem key="rightBarButtonItem" title="Log out" id="wD4-Uq-djY">
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <connections>
+                                                <action selector="onLogout:" destination="oeI-kK-Hla" id="gGP-lh-94C"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="myZ-fr-gaZ"/>
                     </view>
@@ -568,6 +602,6 @@
         <image name="star.fill" catalog="system" width="64" height="58"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="klA-fV-eju"/>
+        <segue reference="ihG-op-IEV"/>
     </inferredMetricsTieBreakers>
 </document>
