@@ -22,6 +22,11 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
         self.loadSearches()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        print("RecentViewController.swift: viewDidLoad()")
+        self.loadSearches()
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("RecentViewController.swift: tableView(cellForRowAt)")
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecentTableViewCell") as! RecentTableViewCell
