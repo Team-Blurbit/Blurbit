@@ -119,7 +119,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="rNM-Qd-DUW">
             <objects>
-                <tabBarController id="FoM-M1-Jjw" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" id="FoM-M1-Jjw" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="L8U-UC-dRq"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FQ3-2r-wBX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -442,7 +442,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecentTableViewCell" rowHeight="150" translatesAutoresizingMaskIntoConstraints="NO" id="9gG-iQ-eAY" customClass="RecentTableViewCell" customModule="Blurbit" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecentTableViewCell" rowHeight="150" translatesAutoresizingMaskIntoConstraints="NO" id="9gG-iQ-eAY" customClass="RecentTableViewCell" customModule="Blurbit" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9gG-iQ-eAY" id="nEn-Vg-w92">
@@ -471,7 +471,7 @@
                                         <connections>
                                             <outlet property="bookAuthor" destination="sZk-oK-Vxs" id="a8W-pr-snP"/>
                                             <outlet property="bookTitle" destination="1Tp-zP-aDH" id="Ibb-bz-bVq"/>
-                                            <segue destination="HC7-ge-SqC" kind="presentation" identifier="recentReviewSegue" modalPresentationStyle="fullScreen" id="klA-fV-eju"/>
+                                            <segue destination="HC7-ge-SqC" kind="show" identifier="recentReviewSegue" id="klA-fV-eju"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
