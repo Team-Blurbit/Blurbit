@@ -58,12 +58,15 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
+    
     @IBAction func onLogout(_ sender: Any) {
         PFUser.logOut()
         let main=UIStoryboard(name: "Main", bundle: nil)
         let loginViewController=main.instantiateViewController(withIdentifier: "LoginViewController")
         let delegate = self.view.window?.windowScene?.delegate as! SceneDelegate
-        delegate.window?.rootViewController=loginViewController    }
+        delegate.window?.rootViewController=loginViewController
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //find the selected search

@@ -420,7 +420,14 @@
                     <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass.circle" catalog="system" selectedImage="magnifyingglass.circle.fill" id="fmQ-aj-C4R" userLabel="Search">
                         <color key="badgeColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBarItem>
-                    <navigationItem key="navigationItem" id="5rl-kB-lev"/>
+                    <navigationItem key="navigationItem" id="5rl-kB-lev">
+                        <barButtonItem key="rightBarButtonItem" title="Log out" id="OzP-Vm-OB1">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="onLogout:" destination="HC7-ge-SqC" id="eLO-Gk-AOl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="PWe-8E-k2D" id="3yp-yK-EoX"/>
                     </connections>
@@ -442,7 +449,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecentTableViewCell" rowHeight="150" translatesAutoresizingMaskIntoConstraints="NO" id="9gG-iQ-eAY" customClass="RecentTableViewCell" customModule="Blurbit" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecentTableViewCell" rowHeight="150" translatesAutoresizingMaskIntoConstraints="NO" id="9gG-iQ-eAY" customClass="RecentTableViewCell" customModule="Blurbit" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9gG-iQ-eAY" id="nEn-Vg-w92">
@@ -481,7 +488,14 @@
                         <viewLayoutGuide key="safeArea" id="b9R-IU-Ikm"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Recents" image="clock" catalog="system" selectedImage="clock.fill" id="vDJ-cl-ECR" userLabel="History"/>
-                    <navigationItem key="navigationItem" id="YLL-vC-OkD"/>
+                    <navigationItem key="navigationItem" id="YLL-vC-OkD">
+                        <barButtonItem key="rightBarButtonItem" title="Log out" id="Y24-39-MDO">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="onLogout:" destination="t9b-5z-6kV" id="HSS-It-x32"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="recentTableView" destination="h68-rh-vzc" id="ahi-YF-j7l"/>
                     </connections>
