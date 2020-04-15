@@ -201,6 +201,7 @@
 				84EAF19C242980D3001EADA0 /* Frameworks */,
 				84EAF19D242980D3001EADA0 /* Resources */,
 				E2F700684F98E405BB58EB64 /* [CP] Embed Pods Frameworks */,
+				6D0A39594FDC422A0961DB02 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -239,6 +240,7 @@
 				84EAF1BD242980D4001EADA0 /* Frameworks */,
 				84EAF1BE242980D4001EADA0 /* Resources */,
 				2F0154B1B4126AA600E4F496 /* [CP] Embed Pods Frameworks */,
+				48757ADFEA46DF90BB91C961 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -338,6 +340,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Blurbit-BlurbitUITests/Pods-Blurbit-BlurbitUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		48757ADFEA46DF90BB91C961 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Blurbit-BlurbitUITests/Pods-Blurbit-BlurbitUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Blurbit-BlurbitUITests/Pods-Blurbit-BlurbitUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Blurbit-BlurbitUITests/Pods-Blurbit-BlurbitUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		48F39071C37C9842245835E6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -380,6 +399,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6D0A39594FDC422A0961DB02 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Blurbit/Pods-Blurbit-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Blurbit/Pods-Blurbit-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Blurbit/Pods-Blurbit-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D16A9C8D83ED3FEE45905B52 /* [CP] Check Pods Manifest.lock */ = {

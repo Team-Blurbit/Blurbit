@@ -10,6 +10,8 @@ target 'Blurbit' do
   pod "AlamofireImage"
   pod "Parse"
   pod "MTBBarcodeScanner"
+  pod "GoogleMaps"
+  pod "GooglePlaces"
 
   target 'BlurbitTests' do
     inherit! :search_paths

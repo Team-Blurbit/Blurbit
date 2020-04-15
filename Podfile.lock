@@ -3,6 +3,13 @@ PODS:
   - AlamofireImage (3.6.0):
     - Alamofire (~> 4.9)
   - Bolts/Tasks (1.9.0)
+  - GoogleMaps (3.8.0):
+    - GoogleMaps/Maps (= 3.8.0)
+  - GoogleMaps/Base (3.8.0)
+  - GoogleMaps/Maps (3.8.0):
+    - GoogleMaps/Base
+  - GooglePlaces (3.8.0):
+    - GoogleMaps/Base (= 3.8.0)
   - MTBBarcodeScanner (5.0.11)
   - Parse (1.17.3):
     - Parse/Core (= 1.17.3)
@@ -11,6 +18,8 @@ PODS:
 
 DEPENDENCIES:
   - AlamofireImage
+  - GoogleMaps
+  - GooglePlaces
   - MTBBarcodeScanner
   - Parse
 
@@ -19,6 +28,8 @@ SPEC REPOS:
     - Alamofire
     - AlamofireImage
     - Bolts
+    - GoogleMaps
+    - GooglePlaces
     - MTBBarcodeScanner
     - Parse
 
@@ -26,9 +37,11 @@ SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   AlamofireImage: be9963c6582d68b39e89191f64c82a7d7bf40fdd
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
+  GoogleMaps: 7c8d66d70e4e8c300f43a7219d8fdaad7b325a9a
+  GooglePlaces: d5f70c3e9e427964fdeca1301a665d276ccd8754
   MTBBarcodeScanner: f453b33c4b7dfe545d8c6484ed744d55671788cb
   Parse: c1ad2a04d2cab2b54b6fb7da05f741abf2cf57d1
 
-PODFILE CHECKSUM: 8cdb74718d9f50ce8528533a754e7431f413c3cf
+PODFILE CHECKSUM: 7b23fe68c235ebe3d4586f59b883eb15b03119fe
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.8.4
