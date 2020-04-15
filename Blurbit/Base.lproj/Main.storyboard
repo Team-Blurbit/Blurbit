@@ -114,7 +114,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-359.4202898550725" y="-478.125"/>
+            <point key="canvasLocation" x="-342" y="-461"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="rNM-Qd-DUW">
@@ -156,7 +156,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ce1-oN-6QH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2091" y="422"/>
+            <point key="canvasLocation" x="-549" y="419"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="qu9-tn-XCY">
@@ -246,7 +246,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-510.14492753623193" y="418.52678571428572"/>
+            <point key="canvasLocation" x="-549" y="1177"/>
         </scene>
         <!--Reviews View Controller-->
         <scene sceneID="ucz-Qk-Cgt">
@@ -421,7 +421,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HD2-Ac-rq5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-510.14492753623193" y="1198.6607142857142"/>
+            <point key="canvasLocation" x="-549" y="1916"/>
         </scene>
         <!--Recents-->
         <scene sceneID="2iX-4V-fAw">
@@ -436,7 +436,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecentTableViewCell" rowHeight="150" translatesAutoresizingMaskIntoConstraints="NO" id="9gG-iQ-eAY" customClass="RecentTableViewCell" customModule="Blurbit" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecentTableViewCell" rowHeight="150" translatesAutoresizingMaskIntoConstraints="NO" id="9gG-iQ-eAY" customClass="RecentTableViewCell" customModule="Blurbit" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9gG-iQ-eAY" id="nEn-Vg-w92">
