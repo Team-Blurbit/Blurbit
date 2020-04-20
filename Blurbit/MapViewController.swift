@@ -125,7 +125,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                                     let marker = GMSMarker()
                                     marker.position = CLLocationCoordinate2DMake(latitude, longitude)
                                     marker.title = storeName
-                                    marker.icon=GMSMarker.markerImage(with: UIColor.blue)
+                                    marker.icon=GMSMarker.markerImage(with: UIColor.systemIndigo)
                                     marker.map = self.mapView
                                 }
                                     print("marker")
