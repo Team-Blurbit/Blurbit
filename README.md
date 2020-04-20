@@ -32,6 +32,8 @@ This app will allow users to find more information regarding any book they encou
 - [x] User can log in to view reviews and recent searches.
 - [x] User can stay logged in.
 - [x] User can log out on the search page.
+- [x] User can view a map view of the phone's current surrounding location.
+- [x] User can see book stores in surrounding location as blue markers and view their name on click.
 - [ ] User can search a book by title.
 
 **Required Must-have Stories**
@@ -58,8 +60,13 @@ This app will allow users to find more information regarding any book they encou
 ### Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
+Milestone 1                                       Milestone 2
+<p float="left">
+   <img src='walkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+   <img src='https://g.recordit.co/NIXV4VfbY1.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+</p>
 
-<img src='walkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+Here's a walk
 
 ### 2. Screen Archetypes
 
