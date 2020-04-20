@@ -61,7 +61,7 @@ This app will allow users to find more information regarding any book they encou
 
 Here's a walkthrough of implemented user stories:
 <p float="left">
-   <img src='walkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+   <img src='walkthrough.gif' title='Video Walkthrough' width='580' alt='Video Walkthrough' />
    <img src='http://g.recordit.co/NIXV4VfbY1.gif' title='Video Walkthrough' height='580' alt='Video Walkthrough' />
 </p>
 
