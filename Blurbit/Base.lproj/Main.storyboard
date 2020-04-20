@@ -130,8 +130,8 @@
                     <connections>
                         <segue destination="W0a-98-XFk" kind="relationship" relationship="viewControllers" id="50f-9i-0gY"/>
                         <segue destination="w3T-3Y-DP1" kind="relationship" relationship="viewControllers" id="ENX-kV-br2"/>
-                        <segue destination="Bfr-0K-3IQ" kind="relationship" relationship="viewControllers" id="cWv-jX-DDp"/>
-                        <segue destination="oeI-kK-Hla" kind="relationship" relationship="viewControllers" id="z1R-xh-FzP"/>
+                        <segue destination="QTM-Kj-pbz" kind="relationship" relationship="viewControllers" id="7fq-NM-rj6"/>
+                        <segue destination="oeI-kK-Hla" kind="relationship" relationship="viewControllers" id="OkF-nT-GtV"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vq4-2e-3dX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -449,7 +449,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecentTableViewCell" rowHeight="150" translatesAutoresizingMaskIntoConstraints="NO" id="9gG-iQ-eAY" customClass="RecentTableViewCell" customModule="Blurbit" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecentTableViewCell" rowHeight="150" translatesAutoresizingMaskIntoConstraints="NO" id="9gG-iQ-eAY" customClass="RecentTableViewCell" customModule="Blurbit" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9gG-iQ-eAY" id="nEn-Vg-w92">
@@ -532,10 +532,18 @@
                         <viewLayoutGuide key="safeArea" id="XTf-Wt-kHo"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="map" catalog="system" selectedImage="map.fill" id="nA7-5S-sjv" userLabel="Map"/>
+                    <navigationItem key="navigationItem" id="o44-1t-mrf">
+                        <barButtonItem key="rightBarButtonItem" title="Log out" id="jiH-jq-wrs">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="onLogout:" destination="Bfr-0K-3IQ" id="NGi-Kb-0iA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e7B-NB-WPr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="851" y="419"/>
+            <point key="canvasLocation" x="854" y="1177"/>
         </scene>
         <!--Recents-->
         <scene sceneID="9NA-uH-ZFq">
@@ -587,6 +595,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X6Q-ca-HyC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1543" y="419"/>
+        </scene>
+        <!--Map-->
+        <scene sceneID="Ckw-LW-jmv">
+            <objects>
+                <navigationController id="QTM-Kj-pbz" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Map" image="map" catalog="system" selectedImage="map.fill" id="1yB-H6-UUB" userLabel="Map"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8hM-wc-O6T">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Bfr-0K-3IQ" kind="relationship" relationship="rootViewController" id="GVc-wE-O1D"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AMX-4b-HYR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="854" y="419"/>
         </scene>
     </scenes>
     <resources>
