@@ -60,10 +60,9 @@ This app will allow users to find more information regarding any book they encou
 ### Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
-Milestone 1                                       Milestone 2
 <p float="left">
    <img src='walkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-   <img src='https://g.recordit.co/NIXV4VfbY1.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+   <img src='http://g.recordit.co/NIXV4VfbY1.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 </p>
 
 Here's a walk
