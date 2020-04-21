@@ -9,33 +9,38 @@
 import UIKit
 import Parse
 import GoogleMaps
+import GooglePlaces
 import CoreLocation
 
 //add to AppDelegate.swift: GMSServices.provideAPIKey(googleApiKey)
 let googleApiKey = "AIzaSyAiPLeK9PFJzvGlAugRivosfuBjsk9ixSE"
 //Query: https://maps.googleapis.com/maps/api/place/textsearch/json?types=book_store&location=41.3850639%2C2.1734035&radius=10000&key=AIzaSyAiPLeK9PFJzvGlAugRivosfuBjsk9ixSE
-class MapViewController: UIViewController, CLLocationManagerDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate{
     let manager :CLLocationManager
     var userMarker :GMSMarker
     var camera :GMSCameraPosition
-    var mapView :GMSMapView
+    //var mapView :GMSMapView
     var viewSet :Bool
     var placesTask: URLSessionDataTask!
+    @IBOutlet var googleMapView: GMSMapView!
+    @IBOutlet var searchBar: UISearchBar!
     
     required init?(coder aDcoder: NSCoder) {
         GMSServices.provideAPIKey("AIzaSyDMQMYI8Vcpzfb3AyceMSRO3tPlWLQ8LyU")
+        GMSPlacesClient.provideAPIKey("AIzaSyAiPLeK9PFJzvGlAugRivosfuBjsk9ixSE")
         self.manager = CLLocationManager()
         self.userMarker = GMSMarker()
         self.camera = GMSCameraPosition()
-        self.mapView = GMSMapView()
         self.viewSet = false
-        
         super.init(coder: aDcoder)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.delegate = self
     
+        userMarker.title = "Your Location"
+        
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.requestWhenInUseAuthorization()
@@ -45,24 +50,34 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         print("here")
     }
     
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        print("Hello187")
+        searchBar.endEditing(true)
+        let aController = GMSAutocompleteViewController()
+        aController.delegate = self
+        present(aController, animated: true, completion: nil )
+        
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations[0]
-        userMarker = GMSMarker(position: CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude))
-        userMarker.title = "Your Location"
+        setUserLocation(position: CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude), callFromAuto: false)
+    }
+    
+    func setUserLocation(position: CLLocationCoordinate2D, callFromAuto: Bool) {
         
         
-        if(viewSet == false) {
-            camera = GMSCameraPosition(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: 15)
-            mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
-            userMarker.map = mapView
-            view = mapView
+        if(viewSet == false || callFromAuto == true) {
+            userMarker.position = position
+            camera = GMSCameraPosition(latitude: position.latitude, longitude: position.longitude, zoom: 15)
+            googleMapView.camera = camera
+            userMarker.map = googleMapView
+            
             //get nearby bookstores
-            getBookstores(near: location.coordinate)
+            getBookstores(near: position)
             
             viewSet = true
-            
         }
-        
     }
 
     func getBookstores(near coordinate: CLLocationCoordinate2D){
@@ -128,7 +143,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                                     marker.position = CLLocationCoordinate2DMake(latitude, longitude)
                                     marker.title = storeName
                                     marker.icon=GMSMarker.markerImage(with: UIColor.systemIndigo)
-                                    marker.map = self.mapView
+                                    marker.map = self.googleMapView
                                 }
                                     print("marker")
                                     //print(marker)
@@ -147,22 +162,33 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         //marker.map = self.mapView
     }
     
-    // Runs everytime the user moves to a new location
-    
-
-    /*
-    // MARK: - Navigation
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
     @IBAction func onLogout(_ sender: Any) {
         PFUser.logOut()
         let main=UIStoryboard(name: "Main", bundle: nil)
         let loginViewController=main.instantiateViewController(withIdentifier: "LoginViewController")
         let delegate = self.view.window?.windowScene?.delegate as! SceneDelegate
-        delegate.window?.rootViewController=loginViewController    }
+        delegate.window?.rootViewController=loginViewController
+        
+    }
+        
 }
+
+extension MapViewController: GMSAutocompleteViewControllerDelegate {
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        searchBar.text = place.name
+        setUserLocation(position: place.coordinate, callFromAuto: true)
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        print(error.localizedDescription)
+    }
+    
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+}
+
+
