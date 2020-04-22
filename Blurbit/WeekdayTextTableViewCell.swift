@@ -5,11 +5,11 @@
 //  Created by administrator on 4/22/20.
 //  Copyright © 2020 Team-Blurbit. All rights reserved.
 //
-
 import UIKit
 
 class WeekdayTextTableViewCell: UITableViewCell {
 
+    
     @IBOutlet weak var weekdayText: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()

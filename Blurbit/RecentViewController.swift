@@ -17,6 +17,7 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         print("RecentViewController.swift: viewDidLoad()")
         super.viewDidLoad()
+        LoadingOverlay.shared.displayOverlay(backgroundView:self.view)
         self.recentTableView.dataSource = self
         self.recentTableView.delegate = self
         self.loadSearches()
@@ -58,6 +59,11 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+            DispatchQueue.main.async{
+                LoadingOverlay.shared.hideOverlay()
+            }
+    }
     
     @IBAction func onLogout(_ sender: Any) {
         PFUser.logOut()
