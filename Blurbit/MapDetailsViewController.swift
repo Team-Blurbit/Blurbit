@@ -9,24 +9,34 @@
 import UIKit
 
 class MapDetailsViewController: UIViewController {
-    
-    var place_id:String=""
+
+    var detailsTask: URLSessionDataTask!
+    var key: String = "AIzaSyAiPLeK9PFJzvGlAugRivosfuBjsk9ixSE"
+    var placeId: String = ""
 
     override func viewDidLoad() {
+        print("MapDetailsViewController.swift: viewDidLoad()")
         super.viewDidLoad()
-        print(place_id)
-        // Do any additional setup after loading the view.
+        let urlString = "https://maps.googleapis.com/maps/api/place/details/json?key=\(key)&place_id=\(placeId)"
+        let urlVar = URL(string: urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
+        var request=URLRequest(url: urlVar, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 50)
+        request.httpMethod = "GET"
+        self.detailsTask = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("MapDetailsViewController.swift: \(error.localizedDescription)")
+            }
+            if let data = data {
+                if let json = try! JSONSerialization.jsonObject(with: data,options:[]) as? [String:Any]{
+                    if let result = json["result"] as? [String:Any] {
+                        if let name = result["name"] as? NSString {
+                            let storeName = name as String
+                            print(storeName)
+                        }
+                    }
+                }
+            }
+        }
+        self.detailsTask.resume()
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

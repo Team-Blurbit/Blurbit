@@ -36,36 +36,33 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     }
     
     override func viewDidLoad() {
+        print("MapViewController.swift: viewDidLoad()")
         super.viewDidLoad()
         searchBar.delegate = self
-    
         userMarker.title = "Your Location"
-        
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
-    
         // Do any additional setup after loading the view.
-        print("here")
     }
-    
+
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        print("Hello187")
+        print("MapViewController.swift: searchBarTextDidBeginEditing()")
         searchBar.endEditing(true)
         let aController = GMSAutocompleteViewController()
         aController.delegate = self
         present(aController, animated: true, completion: nil )
-        
     }
-    
+
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("MapViewController.swift: locationManager()")
         let location = locations[0]
         setUserLocation(position: CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude), callFromAuto: false)
     }
-    
+
     func setUserLocation(position: CLLocationCoordinate2D, callFromAuto: Bool) {
-        
+        print("MapViewController.swift: setUserLocation()")
         
         if(viewSet == false || callFromAuto == true) {
             userMarker.position = position
@@ -80,19 +77,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         }
     }
 
-    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool
-    {
-        
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        print("MapViewController.swift: mapView()")
         if let placeMarker = marker as? PlaceMarker{
             //go to details view controller
             let secondVC = self.storyboard?.instantiateViewController(withIdentifier: "MapDetailsViewController") as? MapDetailsViewController
-            secondVC?.place_id=placeMarker.place_id
+            secondVC?.placeId = placeMarker.place_id
             self.navigationController?.pushViewController(secondVC!, animated: true)
         }
         return true
     }
-    
+
     func getBookstores(near coordinate: CLLocationCoordinate2D){
+        print("MapViewController.swift: getBookstores()")
         //mapView.clear()
         //call to Google API
         let urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=\(googleApiKey)&location=\(coordinate.latitude),\(coordinate.longitude)&radius=500000&types=book_store"
@@ -115,7 +112,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                       //if results != nil {
                         for index in 0..<results.count {
                             if let resultPlace = results[index] as? NSDictionary {
-
+                                    print(resultPlace)
                                     //create empty vars in case nothing is found
                                     var storeName = ""
                                     var latitude = 0.0
@@ -124,6 +121,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                                     //check if place is found and assing
                                     if let name = resultPlace["name"] as? NSString {
                                         storeName = name as String
+                                        print(storeName)
                                     }
                                     if let geometry = resultPlace["geometry"] as? NSDictionary {
                                         if let location = geometry["location"] as? NSDictionary {
@@ -166,27 +164,27 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         let loginViewController=main.instantiateViewController(withIdentifier: "LoginViewController")
         let delegate = self.view.window?.windowScene?.delegate as! SceneDelegate
         delegate.window?.rootViewController=loginViewController
-        
     }
-        
+
 }
 
 extension MapViewController: GMSAutocompleteViewControllerDelegate {
+
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        print("MapViewController.swift: viewController(viewController, didAutocompleteWith)")
         searchBar.text = place.name
         setUserLocation(position: place.coordinate, callFromAuto: true)
         dismiss(animated: true, completion: nil)
     }
-    
+
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        print("MapViewController.swift: viewController(viewController, didFailAutocompleteWithError)")
         print(error.localizedDescription)
     }
-    
+
     func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        print("MapViewController.swift: wasCancelled()")
         dismiss(animated: true, completion: nil)
     }
-    
-    
+
 }
-
-
