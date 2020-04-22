@@ -14,7 +14,7 @@ import CoreLocation
 //add to AppDelegate.swift: GMSServices.provideAPIKey(googleApiKey)
 let googleApiKey = "AIzaSyAiPLeK9PFJzvGlAugRivosfuBjsk9ixSE"
 //Query: https://maps.googleapis.com/maps/api/place/textsearch/json?types=book_store&location=41.3850639%2C2.1734035&radius=10000&key=AIzaSyAiPLeK9PFJzvGlAugRivosfuBjsk9ixSE
-class MapViewController: UIViewController, CLLocationManagerDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     let manager :CLLocationManager
     var userMarker :GMSMarker
     var camera :GMSCameraPosition
@@ -28,6 +28,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.userMarker = GMSMarker()
         self.camera = GMSCameraPosition()
         self.mapView = GMSMapView()
+        
         self.viewSet = false
         
         super.init(coder: aDcoder)
@@ -40,7 +41,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
-    
+        self.view.addSubview(mapView)
+        
         // Do any additional setup after loading the view.
         print("here")
     }
@@ -56,7 +58,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
             userMarker.map = mapView
             view = mapView
-            //get nearby bookstores
+            mapView.delegate=self            //get nearby bookstores
             getBookstores(near: location.coordinate)
             
             viewSet = true
@@ -64,13 +66,25 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         }
         
     }
-
+    
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool
+    {
+        
+        print("hi3")
+        if let placeMarker = marker as? PlaceMarker{
+            //go to details view controller
+            let secondVC = self.storyboard?.instantiateViewController(withIdentifier: "MapDetailsViewController") as? MapDetailsViewController
+            secondVC?.place_id=placeMarker.place_id
+            self.navigationController?.pushViewController(secondVC!, animated: true)
+        }
+        print("hi2")
+        return true
+    }
     func getBookstores(near coordinate: CLLocationCoordinate2D){
         //mapView.clear()
         //call to Google API
         let urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=\(googleApiKey)&location=\(coordinate.latitude),\(coordinate.longitude)&radius=500&types=book_store"
         //urlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
-        print(urlString)
         let urlVar=URL(string: urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
         var request=URLRequest(url: urlVar, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 50)
         request.httpMethod="GET"
@@ -78,29 +92,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         /*if placesTask!.taskIdentifier > 0 && placesTask!.state == .running {
             placesTask!.cancel()
         }*/
-        //let session=URLSession.shared
-        print("here")
-        //UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        print("here2")
         self.placesTask = URLSession.shared.dataTask(with: request ) { data, response, error in
-            print("data")
             if let error=error{
                 print(error.localizedDescription)
             }
             if let data=data{
-            print(data)
             //UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                 if let json = try! JSONSerialization.jsonObject(with: data,options:[]) as? [String:Any]{
-                print("json")
-                print(json)
                     if let results = json["results"] as? [[String:Any]] {
-                    print(results)
-                    print("failed")
                       //if results != nil {
-                        print("here4")
                         for index in 0..<results.count {
-                            print("index")
-                            print(index)
                             if let resultPlace = results[index] as? NSDictionary {
 
                                     //create empty vars in case nothing is found
@@ -111,7 +112,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                                     //check if place is found and assing
                                     if let name = resultPlace["name"] as? NSString {
                                         storeName = name as String
-                                        print(storeName)
                                     }
                                     if let geometry = resultPlace["geometry"] as? NSDictionary {
                                         if let location = geometry["location"] as? NSDictionary {
@@ -123,14 +123,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                                             }
                                         }
                                     }
+                                    let place_id=resultPlace["place_id"]  as! String
                                 DispatchQueue.main.async{
-                                    let marker = GMSMarker()
+                                    let marker = PlaceMarker(place_id:place_id)
                                     marker.position = CLLocationCoordinate2DMake(latitude, longitude)
+                                    
                                     marker.title = storeName
                                     marker.icon=GMSMarker.markerImage(with: UIColor.systemIndigo)
                                     marker.map = self.mapView
                                 }
-                                    print("marker")
                                     //print(marker)
                                 }
                             }
