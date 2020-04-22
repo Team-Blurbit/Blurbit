@@ -112,7 +112,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                       //if results != nil {
                         for index in 0..<results.count {
                             if let resultPlace = results[index] as? NSDictionary {
-                                    print(resultPlace)
                                     //create empty vars in case nothing is found
                                     var storeName = ""
                                     var latitude = 0.0
@@ -121,7 +120,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                                     //check if place is found and assing
                                     if let name = resultPlace["name"] as? NSString {
                                         storeName = name as String
-                                        print(storeName)
                                     }
                                     if let geometry = resultPlace["geometry"] as? NSDictionary {
                                         if let location = geometry["location"] as? NSDictionary {
