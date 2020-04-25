@@ -19,6 +19,7 @@
 		4E5A0089243DA91C0059BC53 /* BookViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5A0088243DA91C0059BC53 /* BookViewCell.swift */; };
 		4E5A008B243DA93A0059BC53 /* ReviewViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5A008A243DA93A0059BC53 /* ReviewViewCell.swift */; };
 		4E5A008D243DABA30059BC53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E5A008C243DABA30059BC53 /* Assets.xcassets */; };
+		795942DD2454C7FB00CC5EC9 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795942DC2454C7FB00CC5EC9 /* ReviewViewController.swift */; };
 		84EAF1A3242980D3001EADA0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EAF1A2242980D3001EADA0 /* AppDelegate.swift */; };
 		84EAF1A5242980D3001EADA0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EAF1A4242980D3001EADA0 /* SceneDelegate.swift */; };
 		84EAF1A7242980D3001EADA0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EAF1A6242980D3001EADA0 /* ViewController.swift */; };
@@ -63,6 +64,7 @@
 		4E5A008C243DABA30059BC53 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		507FD7A94F94976619F21FEE /* Pods-BlurbitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlurbitTests.debug.xcconfig"; path = "Target Support Files/Pods-BlurbitTests/Pods-BlurbitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		58E3FC2CBD19317AEA549994 /* Pods-BlurbitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlurbitTests.release.xcconfig"; path = "Target Support Files/Pods-BlurbitTests/Pods-BlurbitTests.release.xcconfig"; sourceTree = "<group>"; };
+		795942DC2454C7FB00CC5EC9 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		847702C41E851A884F927436 /* Pods-Blurbit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Blurbit.debug.xcconfig"; path = "Target Support Files/Pods-Blurbit/Pods-Blurbit.debug.xcconfig"; sourceTree = "<group>"; };
 		84EAF19F242980D3001EADA0 /* Blurbit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blurbit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84EAF1A2242980D3001EADA0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -158,14 +160,15 @@
 				84EAF1A4242980D3001EADA0 /* SceneDelegate.swift */,
 				84EAF1A6242980D3001EADA0 /* ViewController.swift */,
 				84EAF1A8242980D3001EADA0 /* Main.storyboard */,
+				795942DC2454C7FB00CC5EC9 /* ReviewViewController.swift */,
 				84EAF1AD242980D4001EADA0 /* LaunchScreen.storyboard */,
 				84EAF1B0242980D4001EADA0 /* Info.plist */,
 				4E5A0084243D9F1C0059BC53 /* SearchViewController.swift */,
+				4E4D0B93244426B000308364 /* LoginViewController.swift */,
 				4E5A0086243DA3980059BC53 /* ReviewsViewController.swift */,
 				4E5A0088243DA91C0059BC53 /* BookViewCell.swift */,
 				4E5A008A243DA93A0059BC53 /* ReviewViewCell.swift */,
 				4E5A008C243DABA30059BC53 /* Assets.xcassets */,
-				4E4D0B93244426B000308364 /* LoginViewController.swift */,
 				C391C1CC24442571006454BC /* RecentViewController.swift */,
 				C391C1CE24442658006454BC /* RecentTableViewCell.swift */,
 				4E50F7F2244719BB0048031B /* MapViewController.swift */,
@@ -485,6 +488,7 @@
 				84EAF1A3242980D3001EADA0 /* AppDelegate.swift in Sources */,
 				4E299E2A244FD80000FC9B49 /* MapDetailsViewController.swift in Sources */,
 				4E5A0089243DA91C0059BC53 /* BookViewCell.swift in Sources */,
+				795942DD2454C7FB00CC5EC9 /* ReviewViewController.swift in Sources */,
 				4E4D0B94244426B000308364 /* LoginViewController.swift in Sources */,
 				C391C1CF24442658006454BC /* RecentTableViewCell.swift in Sources */,
 				4E5A0085243D9F1C0059BC53 /* SearchViewController.swift in Sources */,

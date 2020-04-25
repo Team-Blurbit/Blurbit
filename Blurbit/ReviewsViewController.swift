@@ -146,5 +146,15 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
            }
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let expandedReview = segue.destination as! ReviewViewController
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)!
+        let review = reviews[indexPath.row]
+        
+        expandedReview.reviewOBJ = review
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 
 }

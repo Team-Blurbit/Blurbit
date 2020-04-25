@@ -10,13 +10,12 @@ import UIKit
 import MTBBarcodeScanner
 import Parse
 
-class SearchViewController: UIViewController {
+class SearchViewController: UIViewController, UISearchTextFieldDelegate{
 
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet var previewView: UIView!
     @IBOutlet weak var searchButton: UIButton!
     
-    @IBOutlet weak var isbn: UILabel!
     var isbn_value: String = ""
     var scanner: MTBBarcodeScanner?
     var selection: Bool = false
@@ -28,7 +27,9 @@ class SearchViewController: UIViewController {
         // scanner?.allowTapToFocus = true
         // Do any additional setup after loading the view.
         scanner = MTBBarcodeScanner(metadataObjectTypes: [AVMetadataObject.ObjectType.ean13.rawValue], previewView: previewView)
+
     }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -91,10 +92,7 @@ class SearchViewController: UIViewController {
         
     }
     
-    @IBAction func onTap(_ sender: Any) {
-        view.endEditing(true)
-    }
-    
+   
     
     @IBAction func onLogout(_ sender: Any) {
         PFUser.logOut()
