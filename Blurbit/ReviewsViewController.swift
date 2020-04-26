@@ -14,8 +14,8 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
 
     var gtin=""
     var imageURL=URL(string:"https://camo.githubusercontent.com/e69c2fe22d071aa6c93355e008fe56a9aff0a14a/68747470733a2f2f692e696d6775722e636f6d2f763257514346412e706e67")!
-    var bookTitle = "unknown title"
-    var authorName="unknown"
+    var bookTitle = "Unknown Title"
+    var authorName="Unknown"
     var ratingNum = 0
     var ratingsTotal = 0
     var reviews=[[String:Any]]()
@@ -43,6 +43,7 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
         
         var url: URL
         if(useASIN == false){
+            print("ASIN: \(self.gtin)")
             url = URL(string: "https://api.rainforestapi.com/request?api_key=379913B5856E4E079E13E66CDD814EB9&type=reviews&amazon_domain=amazon.com&gtin="+self.gtin)!
         }
         else{
@@ -67,16 +68,18 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
                 if let title=product["title"] as? String{
                     self.bookTitle=title
                 }
-                let author=product["sub_title"] as! [String:Any]
-                if let bookAuthor=author["text"] as? String{
-                self.authorName=bookAuthor
-                    if self.authorName.contains(","){
-                        let splitChars=self.authorName.split(separator: ",")
-                        let lastName=splitChars[0]
-                        let firstName=splitChars[1]
-                        self.authorName=firstName+" "+lastName as String
+                if let author=product["sub_title"] as? [String:Any] {
+                    if let bookAuthor=author["text"] as? String{
+                    self.authorName=bookAuthor
+                        if self.authorName.contains(","){
+                            let splitChars=self.authorName.split(separator: ",")
+                            let lastName=splitChars[0]
+                            let firstName=splitChars[1]
+                            self.authorName=firstName+" "+lastName as String
+                        }
                     }
                 }
+                    
                 let ratings=dataDictionary["summary"] as! [String:Any]
                 if let ratingNumber=ratings["rating"] as? Double{
                     self.ratingNum=Int(ratingNumber)

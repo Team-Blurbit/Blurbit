@@ -85,6 +85,7 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
         let cell = sender as! UITableViewCell
         let indexPath = resultsTableView.indexPath(for: cell)!
         let result = search_results[indexPath.row]
+        print(result)
         
         bookReviews.gtin = result["asin"] as! String
         bookReviews.useASIN = true
