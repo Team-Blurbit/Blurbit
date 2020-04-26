@@ -237,16 +237,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="145" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1cA-ra-6fV" userLabel="Results Table View">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="192" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1cA-ra-6fV" userLabel="Results Table View">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookCell" rowHeight="146" id="5Bw-21-Oxv" userLabel="Book Cell" customClass="BookCell" customModule="Blurbit" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="146"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookCell" rowHeight="192" id="5Bw-21-Oxv" userLabel="Book Cell" customClass="BookCell" customModule="Blurbit" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="192"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5Bw-21-Oxv" id="c4T-iB-uSD">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="146"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="192"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NnP-fJ-s5A" userLabel="Book Title">
@@ -263,8 +263,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AXU-Yg-8Rf" userLabel="Book Image View">
-                                                    <rect key="frame" x="3" y="6" width="125" height="135"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AXU-Yg-8Rf" userLabel="Book Image View">
+                                                    <rect key="frame" x="3" y="6" width="125" height="175"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
@@ -273,6 +273,7 @@
                                             <outlet property="bookAsin" destination="MZx-qr-ctt" id="a65-aa-RjN"/>
                                             <outlet property="bookImage" destination="AXU-Yg-8Rf" id="OQN-Bf-Nbt"/>
                                             <outlet property="bookTitleLabel" destination="NnP-fJ-s5A" id="Mu4-jg-XSk"/>
+                                            <segue destination="HC7-ge-SqC" kind="show" id="lpd-AO-Q00"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -842,7 +843,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="klA-fV-eju"/>
+        <segue reference="lpd-AO-Q00"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="blank-profile-picture-973460_640" width="640" height="640"/>

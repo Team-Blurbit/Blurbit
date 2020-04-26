@@ -117,6 +117,7 @@ class SearchViewController: UIViewController, UISearchTextFieldDelegate{
         else {
             reviewsViewController.gtin=searchTextField.text as! String
         }
+        reviewsViewController.useASIN = false
     
         
         // reviewsViewController.gtin=searchTextField.text as! String

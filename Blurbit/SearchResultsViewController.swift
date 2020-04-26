@@ -77,16 +77,22 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
         let url = URL(string:
             "https://api.rainforestapi.com/request?api_key=379913B5856E4E079E13E66CDD814EB9&type=search&amazon_domain=amazon.com&search_term=" + searchterm + "&sort_by=price_high_to_low")!
     }
-    /*
-    // MARK: - Navigation
+  
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        let bookReviews = segue.destination as! ReviewsViewController
+        let cell = sender as! UITableViewCell
+        let indexPath = resultsTableView.indexPath(for: cell)!
+        let result = search_results[indexPath.row]
+        
+        bookReviews.gtin = result["asin"] as! String
+        bookReviews.useASIN = true
+        
+        resultsTableView.deselectRow(at: indexPath, animated: true)
     }
-    */
-
+    
+    
 }
 
 

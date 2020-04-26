@@ -19,6 +19,7 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
     var ratingNum = 0
     var ratingsTotal = 0
     var reviews=[[String:Any]]()
+    var useASIN = false
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -39,7 +40,15 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
     func loadReviews(){
         print("ReviewsViewController.swift: loadReviews()")
         //test GTIN:9780141362250
-        let url = URL(string: "https://api.rainforestapi.com/request?api_key=379913B5856E4E079E13E66CDD814EB9&type=reviews&amazon_domain=amazon.com&gtin="+self.gtin)!
+        
+        var url: URL
+        if(useASIN == false){
+            url = URL(string: "https://api.rainforestapi.com/request?api_key=379913B5856E4E079E13E66CDD814EB9&type=reviews&amazon_domain=amazon.com&gtin="+self.gtin)!
+        }
+        else{
+            url = URL(string: "https://api.rainforestapi.com/request?api_key=379913B5856E4E079E13E66CDD814EB9&type=reviews&amazon_domain=amazon.com&asin="+self.gtin)!
+        }
+    
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
         let task = session.dataTask(with: request) { (data, response, error) in
@@ -158,3 +167,4 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
     }
 
 }
+// B003H4I5G2
