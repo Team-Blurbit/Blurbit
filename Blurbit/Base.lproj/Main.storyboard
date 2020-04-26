@@ -471,11 +471,85 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="PWe-8E-k2D" id="3yp-yK-EoX"/>
+                        <segue destination="8RO-kb-70F" kind="show" identifier="NoReviews" id="rQ9-eu-Ztd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HD2-Ac-rq5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-549" y="1916"/>
+        </scene>
+        <!--No Reviews View Controller-->
+        <scene sceneID="Abm-Rn-hgU">
+            <objects>
+                <viewController id="8RO-kb-70F" customClass="NoReviewsViewController" customModule="Blurbit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qdk-jc-gp8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iX1-nj-0Cc">
+                                <rect key="frame" x="87" y="109" width="240" height="304"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Book Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ou-Vb-RUL">
+                                <rect key="frame" x="20" y="439" width="374" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="JId-9f-eJF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oZb-72-HdA">
+                                <rect key="frame" x="87" y="551" width="240" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="51" id="A8W-Yt-WhD"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="obX-pn-OQf">
+                                <rect key="frame" x="20" y="522" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Reviews Found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZYW-iX-Joo">
+                                <rect key="frame" x="31" y="685" width="363" height="112"/>
+                                <fontDescription key="fontDescription" type="italicSystem" pointSize="31"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ZYW-iX-Joo" firstAttribute="leading" secondItem="5eZ-E9-wNG" secondAttribute="leading" constant="31" id="1KZ-07-fSw"/>
+                            <constraint firstItem="3ou-Vb-RUL" firstAttribute="top" secondItem="iX1-nj-0Cc" secondAttribute="bottom" constant="26" id="B6w-5y-3CF"/>
+                            <constraint firstItem="obX-pn-OQf" firstAttribute="top" secondItem="3ou-Vb-RUL" secondAttribute="bottom" constant="8" id="CCs-fe-AXx"/>
+                            <constraint firstItem="3ou-Vb-RUL" firstAttribute="leading" secondItem="5eZ-E9-wNG" secondAttribute="leading" constant="20" id="F4Q-09-7lj"/>
+                            <constraint firstItem="oZb-72-HdA" firstAttribute="leading" secondItem="5eZ-E9-wNG" secondAttribute="leading" constant="87" id="GJ0-ge-ExF"/>
+                            <constraint firstItem="5eZ-E9-wNG" firstAttribute="trailing" secondItem="oZb-72-HdA" secondAttribute="trailing" constant="87" id="H3p-K0-bqR"/>
+                            <constraint firstItem="oZb-72-HdA" firstAttribute="top" secondItem="obX-pn-OQf" secondAttribute="bottom" constant="8" id="Kdc-aD-DWg"/>
+                            <constraint firstItem="5eZ-E9-wNG" firstAttribute="trailing" secondItem="3ou-Vb-RUL" secondAttribute="trailing" constant="20" id="Nak-yW-UkO"/>
+                            <constraint firstItem="5eZ-E9-wNG" firstAttribute="trailing" secondItem="ZYW-iX-Joo" secondAttribute="trailing" constant="20" id="VAR-T2-OVp"/>
+                            <constraint firstItem="obX-pn-OQf" firstAttribute="leading" secondItem="5eZ-E9-wNG" secondAttribute="leading" constant="20" id="WTe-wR-dB1"/>
+                            <constraint firstItem="iX1-nj-0Cc" firstAttribute="top" secondItem="5eZ-E9-wNG" secondAttribute="top" constant="21" id="XlC-Jw-NXd"/>
+                            <constraint firstItem="5eZ-E9-wNG" firstAttribute="bottom" secondItem="ZYW-iX-Joo" secondAttribute="bottom" constant="16" id="dZc-Qy-Pyz"/>
+                            <constraint firstItem="5eZ-E9-wNG" firstAttribute="trailing" secondItem="obX-pn-OQf" secondAttribute="trailing" constant="20" id="eXz-Km-49C"/>
+                            <constraint firstItem="5eZ-E9-wNG" firstAttribute="trailing" secondItem="iX1-nj-0Cc" secondAttribute="trailing" constant="87" id="gCR-nZ-n9t"/>
+                            <constraint firstItem="ZYW-iX-Joo" firstAttribute="top" secondItem="oZb-72-HdA" secondAttribute="bottom" constant="83" id="rO3-Ga-1Ut"/>
+                            <constraint firstItem="iX1-nj-0Cc" firstAttribute="leading" secondItem="5eZ-E9-wNG" secondAttribute="leading" constant="87" id="tX5-9v-agq"/>
+                            <constraint firstItem="5eZ-E9-wNG" firstAttribute="bottom" secondItem="oZb-72-HdA" secondAttribute="bottom" constant="211" id="xbz-5l-bD6"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="5eZ-E9-wNG"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="PL5-tv-NR9"/>
+                    <connections>
+                        <outlet property="author" destination="obX-pn-OQf" id="tZX-YX-qON"/>
+                        <outlet property="bookTitle" destination="3ou-Vb-RUL" id="qFR-Li-Wlo"/>
+                        <outlet property="poster" destination="iX1-nj-0Cc" id="xcv-rm-3xm"/>
+                        <outlet property="rating" destination="oZb-72-HdA" id="MfI-rW-Y7U"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J52-eB-Sx8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1500.0000000000002" y="1915.8482142857142"/>
         </scene>
         <!--Map Details View Controller-->
         <scene sceneID="YP0-Tc-DD8">

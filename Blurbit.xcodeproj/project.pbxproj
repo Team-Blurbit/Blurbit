@@ -19,6 +19,7 @@
 		4E5A0089243DA91C0059BC53 /* BookViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5A0088243DA91C0059BC53 /* BookViewCell.swift */; };
 		4E5A008B243DA93A0059BC53 /* ReviewViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5A008A243DA93A0059BC53 /* ReviewViewCell.swift */; };
 		4E5A008D243DABA30059BC53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E5A008C243DABA30059BC53 /* Assets.xcassets */; };
+		79581B0F245610E50066406E /* NoReviewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79581B0E245610E50066406E /* NoReviewsViewController.swift */; };
 		7958418E2455569900C61802 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7958418D2455569900C61802 /* SearchResultsViewController.swift */; };
 		795841902455573700C61802 /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7958418F2455573700C61802 /* BookCell.swift */; };
 		795942DD2454C7FB00CC5EC9 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795942DC2454C7FB00CC5EC9 /* ReviewViewController.swift */; };
@@ -66,6 +67,7 @@
 		4E5A008C243DABA30059BC53 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		507FD7A94F94976619F21FEE /* Pods-BlurbitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlurbitTests.debug.xcconfig"; path = "Target Support Files/Pods-BlurbitTests/Pods-BlurbitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		58E3FC2CBD19317AEA549994 /* Pods-BlurbitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlurbitTests.release.xcconfig"; path = "Target Support Files/Pods-BlurbitTests/Pods-BlurbitTests.release.xcconfig"; sourceTree = "<group>"; };
+		79581B0E245610E50066406E /* NoReviewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoReviewsViewController.swift; sourceTree = "<group>"; };
 		7958418D2455569900C61802 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		7958418F2455573700C61802 /* BookCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
 		795942DC2454C7FB00CC5EC9 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				84EAF1A4242980D3001EADA0 /* SceneDelegate.swift */,
 				84EAF1A6242980D3001EADA0 /* ViewController.swift */,
 				84EAF1A8242980D3001EADA0 /* Main.storyboard */,
+				79581B0E245610E50066406E /* NoReviewsViewController.swift */,
 				795942DC2454C7FB00CC5EC9 /* ReviewViewController.swift */,
 				84EAF1AD242980D4001EADA0 /* LaunchScreen.storyboard */,
 				84EAF1B0242980D4001EADA0 /* Info.plist */,
@@ -504,6 +507,7 @@
 				C3349CB82450FEA60092BE74 /* WeekdayTextTableViewCell.swift in Sources */,
 				4E299E28244FD7EC00FC9B49 /* PlaceMarker.swift in Sources */,
 				4E5A008B243DA93A0059BC53 /* ReviewViewCell.swift in Sources */,
+				79581B0F245610E50066406E /* NoReviewsViewController.swift in Sources */,
 				4E50F7F5244719CE0048031B /* FeaturedViewController.swift in Sources */,
 				84EAF1A5242980D3001EADA0 /* SceneDelegate.swift in Sources */,
 			);

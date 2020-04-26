@@ -61,6 +61,7 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
                 // TODO: Unexpectedly found nil while unwrapping an Optional value
                 self.reviews=dataDictionary["reviews"] as! [[String:Any]]
                 let product=dataDictionary["product"] as! [String:Any]
+                
                 if let imageData=product["image"] as? String{
                     let imageUrl=URL(string:imageData)!
                     self.imageURL=imageUrl
@@ -86,6 +87,12 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
                 }
                 if let ratingtotal=ratings["ratings_total"] as? Int{
                     self.ratingsTotal=ratingtotal
+                }
+                
+                // print("IMG URL: \(self.imageURL.absoluteString)")
+                
+                if(self.reviews.count == 0){
+                    self.performSegue(withIdentifier: "NoReviews", sender: self)
                 }
                 // print(self.reviews[0])
                 // print(product)
@@ -160,14 +167,37 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let expandedReview = segue.destination as! ReviewViewController
-        let cell = sender as! UITableViewCell
-        let indexPath = tableView.indexPath(for: cell)!
-        let review = reviews[indexPath.row]
         
-        expandedReview.reviewOBJ = review
-        tableView.deselectRow(at: indexPath, animated: true)
+        if(segue.identifier != "NoReviews") {
+            let expandedReview = segue.destination as! ReviewViewController
+            let cell = sender as! UITableViewCell
+            let indexPath = tableView.indexPath(for: cell)!
+            let review = reviews[indexPath.row]
+            
+            expandedReview.reviewOBJ = review
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+        else {
+            let noReviewsView = segue.destination as! NoReviewsViewController
+            let ratingImageName="stars_\(self.ratingNum).png" as String
+            
+            noReviewsView.url = imageURL.absoluteString
+            
+            if(authorName == "Unknown") {
+                noReviewsView.a = "Author Unknown"
+            }
+            else {
+                noReviewsView.a = authorName
+            }
+            
+            noReviewsView.t = bookTitle
+            noReviewsView.img = UIImage(named:ratingImageName)!
+            
+            self.navigationController?.popViewController(animated: false)
+        }
+         
     }
 
 }
+
 // B003H4I5G2
