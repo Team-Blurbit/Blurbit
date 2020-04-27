@@ -71,10 +71,10 @@ Here's a walkthrough of implemented user stories:
    <img src='http://recordit.co/OaENZyRQXa.gif' title='ML Playground' height='580' alt='ML Playground' />
 </p>
 <p float="left">
-   <img src='expand_review.gif' title='Expanded Review Screen' height='580'/>
+   <img src='expand_review.gif.gif' title='Expanded Review Screen' height='580'/>
 </p>
 <p float="left">
-   <img src='search_title_bar.gif' title='Search By Title' height='580'  />
+   <img src='search_title_bar.gif.gif' title='Search By Title' height='580'  />
 </p>
 
 ### 2. Screen Archetypes
