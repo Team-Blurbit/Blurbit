@@ -67,8 +67,9 @@ Here's a walkthrough of implemented user stories:
    <img src='walkthrough.gif' title='Video Walkthrough' height='580' alt='Video Walkthrough' />
    <img src='http://g.recordit.co/NIXV4VfbY1.gif' title='Video Walkthrough' height='580' alt='Video Walkthrough' />
 </p>
-
-Here's a walk
+<p float="left">
+   <img src='http://recordit.co/OaENZyRQXa.gif' title='ML Playground' height='580' alt='ML Playground' />
+</p>
 
 ### 2. Screen Archetypes
 
