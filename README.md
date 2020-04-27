@@ -72,8 +72,6 @@ Here's a walkthrough of implemented user stories:
 </p>
 <p float="left">
    <img src='expand_review.gif.gif' title='Expanded Review Screen' height='580'/>
-</p>
-<p float="left">
    <img src='search_title_bar.gif.gif' title='Search By Title' height='580'  />
 </p>
 
