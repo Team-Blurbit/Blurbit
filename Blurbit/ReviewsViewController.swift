@@ -20,6 +20,7 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
     var ratingsTotal = 0
     var reviews=[[String:Any]]()
     var useASIN = false
+    var genre="unknown"
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -37,6 +38,9 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
         tableView.delegate=self
         tableView.dataSource=self
         loadReviews()
+        getGenre()
+        print("genre: ")
+        print(self.genre)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -63,7 +67,7 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
         let task = session.dataTask(with: request) { (data, response, error) in
             // This will run when the network request returns
             if let error = error {
-                print("ReviewsViewController.swift: ", error.localizedDescription)
+                //print("ReviewsViewController.swift: ", error.localizedDescription)
                 self.loadReviews()
             } else if let data = data {
                 do {
@@ -212,7 +216,81 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
         }
          
     }
-
+    
+    func getGenre(){
+        var key="unknown"
+        //call openlibrary API
+        //get key by //isbn-13:http://openlibrary.org/api/things?query={%22type%22:%22\/type\/edition%22,%22isbn_13%22:%229780061120084%22}
+        let urlString = "https://openlibrary.org/api/things?query={\"type\":\"\\/type\\/edition\",\"isbn_13\":\""+self.gtin+"\"}"
+        //print(urlString)
+        //print(urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
+        if let url=URL(string:urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!) {
+        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
+        session.configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
+        let task = session.dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else if let data = data,
+                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                //print("json got through")
+                //print(dataDictionary)
+                let keyResult=dataDictionary["result"] as! [String]
+                //print(keyResult)
+                key=keyResult[0] as! String
+                //print(key)
+                key=key.replacingOccurrences(of: "/books/", with: "/b/")
+                //print(key)
+                DispatchQueue.main.async{
+                    self.loadActualGenre(key:key)
+                }
+            }
+        
+        }        //get genre with key: http://openlibrary.org/api/get?key=/b/OL1001932M
+        print("also got here")
+        task.resume()
+        print("also post")
+        }
+                    
+    }
+    
+    func loadActualGenre(key:String){
+        print("key:")
+            print(key)
+            if key != "unknown"{
+                let urlString="https://openlibrary.org/api/get?key="+key
+                let urlVar=urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+                let url2 = URL(string: urlVar)!
+                print(urlVar)
+                let session2 = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
+                session2.configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
+                let task2 = session2.dataTask(with: url2) { (data2, response2, error2) in
+                    if error2 != nil{
+                        print("error")
+                        print(error2!.localizedDescription)
+                    } else if let data2 = data2,let dataDictionary2 = try! JSONSerialization.jsonObject(with: data2, options: []) as? [String: Any]{
+                        print("success data")
+                        //print(dataDictionary2["result"]!))
+                        let resultsData=dataDictionary2["result"]! as! [String:Any]
+                        print(resultsData)
+                        if let genreResult=resultsData["genres"] as? [String]{
+                            print(genreResult)
+                            self.genre=genreResult[0] as! String
+                        }
+                        else if let subjectResults=resultsData["subjects"] as? [String]{
+                            print(subjectResults)
+                            self.genre=subjectResults[0] as! String
+                        }
+                        print("genre post request")
+                        print(self.genre)
+                    }
+                }
+                print("got here")
+                task2.resume()
+                print("gh post")
+            }
+            
+        }
+    
 }
 
 // B003H4I5G2
