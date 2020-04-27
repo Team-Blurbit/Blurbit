@@ -25,18 +25,26 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view.
         startSetup();
     }
 
     func startSetup(){
+        LoadingOverlay.shared.displayOverlay(backgroundView:self.view)
         print("ReviewsViewController.swift: startSetup()")
         print(self.gtin)
         tableView.delegate=self
         tableView.dataSource=self
         loadReviews()
     }
-
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+            DispatchQueue.main.async{
+                LoadingOverlay.shared.hideOverlay()
+            }
+    }
+    
     func loadReviews(){
         print("ReviewsViewController.swift: loadReviews()")
         //test GTIN:9780141362250

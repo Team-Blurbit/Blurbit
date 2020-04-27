@@ -42,7 +42,6 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         resultsTableView.dataSource = self
         resultsTableView.delegate = self
         searchBar.delegate = self
@@ -51,6 +50,11 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
         print("search results view controller loaded.")
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+            DispatchQueue.main.async{
+                LoadingOverlay.shared.hideOverlay()
+            }
+    }
     
     func loadBooks(){
         let url = URL(string: "https://api.rainforestapi.com/request?api_key=379913B5856E4E079E13E66CDD814EB9&type=search&amazon_domain=amazon.com&rh=n:266239&search_term="+searchterm+"&sort_by=featured")!
@@ -73,6 +77,7 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
            }
         }
         task.resume()
+        LoadingOverlay.shared.displayOverlay(backgroundView:self.view)
         self.resultsTableView.reloadData()
     }
     

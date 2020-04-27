@@ -11,6 +11,7 @@
 		3A7DC0C964922E6EEA857935 /* Pods_BlurbitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3B854C9BF2D2C52B4CF37A /* Pods_BlurbitTests.framework */; };
 		4E299E28244FD7EC00FC9B49 /* PlaceMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E299E27244FD7EC00FC9B49 /* PlaceMarker.swift */; };
 		4E299E2A244FD80000FC9B49 /* MapDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E299E29244FD80000FC9B49 /* MapDetailsViewController.swift */; };
+		4E2C6640245658FB00F366C9 /* LoadingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2C663F245658FB00F366C9 /* LoadingOverlay.swift */; };
 		4E4D0B94244426B000308364 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4D0B93244426B000308364 /* LoginViewController.swift */; };
 		4E50F7F3244719BB0048031B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E50F7F2244719BB0048031B /* MapViewController.swift */; };
 		4E50F7F5244719CE0048031B /* FeaturedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E50F7F4244719CE0048031B /* FeaturedViewController.swift */; };
@@ -57,6 +58,7 @@
 		02A48FCC1F360D32BE3A8B79 /* Pods-Blurbit-BlurbitUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Blurbit-BlurbitUITests.debug.xcconfig"; path = "Target Support Files/Pods-Blurbit-BlurbitUITests/Pods-Blurbit-BlurbitUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4E299E27244FD7EC00FC9B49 /* PlaceMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceMarker.swift; sourceTree = "<group>"; };
 		4E299E29244FD80000FC9B49 /* MapDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDetailsViewController.swift; sourceTree = "<group>"; };
+		4E2C663F245658FB00F366C9 /* LoadingOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingOverlay.swift; sourceTree = "<group>"; };
 		4E4D0B93244426B000308364 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4E50F7F2244719BB0048031B /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		4E50F7F4244719CE0048031B /* FeaturedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedViewController.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				4E50F7F4244719CE0048031B /* FeaturedViewController.swift */,
 				4E299E27244FD7EC00FC9B49 /* PlaceMarker.swift */,
 				4E299E29244FD80000FC9B49 /* MapDetailsViewController.swift */,
+				4E2C663F245658FB00F366C9 /* LoadingOverlay.swift */,
 			);
 			path = Blurbit;
 			sourceTree = "<group>";
@@ -494,6 +497,7 @@
 				795841902455573700C61802 /* BookCell.swift in Sources */,
 				4E50F7F3244719BB0048031B /* MapViewController.swift in Sources */,
 				7958418E2455569900C61802 /* SearchResultsViewController.swift in Sources */,
+				4E2C6640245658FB00F366C9 /* LoadingOverlay.swift in Sources */,
 				84EAF1A7242980D3001EADA0 /* ViewController.swift in Sources */,
 				4E5A0087243DA3980059BC53 /* ReviewsViewController.swift in Sources */,
 				84EAF1A3242980D3001EADA0 /* AppDelegate.swift in Sources */,
