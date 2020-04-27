@@ -38,9 +38,6 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
         tableView.delegate=self
         tableView.dataSource=self
         loadReviews()
-        getGenre()
-        print("genre: ")
-        print(self.genre)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -103,6 +100,9 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
                         self.ratingsTotal=ratingtotal
                     }
                     
+                    self.getGenre()
+                    print("genre: ")
+                    print(self.genre)
                     // print("IMG URL: \(self.imageURL.absoluteString)")
                     
                     if(self.reviews.count == 0){
@@ -112,6 +112,7 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
                     // print(product)
                     // create new Searche record
                     self.createSearch()
+                    print("post create")
                     
                     self.tableView.reloadData()
                 }
@@ -233,16 +234,21 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
             } else if let data = data,
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
                 //print("json got through")
-                //print(dataDictionary)
-                let keyResult=dataDictionary["result"] as! [String]
-                //print(keyResult)
-                key=keyResult[0] as! String
-                //print(key)
-                key=key.replacingOccurrences(of: "/books/", with: "/b/")
-                //print(key)
-                DispatchQueue.main.async{
-                    self.loadActualGenre(key:key)
+                print(dataDictionary)
+                if let keyResult=dataDictionary["result"] as? [String]{
+                    key=keyResult[0] as! String
+                    //print(key)
+                    key=key.replacingOccurrences(of: "/books/", with: "/b/")
+                    //print(key)
+                    DispatchQueue.main.async{
+                        self.loadActualGenre(key:key)
+                    }
                 }
+            }
+            else{
+               DispatchQueue.main.async{
+                   self.createBook()
+               }
             }
         
         }        //get genre with key: http://openlibrary.org/api/get?key=/b/OL1001932M
@@ -282,6 +288,14 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
                         }
                         print("genre post request")
                         print(self.genre)
+                        DispatchQueue.main.async{
+                            self.createBook()
+                        }
+                    }
+                    else{
+                        DispatchQueue.main.async{
+                            self.createBook()
+                        }
                     }
                 }
                 print("got here")
@@ -291,6 +305,55 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
             
         }
     
+    func createBook(){
+        print("createBook() called")
+        print(self.authorName)
+        print(self.bookTitle)
+        //check if book with title and author exists already
+        let query=PFQuery(className:"Book")
+        var authorQuery=query.whereKey("author", equalTo: self.authorName)
+        var titleQuery=query.whereKey("title",equalTo: self.bookTitle)
+        var authorOrTitle=PFQuery.orQuery(withSubqueries: [authorQuery,titleQuery])
+        print(authorOrTitle)
+        query.findObjectsInBackground { (data, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else if data != nil && data?.count == 0 {
+                print("doing it")
+                let book = PFObject(className: "Book")
+                book["author"] = self.authorName
+                book["title"] = self.bookTitle
+                book["genre"] = self.genre
+                book["isbn"]=self.gtin
+                book.saveInBackground { (success, error) in
+                    if (success) {
+                        print("ReviewsViewController.swift: book record saved")
+                   } else {
+                        let message = error?.localizedDescription ?? "error creating book record"
+                        print("ReviewsViewController.swift: \(message)")
+                   }
+                }
+            }
+            else{
+                print("doing it")
+                let book = PFObject(className: "Book")
+                book["author"] = self.authorName
+                book["title"] = self.bookTitle
+                book["genre"] = self.genre
+                book["isbn"]=self.gtin
+                book.saveInBackground { (success, error) in
+                    if (success) {
+                        print("ReviewsViewController.swift: book record saved")
+                   } else {
+                        let message = error?.localizedDescription ?? "error creating book record"
+                        print("ReviewsViewController.swift: \(message)")
+                   }
+                }
+            }
+        }
+        
+    }
 }
 
 // B003H4I5G2

@@ -24,6 +24,7 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        LoadingOverlay.shared.displayOverlay(backgroundView:self.view)
         print("RecentViewController.swift: viewDidLoad()")
         self.loadSearches()
     }
