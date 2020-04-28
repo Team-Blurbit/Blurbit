@@ -33,6 +33,8 @@
 		C3349CB82450FEA60092BE74 /* WeekdayTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3349CB72450FEA60092BE74 /* WeekdayTextTableViewCell.swift */; };
 		C391C1CD24442571006454BC /* RecentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C391C1CC24442571006454BC /* RecentViewController.swift */; };
 		C391C1CF24442658006454BC /* RecentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C391C1CE24442658006454BC /* RecentTableViewCell.swift */; };
+		C3FD104024569AA900FEF540 /* ItemSimilarityRecommender.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3FD103F24569AA900FEF540 /* ItemSimilarityRecommender.mlmodel */; };
+		C3FD17422457AA6800410678 /* FeaturedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FD17412457AA6800410678 /* FeaturedTableViewCell.swift */; };
 		DA356292A594F0420A794C5F /* Pods_Blurbit_BlurbitUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B114ADA75A2027E630FEE5C7 /* Pods_Blurbit_BlurbitUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +94,8 @@
 		C3349CB72450FEA60092BE74 /* WeekdayTextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekdayTextTableViewCell.swift; sourceTree = "<group>"; };
 		C391C1CC24442571006454BC /* RecentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentViewController.swift; sourceTree = "<group>"; };
 		C391C1CE24442658006454BC /* RecentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentTableViewCell.swift; sourceTree = "<group>"; };
+		C3FD103F24569AA900FEF540 /* ItemSimilarityRecommender.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ItemSimilarityRecommender.mlmodel; sourceTree = "<group>"; };
+		C3FD17412457AA6800410678 /* FeaturedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedTableViewCell.swift; sourceTree = "<group>"; };
 		CB02BC846CE5301A248E34B3 /* Pods_Blurbit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Blurbit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -161,29 +165,31 @@
 		84EAF1A1242980D3001EADA0 /* Blurbit */ = {
 			isa = PBXGroup;
 			children = (
-				7958418F2455573700C61802 /* BookCell.swift */,
-				7958418D2455569900C61802 /* SearchResultsViewController.swift */,
-				C3349CB72450FEA60092BE74 /* WeekdayTextTableViewCell.swift */,
+				4E5A008C243DABA30059BC53 /* Assets.xcassets */,
+				84EAF1B0242980D4001EADA0 /* Info.plist */,
 				84EAF1A2242980D3001EADA0 /* AppDelegate.swift */,
 				84EAF1A4242980D3001EADA0 /* SceneDelegate.swift */,
-				84EAF1A6242980D3001EADA0 /* ViewController.swift */,
+				7958418F2455573700C61802 /* BookCell.swift */,
 				84EAF1A8242980D3001EADA0 /* Main.storyboard */,
+				84EAF1AD242980D4001EADA0 /* LaunchScreen.storyboard */,
+				4E4D0B93244426B000308364 /* LoginViewController.swift */,
+				4E5A0084243D9F1C0059BC53 /* SearchViewController.swift */,
+				4E5A0086243DA3980059BC53 /* ReviewsViewController.swift */,
+				7958418D2455569900C61802 /* SearchResultsViewController.swift */,
+				84EAF1A6242980D3001EADA0 /* ViewController.swift */,
 				79581B0E245610E50066406E /* NoReviewsViewController.swift */,
 				795942DC2454C7FB00CC5EC9 /* ReviewViewController.swift */,
-				84EAF1AD242980D4001EADA0 /* LaunchScreen.storyboard */,
-				84EAF1B0242980D4001EADA0 /* Info.plist */,
-				4E5A0084243D9F1C0059BC53 /* SearchViewController.swift */,
-				4E4D0B93244426B000308364 /* LoginViewController.swift */,
-				4E5A0086243DA3980059BC53 /* ReviewsViewController.swift */,
 				4E5A0088243DA91C0059BC53 /* BookViewCell.swift */,
 				4E5A008A243DA93A0059BC53 /* ReviewViewCell.swift */,
-				4E5A008C243DABA30059BC53 /* Assets.xcassets */,
 				C391C1CC24442571006454BC /* RecentViewController.swift */,
 				C391C1CE24442658006454BC /* RecentTableViewCell.swift */,
 				4E50F7F2244719BB0048031B /* MapViewController.swift */,
-				4E50F7F4244719CE0048031B /* FeaturedViewController.swift */,
-				4E299E27244FD7EC00FC9B49 /* PlaceMarker.swift */,
 				4E299E29244FD80000FC9B49 /* MapDetailsViewController.swift */,
+				4E299E27244FD7EC00FC9B49 /* PlaceMarker.swift */,
+				C3349CB72450FEA60092BE74 /* WeekdayTextTableViewCell.swift */,
+				4E50F7F4244719CE0048031B /* FeaturedViewController.swift */,
+				C3FD17412457AA6800410678 /* FeaturedTableViewCell.swift */,
+				C3FD103F24569AA900FEF540 /* ItemSimilarityRecommender.mlmodel */,
 			);
 			path = Blurbit;
 			sourceTree = "<group>";
@@ -496,6 +502,7 @@
 				7958418E2455569900C61802 /* SearchResultsViewController.swift in Sources */,
 				84EAF1A7242980D3001EADA0 /* ViewController.swift in Sources */,
 				4E5A0087243DA3980059BC53 /* ReviewsViewController.swift in Sources */,
+				C3FD17422457AA6800410678 /* FeaturedTableViewCell.swift in Sources */,
 				84EAF1A3242980D3001EADA0 /* AppDelegate.swift in Sources */,
 				4E299E2A244FD80000FC9B49 /* MapDetailsViewController.swift in Sources */,
 				4E5A0089243DA91C0059BC53 /* BookViewCell.swift in Sources */,
@@ -503,6 +510,7 @@
 				4E4D0B94244426B000308364 /* LoginViewController.swift in Sources */,
 				C391C1CF24442658006454BC /* RecentTableViewCell.swift in Sources */,
 				4E5A0085243D9F1C0059BC53 /* SearchViewController.swift in Sources */,
+				C3FD104024569AA900FEF540 /* ItemSimilarityRecommender.mlmodel in Sources */,
 				C391C1CD24442571006454BC /* RecentViewController.swift in Sources */,
 				C3349CB82450FEA60092BE74 /* WeekdayTextTableViewCell.swift in Sources */,
 				4E299E28244FD7EC00FC9B49 /* PlaceMarker.swift in Sources */,
