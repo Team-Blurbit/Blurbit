@@ -8,15 +8,18 @@
 
 import UIKit
 import Parse
+import AlamofireImage
 
 class RatingViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
     
     var isbn=""
     var bookId=""
+    var imageUrl=""
     var rowSelected=0
     
     @IBOutlet weak var comment: UITextView!
     
+    @IBOutlet weak var bookCover: UIImageView!
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -35,7 +38,8 @@ class RatingViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDa
     var pickerRatings:Array<Int> = [5,4,3,2,1]
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        var url=URL(string:imageUrl)!
+        bookCover.af_setImage(withURL: url)
         // Do any additional setup after loading the view.
         pickerView.delegate=self
         pickerView.dataSource=self

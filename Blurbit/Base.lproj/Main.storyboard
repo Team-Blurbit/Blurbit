@@ -570,6 +570,7 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="bookCover" destination="c7c-ha-WR3" id="hex-xX-MqZ"/>
                         <outlet property="comment" destination="Fzk-ZN-NrH" id="0cF-dB-4UR"/>
                         <outlet property="pickerView" destination="P2k-GR-Bgi" id="BUG-Tu-757"/>
                     </connections>
@@ -1224,6 +1225,6 @@
         <image name="viewfinder.circle.fill" catalog="system" width="64" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ihG-op-IEV"/>
+        <segue reference="klA-fV-eju"/>
     </inferredMetricsTieBreakers>
 </document>

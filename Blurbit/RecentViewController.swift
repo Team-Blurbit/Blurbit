@@ -149,6 +149,10 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
             print(ratingController.bookId)
             ratingController.isbn = search["isbn"] as! String
             print("isbn")
+            print(indexPath.row)
+            ratingController.imageUrl=self.books[indexPath.row]["imageUrl"] as! String
+            //var url=URL(string:imageUrl)!
+            //ratingController.bookCover.af_setImage(withURL: url)
             print(ratingController.isbn)
         }
         }
