@@ -8,11 +8,18 @@
 
 import UIKit
 
+protocol RecentTableViewCellDelegate:class{
+    func onRatingButton(_ sender:UIButton)
+}
+
 class RecentTableViewCell: UITableViewCell {
     
 
     @IBOutlet weak var bookAuthor: UILabel!
     @IBOutlet weak var bookTitle: UILabel!
+    @IBOutlet weak var bookCover: UIImageView!
+    @IBOutlet weak var ratingButton: UIButton!
+    weak var delegate:RecentTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,5 +31,10 @@ class RecentTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    
+    @IBAction func onRating(_ sender: UIButton) {
+        delegate?.onRatingButton(sender)
+    }
+    
 }

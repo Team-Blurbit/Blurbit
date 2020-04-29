@@ -19,6 +19,8 @@
 		4E5A0089243DA91C0059BC53 /* BookViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5A0088243DA91C0059BC53 /* BookViewCell.swift */; };
 		4E5A008B243DA93A0059BC53 /* ReviewViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5A008A243DA93A0059BC53 /* ReviewViewCell.swift */; };
 		4E5A008D243DABA30059BC53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E5A008C243DABA30059BC53 /* Assets.xcassets */; };
+		4E6BB50924595B000090237E /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6BB50824595B000090237E /* RatingViewController.swift */; };
+		4EAC88402459B9760087DCA1 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC883F2459B9760087DCA1 /* Book.swift */; };
 		79581B0F245610E50066406E /* NoReviewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79581B0E245610E50066406E /* NoReviewsViewController.swift */; };
 		7958418E2455569900C61802 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7958418D2455569900C61802 /* SearchResultsViewController.swift */; };
 		795841902455573700C61802 /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7958418F2455573700C61802 /* BookCell.swift */; };
@@ -67,6 +69,8 @@
 		4E5A0088243DA91C0059BC53 /* BookViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookViewCell.swift; sourceTree = "<group>"; };
 		4E5A008A243DA93A0059BC53 /* ReviewViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewCell.swift; sourceTree = "<group>"; };
 		4E5A008C243DABA30059BC53 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4E6BB50824595B000090237E /* RatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
+		4EAC883F2459B9760087DCA1 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		507FD7A94F94976619F21FEE /* Pods-BlurbitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlurbitTests.debug.xcconfig"; path = "Target Support Files/Pods-BlurbitTests/Pods-BlurbitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		58E3FC2CBD19317AEA549994 /* Pods-BlurbitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlurbitTests.release.xcconfig"; path = "Target Support Files/Pods-BlurbitTests/Pods-BlurbitTests.release.xcconfig"; sourceTree = "<group>"; };
 		79581B0E245610E50066406E /* NoReviewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoReviewsViewController.swift; sourceTree = "<group>"; };
@@ -190,6 +194,8 @@
 				4E50F7F4244719CE0048031B /* FeaturedViewController.swift */,
 				C3FD17412457AA6800410678 /* FeaturedTableViewCell.swift */,
 				C3FD103F24569AA900FEF540 /* ItemSimilarityRecommender.mlmodel */,
+				4E6BB50824595B000090237E /* RatingViewController.swift */,
+				4EAC883F2459B9760087DCA1 /* Book.swift */,
 			);
 			path = Blurbit;
 			sourceTree = "<group>";
@@ -498,12 +504,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				795841902455573700C61802 /* BookCell.swift in Sources */,
+				4E6BB50924595B000090237E /* RatingViewController.swift in Sources */,
 				4E50F7F3244719BB0048031B /* MapViewController.swift in Sources */,
 				7958418E2455569900C61802 /* SearchResultsViewController.swift in Sources */,
 				84EAF1A7242980D3001EADA0 /* ViewController.swift in Sources */,
 				4E5A0087243DA3980059BC53 /* ReviewsViewController.swift in Sources */,
 				C3FD17422457AA6800410678 /* FeaturedTableViewCell.swift in Sources */,
 				84EAF1A3242980D3001EADA0 /* AppDelegate.swift in Sources */,
+				4EAC88402459B9760087DCA1 /* Book.swift in Sources */,
 				4E299E2A244FD80000FC9B49 /* MapDetailsViewController.swift in Sources */,
 				4E5A0089243DA91C0059BC53 /* BookViewCell.swift in Sources */,
 				795942DD2454C7FB00CC5EC9 /* ReviewViewController.swift in Sources */,
