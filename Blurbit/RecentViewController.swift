@@ -8,6 +8,7 @@
 
 import Parse
 import UIKit
+import AlamofireImage
 
 class RecentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,RecentTableViewCellDelegate {
     func onRatingButton(_ sender: UIButton) {
@@ -53,6 +54,10 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
         //book.fetchIfNeeded()
         print("book")
         print(book)
+        let imageUrl=book["imageUrl"] as! String
+        print(imageUrl)
+        let url=URL(string: imageUrl)!
+        cell.bookCover.af_setImage(withURL: url)
         cell.bookAuthor.text = book["author"] as! String
         cell.bookTitle.text = book["title"] as! String
         return cell
@@ -71,11 +76,13 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
         query.whereKey("user", equalTo: PFUser.current()!)
         query.findObjectsInBackground { (searches, error) in
             if (searches != nil) {
+                print("searching...")
                 self.searches = searches!
                 //self.books = searches!
                 //self.books=[PFObject].init(repeating: Book(), count: searches!.count)
                 //print(self.books)
                 self.loadBooks()
+                print("searched")
     
             } else {
                 let message = error?.localizedDescription ?? "error loading search records"

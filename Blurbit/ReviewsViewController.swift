@@ -283,6 +283,7 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
                 book["title"] = self.bookTitle
                 book["genre"] = self.genre
                 book["isbn"]=self.gtin
+                book["imageUrl"]=self.imageURL.absoluteString
                 book.saveInBackground { (success, error) in
                     if (success) {
                         bookId=book.objectId as! String
