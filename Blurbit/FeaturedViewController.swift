@@ -37,7 +37,7 @@ class FeaturedViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        print("FeaturedViewController.swift: viewDidLoad()")
+        print("FeaturedViewController.swift: viewDidAppear()")
         self.loadPredictions()
     }
 

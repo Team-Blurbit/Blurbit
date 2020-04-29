@@ -32,16 +32,24 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         print("RecentViewController.swift: viewDidLoad()")
         super.viewDidLoad()
+        LoadingOverlay.shared.displayOverlay(backgroundView:self.view)
         self.recentTableView.dataSource = self
         self.recentTableView.delegate = self
         self.loadSearches()
+        print("done loading")
     }
 
     override func viewDidAppear(_ animated: Bool) {
         print("RecentViewController.swift: viewDidLoad()")
         self.loadSearches()
     }
-
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+            DispatchQueue.main.async{
+                LoadingOverlay.shared.hideOverlay()
+            }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("RecentViewController.swift: tableView(cellForRowAt)")
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecentTableViewCell") as! RecentTableViewCell
@@ -111,12 +119,12 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
                     }
                 }
                 else{
-                    self.recentTableView.reloadData()
-                    return
+                    //self.recentTableView.reloadData()
+                    //return
                 }
             }
         }
-        //self.recentTableView.reloadData()
+        self.recentTableView.reloadData()
         return
     }
 
