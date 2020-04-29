@@ -58,16 +58,19 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
         //let book = search["bookId"] as! Book
         print("index")
         print(self.books.count)
-        let book=self.books[indexPath.row]
-        //book.fetchIfNeeded()
-        print("book")
-        print(book)
-        let imageUrl=book["imageUrl"] as! String
-        print(imageUrl)
-        let url=URL(string: imageUrl)!
-        cell.bookCover.af_setImage(withURL: url)
-        cell.bookAuthor.text = book["author"] as! String
-        cell.bookTitle.text = book["title"] as! String
+        print(indexPath.row)
+        if (self.books.count > 0) {
+            let book=self.books[indexPath.row]
+            //book.fetchIfNeeded()
+            print("book")
+            print(book)
+            let imageUrl=book["imageUrl"] as! String
+            print(imageUrl)
+            let url=URL(string: imageUrl)!
+            cell.bookCover.af_setImage(withURL: url)
+            cell.bookAuthor.text = book["author"] as! String
+            cell.bookTitle.text = book["title"] as! String
+        }
         return cell
     }
 
