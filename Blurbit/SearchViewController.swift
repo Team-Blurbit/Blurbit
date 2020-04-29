@@ -91,7 +91,6 @@ class SearchViewController: UIViewController, UISearchTextFieldDelegate{
     func startSetup(){
         
     }
-
     @IBAction func onLogout(_ sender: Any) {
         PFUser.logOut()
         let main=UIStoryboard(name: "Main", bundle: nil)
