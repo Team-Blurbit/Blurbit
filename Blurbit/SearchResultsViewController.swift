@@ -9,7 +9,7 @@
 import UIKit
 import AlamofireImage
 
-class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class SearchResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return search_results.count
     }
@@ -34,6 +34,7 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
     }
     
   
+    @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var resultsTableView: UITableView!
     
     var searchterm = "crown+of+swords" // we have to change this var to change the search results
@@ -41,19 +42,29 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         resultsTableView.dataSource = self
         resultsTableView.delegate = self
+        searchBar.delegate = self
 
+        loadBooks()
         print("search results view controller loaded.")
-        //https://api.rainforestapi.com/request?api_key=379913B5856E4E079E13E66CDD814EB9&type=search&amazon_domain=amazon.com&search_term=black+swan&sort_by=price_high_to_low
-        let url = URL(string: "https://api.rainforestapi.com/request?api_key=379913B5856E4E079E13E66CDD814EB9&type=search&amazon_domain=amazon.com&rh=n:266239&search_term="+searchterm+"&sort_by=price_high_to_low")!
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+            DispatchQueue.main.async{
+                LoadingOverlay.shared.hideOverlay()
+            }
+    }
+    
+    func loadBooks(){
+        let url = URL(string: "https://api.rainforestapi.com/request?api_key=379913B5856E4E079E13E66CDD814EB9&type=search&amazon_domain=amazon.com&rh=n:266239&search_term="+searchterm+"&sort_by=featured")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
         let task = session.dataTask(with: request) { (data, response, error) in
            // This will run when the network request returns
            if let error = error {
               print(error.localizedDescription)
+              self.loadBooks()
            } else if let data = data {
               let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
 
@@ -66,16 +77,24 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
            }
         }
         task.resume()
-        
+        LoadingOverlay.shared.displayOverlay(backgroundView:self.view)
+        self.resultsTableView.reloadData()
     }
     
-
-    func loadBooks(){
-        searchterm = "Black+Swan"
-        var booklist=[[String:Any]]()
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        searchBar.endEditing(true)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
         
-        let url = URL(string:
-            "https://api.rainforestapi.com/request?api_key=379913B5856E4E079E13E66CDD814EB9&type=search&amazon_domain=amazon.com&search_term=" + searchterm + "&sort_by=price_high_to_low")!
+        if(searchBar.text != "") {
+            var name = searchBar.text! as String
+            name = name.replacingOccurrences(of: " ", with: "")
+            self.searchterm = name
+            print(name)
+            loadBooks()
+        }
     }
   
 

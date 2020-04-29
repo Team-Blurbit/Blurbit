@@ -25,18 +25,26 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view.
         startSetup();
     }
 
     func startSetup(){
+        LoadingOverlay.shared.displayOverlay(backgroundView:self.view)
         print("ReviewsViewController.swift: startSetup()")
         print(self.gtin)
         tableView.delegate=self
         tableView.dataSource=self
         loadReviews()
     }
-
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+            DispatchQueue.main.async{
+                LoadingOverlay.shared.hideOverlay()
+            }
+    }
+    
     func loadReviews(){
         print("ReviewsViewController.swift: loadReviews()")
         //test GTIN:9780141362250
@@ -56,50 +64,57 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
             // This will run when the network request returns
             if let error = error {
                 print("ReviewsViewController.swift: ", error.localizedDescription)
+                self.loadReviews()
             } else if let data = data {
-                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-                // TODO: Unexpectedly found nil while unwrapping an Optional value
-                self.reviews=dataDictionary["reviews"] as! [[String:Any]]
-                let product=dataDictionary["product"] as! [String:Any]
-                
-                if let imageData=product["image"] as? String{
-                    let imageUrl=URL(string:imageData)!
-                    self.imageURL=imageUrl
-                }
-                if let title=product["title"] as? String{
-                    self.bookTitle=title
-                }
-                if let author=product["sub_title"] as? [String:Any] {
-                    if let bookAuthor=author["text"] as? String{
-                    self.authorName=bookAuthor
-                        if self.authorName.contains(","){
-                            let splitChars=self.authorName.split(separator: ",")
-                            let lastName=splitChars[0]
-                            let firstName=splitChars[1]
-                            self.authorName=firstName+" "+lastName as String
+                do {
+                    let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+                    // TODO: Unexpectedly found nil while unwrapping an Optional value
+                    self.reviews=dataDictionary["reviews"] as! [[String:Any]]
+                    let product=dataDictionary["product"] as! [String:Any]
+                    
+                    if let imageData=product["image"] as? String{
+                        let imageUrl=URL(string:imageData)!
+                        self.imageURL=imageUrl
+                    }
+                    if let title=product["title"] as? String{
+                        self.bookTitle=title
+                    }
+                    if let author=product["sub_title"] as? [String:Any] {
+                        if let bookAuthor=author["text"] as? String{
+                        self.authorName=bookAuthor
+                            if self.authorName.contains(","){
+                                let splitChars=self.authorName.split(separator: ",")
+                                let lastName=splitChars[0]
+                                let firstName=splitChars[1]
+                                self.authorName=firstName+" "+lastName as String
+                            }
                         }
                     }
-                }
+                        
+                    let ratings=dataDictionary["summary"] as! [String:Any]
+                    if let ratingNumber=ratings["rating"] as? Double{
+                        self.ratingNum=Int(ratingNumber)
+                    }
+                    if let ratingtotal=ratings["ratings_total"] as? Int{
+                        self.ratingsTotal=ratingtotal
+                    }
                     
-                let ratings=dataDictionary["summary"] as! [String:Any]
-                if let ratingNumber=ratings["rating"] as? Double{
-                    self.ratingNum=Int(ratingNumber)
+                    // print("IMG URL: \(self.imageURL.absoluteString)")
+                    
+                    if(self.reviews.count == 0){
+                        self.performSegue(withIdentifier: "NoReviews", sender: self)
+                    }
+                    // print(self.reviews[0])
+                    // print(product)
+                    // create new Searche record
+                    self.createSearch()
+                    
+                    self.tableView.reloadData()
                 }
-                if let ratingtotal=ratings["ratings_total"] as? Int{
-                    self.ratingsTotal=ratingtotal
+                catch {
+                    print("Failed, retrying.....")
+                    self.loadReviews()
                 }
-                
-                // print("IMG URL: \(self.imageURL.absoluteString)")
-                
-                if(self.reviews.count == 0){
-                    self.performSegue(withIdentifier: "NoReviews", sender: self)
-                }
-                // print(self.reviews[0])
-                // print(product)
-                // create new Searche record
-                self.createSearch()
-                
-                self.tableView.reloadData()
             }
         }
         task.resume()

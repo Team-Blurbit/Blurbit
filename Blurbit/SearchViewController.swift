@@ -93,6 +93,9 @@ class SearchViewController: UIViewController, UISearchTextFieldDelegate{
     }
     
    
+    @IBAction func onTap(_ sender: Any) {
+        searchTextField.endEditing(true)
+    }
     
     @IBAction func onLogout(_ sender: Any) {
         PFUser.logOut()

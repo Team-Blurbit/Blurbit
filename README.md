@@ -34,7 +34,10 @@ This app will allow users to find more information regarding any book they encou
 - [x] User can log out on the search page.
 - [x] User can view a map view of the phone's current surrounding location.
 - [x] User can see book stores in surrounding location as blue markers and view their name on click.
-- [ ] User can search a book by title.
+- [x] User can see detailed information about the store name and hours on a details screen when clicking on a book store.
+- [x] User can search a book by title.
+- [x] User can click on a review to see an expanded review screen.
+- [ ] Work in progress: user can view recommendations based on past searches.
 
 **Required Must-have Stories**
 * AS A user, I WANT to scan a barcode, SO THAT I can read reviews.
@@ -61,11 +64,16 @@ This app will allow users to find more information regarding any book they encou
 
 Here's a walkthrough of implemented user stories:
 <p float="left">
-   <img src='walkthrough.gif' title='Video Walkthrough' height='580' alt='Video Walkthrough' />
+   <img src='/gifs/walkthrough.gif' title='Video Walkthrough' height='580' alt='Video Walkthrough' />
    <img src='http://g.recordit.co/NIXV4VfbY1.gif' title='Video Walkthrough' height='580' alt='Video Walkthrough' />
 </p>
-
-Here's a walk
+<p float="left">
+   <img src='http://recordit.co/OaENZyRQXa.gif' title='ML Playground' height='580' alt='ML Playground' />
+</p>
+<p float="left">
+   <img src='/gifs/expand_review.gif' title='Expanded Review Screen' height='580'/>
+   <img src='/gifs/search_title_bar.gif' title='Search By Title' height='580'  />
+</p>
 
 ### 2. Screen Archetypes
 
