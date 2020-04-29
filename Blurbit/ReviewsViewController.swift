@@ -20,6 +20,7 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
     var ratingsTotal = 0
     var reviews=[[String:Any]]()
     var useASIN = false
+    var genre="unknown"
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -107,14 +108,16 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
                     // print(self.reviews[0])
                     // print(product)
                     // create new Searche record
-                    self.createSearch()
-                    
-                    self.tableView.reloadData()
+                    // self.createSearch()
+                    // self.tableView.reloadData()
                 }
-                catch {
-                    print("Failed, retrying.....")
-                    self.loadReviews()
-                }
+                // print(self.reviews[0])
+                // print(product)
+                // create new Searche record
+                //self.createSearch()
+                
+                self.tableView.reloadData()
+                self.getGenre()
             }
         }
         task.resume()
@@ -164,13 +167,13 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
         delegate.window?.rootViewController=loginViewController
     }
     
-    func createSearch() {
+    func createSearch(bookId:String) {
         print("ReviewsViewController.swift: createSearch()")
         let search = PFObject(className: "Search")
-        search["author"] = self.authorName
-        search["title"] = self.bookTitle
-        search["user"] = PFUser.current()!
+        search["bookId"]=bookId
         search["isbn"]=self.gtin
+        search["user"] = PFUser.current()!
+        //review will be added later on
         search.saveInBackground { (success, error) in
             if (success) {
                 print("ReviewsViewController.swift: search record saved")
@@ -181,6 +184,142 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
         }
     }
     
+    func getGenre(){
+        var key="unknown"
+        //call openlibrary API
+        //get key by //isbn-13:http://openlibrary.org/api/things?query={%22type%22:%22\/type\/edition%22,%22isbn_13%22:%229780061120084%22}
+        let urlString = "https://openlibrary.org/api/things?query={\"type\":\"\\/type\\/edition\",\"isbn_13\":\""+self.gtin+"\"}"
+        //print(urlString)
+        //print(urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
+        if let url=URL(string:urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!) {
+        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
+        session.configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
+        let task = session.dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else if let data = data,
+                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                //print("json got through")
+                print(dataDictionary)
+                if let keyResult=dataDictionary["result"] as? [String] {
+                    if keyResult.count > 0 {
+                        key=keyResult[0] as! String
+                        key=key.replacingOccurrences(of: "/books/", with: "/b/")
+                        //print(key)
+                        DispatchQueue.main.async{
+                            self.loadActualGenre(key:key)
+                        }
+                    }
+                else{
+                       DispatchQueue.main.async{
+                           self.createBook()
+                       }
+                    }
+            }
+            else{
+               DispatchQueue.main.async{
+                   self.createBook()
+               }
+            }
+            }
+        }        //get genre with key: http://openlibrary.org/api/get?key=/b/OL1001932M
+        print("also got here")
+        task.resume()
+        print("also post")
+        }
+                    
+    }
+    
+    func loadActualGenre(key:String){
+        print("key:")
+            print(key)
+            if key != "unknown"{
+                let urlString="https://openlibrary.org/api/get?key="+key
+                let urlVar=urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+                let url2 = URL(string: urlVar)!
+                print(urlVar)
+                let session2 = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
+                session2.configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
+                let task2 = session2.dataTask(with: url2) { (data2, response2, error2) in
+                    if error2 != nil{
+                        print("error")
+                        print(error2!.localizedDescription)
+                    } else if let data2 = data2,let dataDictionary2 = try! JSONSerialization.jsonObject(with: data2, options: []) as? [String: Any]{
+                        print("success data")
+                        //print(dataDictionary2["result"]!))
+                        let resultsData=dataDictionary2["result"]! as! [String:Any]
+                        print(resultsData)
+                        if let genreResult=resultsData["genres"] as? [String]{
+                            print(genreResult)
+                            self.genre=genreResult[0] as! String
+                        }
+                        else if let subjectResults=resultsData["subjects"] as? [String]{
+                            print(subjectResults)
+                            self.genre=subjectResults[0] as! String
+                        }
+                        print("genre post request")
+                        print(self.genre)
+                        DispatchQueue.main.async{
+                            self.createBook()
+                        }
+                    }
+                    else{
+                        DispatchQueue.main.async{
+                            self.createBook()
+                        }
+                    }
+                }
+                print("got here")
+                task2.resume()
+                print("gh post")
+            }
+            
+        }
+
+    func createBook(){
+        print("createBook() called")
+        print(self.authorName)
+        print(self.bookTitle)
+        var bookId=""
+        //check if book with title and author exists already
+        var query=PFQuery(className:"Book")
+        query=query.whereKey("isbn", equalTo: self.gtin)
+        query.findObjectsInBackground { (data, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else{
+                print("data")
+                print(data != nil && data!.count > 0)
+            }
+            if (data != nil && data!.count == 0) || (data == nil) {
+                let book = PFObject(className: "Book")
+                //bookId=book.objectId as! String
+                book["author"] = self.authorName
+                book["title"] = self.bookTitle
+                book["genre"] = self.genre
+                book["isbn"]=self.gtin
+                book["imageUrl"]=self.imageURL.absoluteString
+                book.saveInBackground { (success, error) in
+                    if (success) {
+                        bookId=book.objectId as! String
+                        print(bookId)
+                        self.createSearch(bookId: bookId)
+                        print("ReviewsViewController.swift: book record saved")
+                   } else {
+                        let message = error?.localizedDescription ?? "error creating book record"
+                        print("ReviewsViewController.swift: \(message)")
+                   }
+                }
+                
+            }
+            else if data != nil && data!.count > 0 {
+                bookId=data![0].objectId as! String
+                self.createSearch(bookId: bookId)
+            }
+        }
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if(segue.identifier != "NoReviews") {
