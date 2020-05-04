@@ -51,14 +51,13 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
         //test GTIN:9780141362250
         
         var url: URL
-        if(useASIN == false){
-            print("ASIN: \(self.gtin)")
+        // if GTIN is 10 characters long, it's *probably* an ASIN
+        if (self.gtin.count == 10) {
+            url = URL(string: "https://api.rainforestapi.com/request?api_key=379913B5856E4E079E13E66CDD814EB9&type=reviews&amazon_domain=amazon.com&asin="+self.gtin)!
+        } else {
             url = URL(string: "https://api.rainforestapi.com/request?api_key=379913B5856E4E079E13E66CDD814EB9&type=reviews&amazon_domain=amazon.com&gtin="+self.gtin)!
         }
-        else{
-            url = URL(string: "https://api.rainforestapi.com/request?api_key=379913B5856E4E079E13E66CDD814EB9&type=reviews&amazon_domain=amazon.com&asin="+self.gtin)!
-        }
-    
+
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
         let task = session.dataTask(with: request) { (data, response, error) in
@@ -72,7 +71,6 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
                     // TODO: Unexpectedly found nil while unwrapping an Optional value
                     self.reviews=dataDictionary["reviews"] as! [[String:Any]]
                     let product=dataDictionary["product"] as! [String:Any]
-                    
                     if let imageData=product["image"] as? String{
                         let imageUrl=URL(string:imageData)!
                         self.imageURL=imageUrl
@@ -158,7 +156,6 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
         }
     }
 
-    
     @IBAction func onLogout(_ sender: Any) {
         PFUser.logOut()
         let main=UIStoryboard(name: "Main", bundle: nil)
@@ -166,7 +163,7 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
         let delegate = self.view.window?.windowScene?.delegate as! SceneDelegate
         delegate.window?.rootViewController=loginViewController
     }
-    
+
     func createSearch(bookId:String) {
         print("ReviewsViewController.swift: createSearch()")
         let search = PFObject(className: "Search")
