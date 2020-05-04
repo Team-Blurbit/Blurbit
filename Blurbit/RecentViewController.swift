@@ -11,18 +11,6 @@ import UIKit
 import AlamofireImage
 
 class RecentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,RecentTableViewCellDelegate {
-    func onRatingButton(_ sender: UIButton) {
-        
-            }
-    
-    func getIndexPath(_ sender:UIButton?) -> IndexPath?{
-        let buttonPos=sender?.convert(CGPoint.zero, to: recentTableView)
-        if let indexPath:IndexPath = recentTableView.indexPathForRow(at: buttonPos!){
-            return indexPath
-        }
-        return nil
-    }
-    
 
     @IBOutlet weak var recentTableView: UITableView!
     var searches = [PFObject]()
@@ -43,29 +31,25 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
         print("RecentViewController.swift: viewDidLoad()")
         self.loadSearches()
     }
-    
+
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-            DispatchQueue.main.async{
-                LoadingOverlay.shared.hideOverlay()
-            }
+        DispatchQueue.main.async{
+            LoadingOverlay.shared.hideOverlay()
+        }
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("RecentViewController.swift: tableView(cellForRowAt)")
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecentTableViewCell") as! RecentTableViewCell
-        let search = self.searches[indexPath.row]
-        //assuming book is pointer
-        //let book = search["bookId"] as! Book
-        print("index")
-        print(self.books.count)
-        print(indexPath.row)
-        if (self.books.count > 0) {
+        //print("RecentViewController.swift: self.books:<\(self.books)>")
+        //print("RecentViewController.swift: self.books.count:<\(self.books.count)>")
+        //print("RecentViewController.swift: indexPath.row:<\(indexPath.row)>")
+        if (self.books.count > indexPath.row) {
             let book=self.books[indexPath.row]
             //book.fetchIfNeeded()
-            print("book")
-            print(book)
+            //print("book \(book)")
             let imageUrl=book["imageUrl"] as! String
-            print(imageUrl)
+            //print(imageUrl)
             let url=URL(string: imageUrl)!
             cell.bookCover.af_setImage(withURL: url)
             cell.bookAuthor.text = book["author"] as! String
@@ -79,6 +63,14 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
         return self.searches.count
     }
 
+    func getIndexPath(_ sender:UIButton?) -> IndexPath?{
+        let buttonPos=sender?.convert(CGPoint.zero, to: recentTableView)
+        if let indexPath:IndexPath = recentTableView.indexPathForRow(at: buttonPos!){
+            return indexPath
+        }
+        return nil
+    }
+
     func loadSearches() {
         print("RecentViewController.swift: loadSearches()")
         let query = PFQuery(className: "Search")
@@ -89,41 +81,37 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
             if (searches != nil) {
                 print("searching...")
                 self.searches = searches!
-                //self.books = searches!
-                //self.books=[PFObject].init(repeating: Book(), count: searches!.count)
-                //print(self.books)
                 self.loadBooks()
                 print("searched")
-    
             } else {
                 let message = error?.localizedDescription ?? "error loading search records"
                 print("FeedViewController.swift: \(message)")
             }
         }
     }
-    
-    func loadBooks(){
+
+    func loadBooks() {
+        print("RecentViewController.swift: loadBooks()")
+        self.books = [] // reset books array before appending
         for search in self.searches{
-            var query=PFQuery(className: "Book")
+            let query = PFQuery(className: "Book")
             query.whereKey("objectId", equalTo: search["bookId"])
-            print(self.index)
             query.findObjectsInBackground { (data, error) in
                 if let error = error {
-                    print(error.localizedDescription)
+                    print("FeedViewController.swift: \(error.localizedDescription)")
                 }
-                if data != nil{
+                if data != nil {
                     //print(data!.count)
                     self.books.append(data![0])
-                    self.index=self.index+1
-                    if self.index >= self.searches.count{
+                    self.index = self.index + 1
+                    if self.index >= self.searches.count {
                         print("here")
                         self.recentTableView.reloadData()
                         return
                     }
-                }
-                else{
-                    //self.recentTableView.reloadData()
-                    //return
+                } else {
+                    let message = "something unexpected happened"
+                    print("FeedViewController.swift: \(message)")
                 }
             }
         }
@@ -131,7 +119,6 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
         return
     }
 
-    
     @IBAction func onLogout(_ sender: Any) {
         PFUser.logOut()
         let main=UIStoryboard(name: "Main", bundle: nil)
@@ -139,8 +126,9 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
         let delegate = self.view.window?.windowScene?.delegate as! SceneDelegate
         delegate.window?.rootViewController=loginViewController
     }
-    
-    
+
+    func onRatingButton(_ sender: UIButton) {}
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //find the selected search
         if let cell=sender as? RecentTableViewCell{
@@ -149,23 +137,25 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
             //pass the selected search's isbn to the reviews view controller
             let reviewsViewController=segue.destination as! ReviewsViewController
             reviewsViewController.gtin=search["isbn"] as! String
+            reviewsViewController.isRecentSearch = true
             recentTableView.deselectRow(at: indexPath, animated: true)
         }
         if (sender as? UIButton) != nil{
-        if let indexPath=getIndexPath(sender as! UIButton){
-            let ratingController=segue.destination as! RatingViewController
-            let search=searches[indexPath.row]
-            ratingController.bookId = search["bookId"] as! String
-            print("bookId")
-            print(ratingController.bookId)
-            ratingController.isbn = search["isbn"] as! String
-            print("isbn")
-            print(indexPath.row)
-            ratingController.imageUrl=self.books[indexPath.row]["imageUrl"] as! String
-            //var url=URL(string:imageUrl)!
-            //ratingController.bookCover.af_setImage(withURL: url)
-            print(ratingController.isbn)
-        }
+            if let indexPath=getIndexPath(sender as! UIButton){
+                let ratingController=segue.destination as! RatingViewController
+                let search=searches[indexPath.row]
+                ratingController.bookId = search["bookId"] as! String
+                print("bookId")
+                print(ratingController.bookId)
+                ratingController.isbn = search["isbn"] as! String
+                print("isbn")
+                print(indexPath.row)
+                ratingController.imageUrl=self.books[indexPath.row]["imageUrl"] as! String
+                //var url=URL(string:imageUrl)!
+                //ratingController.bookCover.af_setImage(withURL: url)
+                print(ratingController.isbn)
+            }
         }
     }
+
 }

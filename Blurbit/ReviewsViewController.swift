@@ -16,6 +16,7 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
     var imageURL=URL(string:"https://camo.githubusercontent.com/e69c2fe22d071aa6c93355e008fe56a9aff0a14a/68747470733a2f2f692e696d6775722e636f6d2f763257514346412e706e67")!
     var bookTitle = "Unknown Title"
     var authorName="Unknown"
+    var isRecentSearch = false
     var ratingNum = 0
     var ratingsTotal = 0
     var reviews=[[String:Any]]()
@@ -26,24 +27,24 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
         startSetup();
     }
 
     func startSetup(){
-        LoadingOverlay.shared.displayOverlay(backgroundView:self.view)
         print("ReviewsViewController.swift: startSetup()")
-        print(self.gtin)
+        LoadingOverlay.shared.displayOverlay(backgroundView:self.view)
+        //print(self.gtin)
         tableView.delegate=self
         tableView.dataSource=self
         loadReviews()
     }
-    
+
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-            DispatchQueue.main.async{
-                LoadingOverlay.shared.hideOverlay()
-            }
+        print("ReviewsViewController.swift: tableView(forRowAt)")
+        DispatchQueue.main.async{
+            LoadingOverlay.shared.hideOverlay()
+        }
     }
     
     func loadReviews(){
@@ -51,14 +52,13 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
         //test GTIN:9780141362250
         
         var url: URL
-        if(useASIN == false){
-            print("ASIN: \(self.gtin)")
+        // if GTIN is 10 characters long, it's *probably* an ASIN
+        if (self.gtin.count == 10) {
+            url = URL(string: "https://api.rainforestapi.com/request?api_key=379913B5856E4E079E13E66CDD814EB9&type=reviews&amazon_domain=amazon.com&asin="+self.gtin)!
+        } else {
             url = URL(string: "https://api.rainforestapi.com/request?api_key=379913B5856E4E079E13E66CDD814EB9&type=reviews&amazon_domain=amazon.com&gtin="+self.gtin)!
         }
-        else{
-            url = URL(string: "https://api.rainforestapi.com/request?api_key=379913B5856E4E079E13E66CDD814EB9&type=reviews&amazon_domain=amazon.com&asin="+self.gtin)!
-        }
-    
+
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
         let task = session.dataTask(with: request) { (data, response, error) in
@@ -72,7 +72,6 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
                     // TODO: Unexpectedly found nil while unwrapping an Optional value
                     self.reviews=dataDictionary["reviews"] as! [[String:Any]]
                     let product=dataDictionary["product"] as! [String:Any]
-                    
                     if let imageData=product["image"] as? String{
                         let imageUrl=URL(string:imageData)!
                         self.imageURL=imageUrl
@@ -99,23 +98,11 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
                     if let ratingtotal=ratings["ratings_total"] as? Int{
                         self.ratingsTotal=ratingtotal
                     }
-                    
                     // print("IMG URL: \(self.imageURL.absoluteString)")
-                    
-                    if(self.reviews.count == 0){
+                    if self.reviews.count == 0 {
                         self.performSegue(withIdentifier: "NoReviews", sender: self)
                     }
-                    // print(self.reviews[0])
-                    // print(product)
-                    // create new Searche record
-                    // self.createSearch()
-                    // self.tableView.reloadData()
                 }
-                // print(self.reviews[0])
-                // print(product)
-                // create new Searche record
-                //self.createSearch()
-                
                 self.tableView.reloadData()
                 self.getGenre()
             }
@@ -158,7 +145,6 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
         }
     }
 
-    
     @IBAction func onLogout(_ sender: Any) {
         PFUser.logOut()
         let main=UIStoryboard(name: "Main", bundle: nil)
@@ -166,7 +152,7 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
         let delegate = self.view.window?.windowScene?.delegate as! SceneDelegate
         delegate.window?.rootViewController=loginViewController
     }
-    
+
     func createSearch(bookId:String) {
         print("ReviewsViewController.swift: createSearch()")
         let search = PFObject(className: "Search")
@@ -200,7 +186,7 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
             } else if let data = data,
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
                 //print("json got through")
-                print(dataDictionary)
+                //print(dataDictionary)
                 if let keyResult=dataDictionary["result"] as? [String] {
                     if keyResult.count > 0 {
                         key=keyResult[0] as! String
@@ -223,63 +209,60 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
             }
             }
         }        //get genre with key: http://openlibrary.org/api/get?key=/b/OL1001932M
-        print("also got here")
+        //print("also got here")
         task.resume()
-        print("also post")
+        //print("also post")
         }
-                    
     }
-    
+
     func loadActualGenre(key:String){
-        print("key:")
-            print(key)
-            if key != "unknown"{
-                let urlString="https://openlibrary.org/api/get?key="+key
-                let urlVar=urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-                let url2 = URL(string: urlVar)!
-                print(urlVar)
-                let session2 = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
-                session2.configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
-                let task2 = session2.dataTask(with: url2) { (data2, response2, error2) in
-                    if error2 != nil{
-                        print("error")
-                        print(error2!.localizedDescription)
-                    } else if let data2 = data2,let dataDictionary2 = try! JSONSerialization.jsonObject(with: data2, options: []) as? [String: Any]{
-                        print("success data")
-                        //print(dataDictionary2["result"]!))
-                        let resultsData=dataDictionary2["result"]! as! [String:Any]
-                        print(resultsData)
-                        if let genreResult=resultsData["genres"] as? [String]{
-                            print(genreResult)
-                            self.genre=genreResult[0] as! String
-                        }
-                        else if let subjectResults=resultsData["subjects"] as? [String]{
-                            print(subjectResults)
-                            self.genre=subjectResults[0] as! String
-                        }
-                        print("genre post request")
-                        print(self.genre)
-                        DispatchQueue.main.async{
-                            self.createBook()
-                        }
+        //print("key: \(key)")
+        if key != "unknown"{
+            let urlString="https://openlibrary.org/api/get?key="+key
+            let urlVar=urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+            let url2 = URL(string: urlVar)!
+            //print(urlVar)
+            let session2 = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
+            session2.configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
+            let task2 = session2.dataTask(with: url2) { (data2, response2, error2) in
+                if error2 != nil {
+                    let message = error2?.localizedDescription ?? "error retrieving genre"
+                    print("ReviewsViewController.swift: \(message)")
+                } else if let data2 = data2,let dataDictionary2 = try! JSONSerialization.jsonObject(with: data2, options: []) as? [String: Any]{
+                    //print("success data")
+                    //print(dataDictionary2["result"]!))
+                    let resultsData=dataDictionary2["result"]! as! [String:Any]
+                    //print(resultsData)
+                    if let genreResult=resultsData["genres"] as? [String]{
+                        //print(genreResult)
+                        self.genre=genreResult[0]
                     }
-                    else{
-                        DispatchQueue.main.async{
-                            self.createBook()
-                        }
+                    else if let subjectResults=resultsData["subjects"] as? [String]{
+                        //print(subjectResults)
+                        self.genre=subjectResults[0]
+                    }
+                    //print("genre post request")
+                    //print(self.genre)
+                    DispatchQueue.main.async{
+                        self.createBook()
                     }
                 }
-                print("got here")
-                task2.resume()
-                print("gh post")
+                else{
+                    DispatchQueue.main.async{
+                        self.createBook()
+                    }
+                }
             }
-            
+            //print("got here")
+            task2.resume()
+            //print("gh post")
         }
+    }
 
     func createBook(){
-        print("createBook() called")
-        print(self.authorName)
-        print(self.bookTitle)
+        print("ReviewsViewController.swift: createBook()")
+        //print(self.authorName)
+        //print(self.bookTitle)
         var bookId=""
         //check if book with title and author exists already
         var query=PFQuery(className:"Book")
@@ -287,14 +270,13 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
         query.findObjectsInBackground { (data, error) in
             if let error = error {
                 print(error.localizedDescription)
+            } else {
+                //print("data")
+                //print(data != nil && data!.count > 0)
             }
-            else{
-                print("data")
-                print(data != nil && data!.count > 0)
-            }
+            // if the book isn't in our database, create a Book and Search record
             if (data != nil && data!.count == 0) || (data == nil) {
                 let book = PFObject(className: "Book")
-                //bookId=book.objectId as! String
                 book["author"] = self.authorName
                 book["title"] = self.bookTitle
                 book["genre"] = self.genre
@@ -302,10 +284,9 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
                 book["imageUrl"]=self.imageURL.absoluteString
                 book.saveInBackground { (success, error) in
                     if (success) {
-                        bookId=book.objectId as! String
-                        print(bookId)
-                        self.createSearch(bookId: bookId)
                         print("ReviewsViewController.swift: book record saved")
+                        bookId=book.objectId!
+                        self.createSearch(bookId: bookId)
                    } else {
                         let message = error?.localizedDescription ?? "error creating book record"
                         print("ReviewsViewController.swift: \(message)")
@@ -313,9 +294,13 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
                 }
                 
             }
+            // the book already exists in our database, don't add a Book record
             else if data != nil && data!.count > 0 {
-                bookId=data![0].objectId as! String
-                self.createSearch(bookId: bookId)
+                // if the book isn't a recent search, create a Search record
+                if self.isRecentSearch == false {
+                    bookId = data![0].objectId!
+                    self.createSearch(bookId: bookId)
+                }
             }
         }
     }
