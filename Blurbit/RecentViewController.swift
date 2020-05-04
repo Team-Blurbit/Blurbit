@@ -137,6 +137,7 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
             //pass the selected search's isbn to the reviews view controller
             let reviewsViewController=segue.destination as! ReviewsViewController
             reviewsViewController.gtin=search["isbn"] as! String
+            reviewsViewController.isRecentSearch = true
             recentTableView.deselectRow(at: indexPath, animated: true)
         }
         if (sender as? UIButton) != nil{
