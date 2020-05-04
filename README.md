@@ -37,7 +37,7 @@ This app will allow users to find more information regarding any book they encou
 - [x] User can see detailed information about the store name and hours on a details screen when clicking on a book store.
 - [x] User can search a book by title.
 - [x] User can click on a review to see an expanded review screen.
-- [ ] Work in progress: user can view recommendations based on past searches.
+- [x] Work in progress: user can view recommendations based on past searches.
 
 **Required Must-have Stories**
 * AS A user, I WANT to scan a barcode, SO THAT I can read reviews.
