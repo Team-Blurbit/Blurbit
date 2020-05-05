@@ -158,12 +158,12 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter ISBN Number" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wds-zp-kxF">
-                                        <rect key="frame" x="8" y="663" width="398" height="34"/>
+                                        <rect key="frame" x="8" y="713" width="398" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e2e-yH-eA6">
-                                        <rect key="frame" x="166" y="705" width="82" height="100"/>
+                                        <rect key="frame" x="166" y="755" width="82" height="50"/>
                                         <state key="normal" image="icons8-book-shelf-50">
                                             <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -509,8 +509,8 @@
                                 <color key="textColor" red="0.4045747817" green="0.39631694560000003" blue="0.89601629969999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Fzk-ZN-NrH">
-                                <rect key="frame" x="87" y="516" width="240" height="182"/>
+                            <textView clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="black" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Fzk-ZN-NrH">
+                                <rect key="frame" x="87" y="596" width="240" height="102"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="9C9-QG-JbQ"/>
@@ -540,6 +540,14 @@
                                     <constraint firstAttribute="width" secondItem="c7c-ha-WR3" secondAttribute="height" multiplier="59:82" id="aVJ-Bp-AB4"/>
                                 </constraints>
                             </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Review title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RLA-OR-ArV">
+                                <rect key="frame" x="87" y="526" width="240" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="9xc-96-fIR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <gestureRecognizers/>
@@ -550,15 +558,18 @@
                             <constraint firstItem="k7Y-3i-7fa" firstAttribute="top" secondItem="c7c-ha-WR3" secondAttribute="bottom" constant="41" id="BCX-eg-d64"/>
                             <constraint firstItem="1up-dq-4Hb" firstAttribute="bottom" secondItem="rRq-vk-g1K" secondAttribute="bottom" constant="18" id="EWW-dR-vSx"/>
                             <constraint firstItem="rRq-vk-g1K" firstAttribute="top" secondItem="Fzk-ZN-NrH" secondAttribute="bottom" constant="54" id="Ldc-tm-YDX"/>
-                            <constraint firstItem="Fzk-ZN-NrH" firstAttribute="top" secondItem="P2k-GR-Bgi" secondAttribute="bottom" constant="8" id="P2r-lg-MIY"/>
                             <constraint firstItem="1up-dq-4Hb" firstAttribute="trailing" secondItem="c7c-ha-WR3" secondAttribute="trailing" constant="148" id="SIf-ac-tvT"/>
                             <constraint firstItem="rRq-vk-g1K" firstAttribute="top" secondItem="Fzk-ZN-NrH" secondAttribute="bottom" constant="54" id="VpS-pL-Gsu"/>
                             <constraint firstItem="k7Y-3i-7fa" firstAttribute="top" secondItem="c7c-ha-WR3" secondAttribute="bottom" constant="41" id="ZcZ-XQ-nND"/>
                             <constraint firstItem="P2k-GR-Bgi" firstAttribute="top" secondItem="k7Y-3i-7fa" secondAttribute="bottom" constant="24" id="a4o-R6-cQS"/>
-                            <constraint firstItem="Fzk-ZN-NrH" firstAttribute="top" secondItem="P2k-GR-Bgi" secondAttribute="bottom" constant="8" id="crA-bW-Lzk"/>
+                            <constraint firstItem="Fzk-ZN-NrH" firstAttribute="top" secondItem="RLA-OR-ArV" secondAttribute="bottom" constant="36" id="anh-1G-Pzs"/>
+                            <constraint firstItem="RLA-OR-ArV" firstAttribute="top" secondItem="P2k-GR-Bgi" secondAttribute="bottom" constant="18" id="dbj-Ve-Z4C"/>
+                            <constraint firstItem="RLA-OR-ArV" firstAttribute="top" secondItem="P2k-GR-Bgi" secondAttribute="bottom" constant="18" id="g2F-Wm-Y3A"/>
                             <constraint firstItem="rRq-vk-g1K" firstAttribute="leading" secondItem="1up-dq-4Hb" secondAttribute="leading" constant="131" id="hLg-NL-C9B"/>
                             <constraint firstItem="k7Y-3i-7fa" firstAttribute="leading" secondItem="1up-dq-4Hb" secondAttribute="leading" constant="25" id="jvG-PP-bPu"/>
                             <constraint firstItem="P2k-GR-Bgi" firstAttribute="leading" secondItem="1up-dq-4Hb" secondAttribute="leading" constant="67" id="uJf-BN-UUm"/>
+                            <constraint firstItem="RLA-OR-ArV" firstAttribute="leading" secondItem="1up-dq-4Hb" secondAttribute="leading" constant="87" id="v1d-QU-OfY"/>
+                            <constraint firstItem="Fzk-ZN-NrH" firstAttribute="top" secondItem="RLA-OR-ArV" secondAttribute="bottom" constant="36" id="wBh-Xm-si2"/>
                             <constraint firstItem="c7c-ha-WR3" firstAttribute="leading" secondItem="1up-dq-4Hb" secondAttribute="leading" constant="148" id="zkp-jf-J1J"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1up-dq-4Hb"/>
@@ -570,6 +581,7 @@
                         <outlet property="bookCover" destination="c7c-ha-WR3" id="hex-xX-MqZ"/>
                         <outlet property="comment" destination="Fzk-ZN-NrH" id="0cF-dB-4UR"/>
                         <outlet property="pickerView" destination="P2k-GR-Bgi" id="BUG-Tu-757"/>
+                        <outlet property="reviewtitle" destination="RLA-OR-ArV" id="1gl-Vv-Vk2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uwi-lR-k8M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

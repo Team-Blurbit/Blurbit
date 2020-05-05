@@ -154,19 +154,32 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
     }
 
     func createSearch(bookId:String) {
-        print("ReviewsViewController.swift: createSearch()")
-        let search = PFObject(className: "Search")
-        search["bookId"]=bookId
-        search["isbn"]=self.gtin
-        search["user"] = PFUser.current()!
-        //review will be added later on
-        search.saveInBackground { (success, error) in
-            if (success) {
-                print("ReviewsViewController.swift: search record saved")
-           } else {
-                let message = error?.localizedDescription ?? "error creating search record"
-                print("ReviewsViewController.swift: \(message)")
-           }
+        //check if book with title and author exists already
+        var query=PFQuery(className:"Search")
+        query=query.whereKey("isbn", equalTo: self.gtin)
+        query.findObjectsInBackground { (data, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else{
+                print("data")
+                print(data != nil && data!.count > 0)
+            }
+            if (data != nil && data!.count == 0) || (data == nil) {        print("ReviewsViewController.swift: createSearch()")
+                let search = PFObject(className: "Search")
+                search["bookId"]=bookId
+                search["isbn"]=self.gtin
+                search["user"] = PFUser.current()!
+                //review will be added later on
+                search.saveInBackground { (success, error) in
+                    if (success) {
+                        print("ReviewsViewController.swift: search record saved")
+                   } else {
+                        let message = error?.localizedDescription ?? "error creating search record"
+                        print("ReviewsViewController.swift: \(message)")
+                   }
+                }
+            }
         }
     }
     
@@ -174,7 +187,13 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
         var key="unknown"
         //call openlibrary API
         //get key by //isbn-13:http://openlibrary.org/api/things?query={%22type%22:%22\/type\/edition%22,%22isbn_13%22:%229780061120084%22}
-        let urlString = "https://openlibrary.org/api/things?query={\"type\":\"\\/type\\/edition\",\"isbn_13\":\""+self.gtin+"\"}"
+        var urlString=""
+        if (useASIN==false){
+            urlString = "https://openlibrary.org/api/things?query={\"type\":\"\\/type\\/edition\",\"isbn_13\":\""+self.gtin+"\"}"
+        }
+        else{
+            urlString = "https://openlibrary.org/api/things?query={\"type\":\"\\/type\\/edition\",\"isbn_10\":\""+self.gtin+"\"}"
+        }
         //print(urlString)
         //print(urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
         if let url=URL(string:urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!) {

@@ -143,17 +143,17 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
         if (sender as? UIButton) != nil{
             if let indexPath=getIndexPath(sender as! UIButton){
                 let ratingController=segue.destination as! RatingViewController
-                let search=searches[indexPath.row]
+                let search=self.searches[indexPath.row]
                 ratingController.bookId = search["bookId"] as! String
                 print("bookId")
                 print(ratingController.bookId)
                 ratingController.isbn = search["isbn"] as! String
                 print("isbn")
-                print(indexPath.row)
+                print(ratingController.isbn)
                 ratingController.imageUrl=self.books[indexPath.row]["imageUrl"] as! String
                 //var url=URL(string:imageUrl)!
                 //ratingController.bookCover.af_setImage(withURL: url)
-                print(ratingController.isbn)
+                //print(ratingController.isbn)
             }
         }
     }

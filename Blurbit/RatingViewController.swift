@@ -15,9 +15,13 @@ class RatingViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDa
     var isbn=""
     var bookId=""
     var imageUrl=""
-    var rowSelected=0
+    var reviTitle="review"
+    var reviewExists=false
+    var rowSelected=5
     
     @IBOutlet weak var comment: UITextView!
+    
+    @IBOutlet weak var reviewtitle: UITextField!
     
     @IBOutlet weak var bookCover: UIImageView!
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -25,24 +29,29 @@ class RatingViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDa
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData.count
+        return self.pickerData.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         self.rowSelected=row
-        return pickerData[row]
+        return self.pickerData[row]
     }
     
     @IBOutlet weak var pickerView: UIPickerView!
     var pickerData:Array<String> = ["Awesome read!","Good read","Okay to pass time","Not worth reading","Waste of money"]
     var pickerRatings:Array<Int> = [5,4,3,2,1]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        var url=URL(string:imageUrl)!
-        bookCover.af_setImage(withURL: url)
+        self.comment.layer.borderWidth=1
+        self.comment.layer.borderColor=UIColor.lightGray.cgColor
+        if let url=URL(string:imageUrl){
+            bookCover.af_setImage(withURL: url)
+        }
         // Do any additional setup after loading the view.
-        pickerView.delegate=self
-        pickerView.dataSource=self
+        self.pickerView.delegate=self
+        self.pickerView.dataSource=self
+        print(self.isbn)
     }
     
     @IBAction func onTap(_ sender: Any) {
@@ -66,36 +75,58 @@ class RatingViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDa
         print(self.bookId)
         print("isbn")
         print(self.isbn)
-        let review = PFObject(className: "Review")
-        review["userId"]=PFUser.current()!
-        review["comment"] = comment.text
-        review["bookId"] = self.bookId
-        review["rating"]=pickerRatings[rowSelected]
-        review.saveInBackground { (success, error) in
-            if (success) {
-                print("ReviewsViewController.swift: search record saved")
-                //find search and add review to it
-                var query=PFQuery(className:"Search")
-                query=query.whereKey("isbn", equalTo: self.isbn)
-                query.findObjectsInBackground { (data, error) in
-                    if let error = error {
-                        print(error.localizedDescription)
-                    }
-                    else if data != nil{
-                        data![0]["reviewId"]=review.objectId
-                    }
-                //dismiss modal view
-                    print("really?")
-                self.dismiss(animated: true, completion: nil)
-                }
+        var query=PFQuery(className:"Review")
+        query=query.whereKey("bookId", equalTo: self.bookId)
+        query=query.whereKey("userId",equalTo:PFUser.current()!)
+        query.findObjectsInBackground { (data, error) in
+            if let error = error {
+                print(error.localizedDescription)
             }
-                else {
-                let message = error?.localizedDescription ?? "error creating search record"
-                print("ReviewsViewController.swift: \(message)")
-                self.dismiss(animated: true, completion: nil)           }
-            
+            else{
+                print("data")
+                print(data != nil && data!.count > 0)
+            }
+            if (data != nil && data!.count == 0) || (data == nil) {
+                let review = PFObject(className: "Review")
+                review["userId"]=PFUser.current()!
+                review["comment"] = self.comment.text
+                review["bookId"] = self.bookId
+                review["title"] = self.reviewtitle.text!
+                review["rating"]=self.pickerRatings[self.rowSelected]
+                review.saveInBackground { (success, error) in
+                if (success) {
+                    print("ReviewsViewController.swift: search record saved")
+                    //find search and add review to it
+                    var query=PFQuery(className:"Search")
+                    query=query.whereKey("isbn", equalTo: self.isbn)
+                    query.findObjectsInBackground { (data, error) in
+                        if let error = error {
+                            print(error.localizedDescription)
+                        }
+                        else if data != nil{
+                            data![0]["reviewId"]=review.objectId
+                        }
+                    //dismiss modal view
+                        print("really?")
+                    self.dismiss(animated: true, completion: nil)
+                    }
+                }
+                    else {
+                    let message = error?.localizedDescription ?? "error creating search record"
+                    print("ReviewsViewController.swift: \(message)")
+                    self.dismiss(animated: true, completion: nil)
+                    
+                    }
+                
+            }
         }
-        
-    self.dismiss(animated: true, completion: nil)    }
+            else{
+                print("else")
+            }
+
+    }
+    self.dismiss(animated: true, completion: nil)
+    }
     
 }
+
