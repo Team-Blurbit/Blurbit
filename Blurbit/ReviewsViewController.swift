@@ -157,6 +157,7 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
         //check if book with title and author exists already
         var query=PFQuery(className:"Search")
         query=query.whereKey("isbn", equalTo: self.gtin)
+        query=query.whereKey("userId",equalTo: PFUser.current()!)
         query.findObjectsInBackground { (data, error) in
             if let error = error {
                 print(error.localizedDescription)
