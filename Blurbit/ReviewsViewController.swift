@@ -49,9 +49,9 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         print("ReviewsViewController.swift: tableView(forRowAt)")
-        DispatchQueue.main.async{
+        /*DispatchQueue.main.async{
             LoadingOverlay.shared.hideOverlay()
-        }
+        }*/
     }
     
     func loadReviews(){
@@ -119,6 +119,25 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
         task.resume()
     }
     
+    func loadAppReviews(bookId:String){
+        let query=PFQuery(className: "Review")
+        query.includeKey("userId")
+        query.whereKey("bookId", equalTo: bookId)
+        query.findObjectsInBackground { (data, error) in
+            print("data")
+            print(data)
+            if let data=data{
+                self.reviews2=data
+                DispatchQueue.main.async{
+                    self.tableView.reloadData()
+                    LoadingOverlay.shared.hideOverlay()
+                }
+            }
+            else{
+                self.reviews2=[PFObject]()
+            }
+        }
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("ReviewsViewController.swift: tableView(numberOfRowsInSection)")
@@ -343,7 +362,10 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
                         print("ReviewsViewController.swift: book record saved")
                         bookId=book.objectId!
                         self.createSearch(bookId: bookId)
-                   } else {
+                        DispatchQueue.main.async{
+                            LoadingOverlay.shared.hideOverlay()
+                        }
+                    } else {
                         let message = error?.localizedDescription ?? "error creating book record"
                         print("ReviewsViewController.swift: \(message)")
                    }
@@ -357,7 +379,7 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
                     //DispatchQueue.main.async{
                     bookId = data![0].objectId!
                     self.createSearch(bookId: bookId)
-                        //self.loadAppReviews(bookId:bookId)
+                    self.loadAppReviews(bookId:bookId)
                     //}
                 //}
             }

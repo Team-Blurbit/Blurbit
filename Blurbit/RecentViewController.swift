@@ -172,7 +172,7 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
                     print(search["isbn"] as! String)
                     reviewsViewController.gtin=gtin
                     reviewsViewController.isRecentSearch = true
-                    reviewsViewController.reviews2=reviewsd
+                    //reviewsViewController.reviews2=reviewsd
                     self.recentTableView.deselectRow(at: indexPath, animated: true)
                 }
                 else{
