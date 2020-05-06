@@ -23,6 +23,7 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
     var reviews2=[PFObject]()
     var useASIN = false
     var genre="unknown"
+    
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -38,6 +39,11 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
         //print(self.gtin)
         tableView.delegate=self
         tableView.dataSource=self
+        //loadReviews()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
         loadReviews()
     }
 
@@ -66,10 +72,12 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
             // This will run when the network request returns
             if let error = error {
                 print("ReviewsViewController.swift: ", error.localizedDescription)
-                self.loadReviews()
+                //self.loadReviews()
             } else if let data = data {
                 do {
                     let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+                    print("datadict")
+                    print(dataDictionary)
                     // TODO: Unexpectedly found nil while unwrapping an Optional value
                     self.reviews=dataDictionary["reviews"] as! [[String:Any]]
                     let product=dataDictionary["product"] as! [String:Any]
@@ -111,21 +119,10 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
         task.resume()
     }
     
-    func loadAppReviews(bookId:String){
-        let query=PFQuery(className: "Review")
-        query.includeKey("userId")
-        query.whereKey("bookId", equalTo: bookId)
-        query.findObjectsInBackground { (data, error) in
-            if let data=data{
-                self.reviews2=data
-                print(self.reviews2)
-            }
-        }
-    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("ReviewsViewController.swift: tableView(numberOfRowsInSection)")
-        return self.reviews2.count+reviews.count
+        return reviews2.count+reviews.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -143,15 +140,16 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
             cell.bookImage.af_setImage(withURL: self.imageURL)
             return cell
         }
-        else if indexPath.row <= self.reviews2.count{
+        else if indexPath.row <= reviews2.count{
             let cell=tableView.dequeueReusableCell(withIdentifier: "ReviewCell") as! ReviewViewCell
-            let review=reviews2[indexPath.row]
+            let review=reviews2[indexPath.row-1]
             // print(review)
             let ratingNumb=review["rating"] as! Int
             cell.titleLabel.text=review["title"] as? String
             let imageName="stars_\(ratingNumb).png" as String
             cell.ratingView.image=UIImage(named:imageName)!
-            let profile=review["username"] as? String
+            let user=review["userId"] as! PFUser
+            let profile=user["username"] as? String
             print(profile)
             cell.usernameLabel.text=profile as? String
             cell.reviewLabel.text=review["comment"] as? String
@@ -209,10 +207,18 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
                    }
                 }
             }
+            else{
+                DispatchQueue.main.async{
+                    print("ReviewsViewController.swift: loadAppReviews()")
+                    //self.loadAppReviews(bookId: bookId)
+                }
+                
+            }
         }
     }
     
     func getGenre(){
+        print("ReviewsViewController.swift: getGenre()")
         var key="unknown"
         //call openlibrary API
         //get key by //isbn-13:http://openlibrary.org/api/things?query={%22type%22:%22\/type\/edition%22,%22isbn_13%22:%229780061120084%22}
@@ -259,12 +265,13 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
             }
         }        //get genre with key: http://openlibrary.org/api/get?key=/b/OL1001932M
         //print("also got here")
-        task.resume()
-        //print("also post")
+                //print("also post")
+            task.resume()
         }
     }
 
     func loadActualGenre(key:String){
+        print("ReviewsViewController.swift: getActualGenre()")
         //print("key: \(key)")
         if key != "unknown"{
             let urlString="https://openlibrary.org/api/get?key="+key
@@ -320,8 +327,8 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
             if let error = error {
                 print(error.localizedDescription)
             } else {
-                //print("data")
-                //print(data != nil && data!.count > 0)
+                print("data")
+                print(data != nil && data!.count > 0)
             }
             // if the book isn't in our database, create a Book and Search record
             if (data != nil && data!.count == 0) || (data == nil) {
@@ -346,11 +353,13 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
             // the book already exists in our database, don't add a Book record
             else if data != nil && data!.count > 0 {
                 // if the book isn't a recent search, create a Search record
-                if self.isRecentSearch == false {
+                //if self.isRecentSearch == false {
+                    //DispatchQueue.main.async{
                     bookId = data![0].objectId!
                     self.createSearch(bookId: bookId)
-                    self.loadAppReviews(bookId:bookId)
-                }
+                        //self.loadAppReviews(bookId:bookId)
+                    //}
+                //}
             }
         }
     }

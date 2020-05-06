@@ -29,18 +29,19 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
 
     override func viewDidAppear(_ animated: Bool) {
         print("RecentViewController.swift: viewDidLoad()")
+        super.viewDidAppear(true)
         self.loadSearches()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidAppear(true)
+    /*override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
         self.searches=[Int:(PFObject,PFObject)?]() as! [Int : (PFObject, PFObject)]
         /*var search:PFObject
         var book:PFObject
         (search,book)=searches[0]!
         print(search)*/
         //self.books=[PFObject]()
-    }
+    }*/
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         DispatchQueue.main.async{
@@ -154,11 +155,36 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
             var search:PFObject
             var book:PFObject
             (search,book)=searches[indexPath.row]!
-            //pass the selected search's isbn to the reviews view controller
-            let reviewsViewController=segue.destination as! ReviewsViewController
-            reviewsViewController.gtin=search["isbn"] as! String
-            reviewsViewController.isRecentSearch = true
-            recentTableView.deselectRow(at: indexPath, animated: true)
+            print("searching for user reviews...")
+            let query=PFQuery(className: "Review")
+            let gtin=search["isbn"] as! String
+            query.includeKey("userId")
+            query.whereKey("bookId", equalTo: search["bookId"]!)
+            query.findObjectsInBackground { (data, error) in
+                print("data")
+                print(data)
+                if let data=data{
+                    let reviewsd=data
+                    print("reviews2:")
+                    print(reviewsd)
+                    let reviewsViewController=segue.destination as! ReviewsViewController
+                    print("search")
+                    print(search["isbn"] as! String)
+                    reviewsViewController.gtin=gtin
+                    reviewsViewController.isRecentSearch = true
+                    reviewsViewController.reviews2=reviewsd
+                    self.recentTableView.deselectRow(at: indexPath, animated: true)
+                }
+                else{
+                    let reviewsViewController=segue.destination as! ReviewsViewController
+                    reviewsViewController.gtin=gtin
+                    reviewsViewController.isRecentSearch = true
+                    self.recentTableView.deselectRow(at: indexPath, animated: true)
+                    
+                }
+            }
+                //pass the selected search's isbn to the reviews view controller
+            
         }
         if (sender as? UIButton) != nil{
             if let indexPath=getIndexPath(sender as! UIButton){
