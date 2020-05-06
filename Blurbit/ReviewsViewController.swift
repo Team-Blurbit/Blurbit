@@ -118,13 +118,14 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
         query.findObjectsInBackground { (data, error) in
             if let data=data{
                 self.reviews2=data
+                print(self.reviews2)
             }
         }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("ReviewsViewController.swift: tableView(numberOfRowsInSection)")
-        return reviews.count
+        return self.reviews2.count+reviews.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -142,7 +143,7 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
             cell.bookImage.af_setImage(withURL: self.imageURL)
             return cell
         }
-        /*else if indexPath.row <= self.reviews2.count{
+        else if indexPath.row <= self.reviews2.count{
             let cell=tableView.dequeueReusableCell(withIdentifier: "ReviewCell") as! ReviewViewCell
             let review=reviews2[indexPath.row]
             // print(review)
@@ -155,10 +156,10 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
             cell.usernameLabel.text=profile as? String
             cell.reviewLabel.text=review["comment"] as? String
             return cell
-        }*/
+        }
         else{
             let cell=tableView.dequeueReusableCell(withIdentifier: "ReviewCell") as! ReviewViewCell
-            let review=reviews[indexPath.row]
+            let review=reviews[indexPath.row-reviews2.count]
             // print(review)
             let ratingNumb=review["rating"] as! Int
             cell.titleLabel.text=review["title"] as? String
@@ -348,7 +349,7 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
                 if self.isRecentSearch == false {
                     bookId = data![0].objectId!
                     self.createSearch(bookId: bookId)
-                    //self.loadAppReviews(bookId:bookId)
+                    self.loadAppReviews(bookId:bookId)
                 }
             }
         }

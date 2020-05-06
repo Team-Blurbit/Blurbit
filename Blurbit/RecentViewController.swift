@@ -13,8 +13,8 @@ import AlamofireImage
 class RecentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,RecentTableViewCellDelegate {
 
     @IBOutlet weak var recentTableView: UITableView!
-    var searches = [PFObject]()
-    var books = [PFObject]()
+    var searches = [Int:(PFObject,PFObject)]()
+    //var books = [PFObject]()
     var index = 0
 
     override func viewDidLoad() {
@@ -31,6 +31,16 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
         print("RecentViewController.swift: viewDidLoad()")
         self.loadSearches()
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        self.searches=[Int:(PFObject,PFObject)?]() as! [Int : (PFObject, PFObject)]
+        /*var search:PFObject
+        var book:PFObject
+        (search,book)=searches[0]!
+        print(search)*/
+        //self.books=[PFObject]()
+    }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         DispatchQueue.main.async{
@@ -44,9 +54,10 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
         //print("RecentViewController.swift: self.books:<\(self.books)>")
         //print("RecentViewController.swift: self.books.count:<\(self.books.count)>")
         //print("RecentViewController.swift: indexPath.row:<\(indexPath.row)>")
-        if (self.books.count > indexPath.row) {
-            let book=self.books[indexPath.row]
-            //book.fetchIfNeeded()
+        if (self.searches.count > indexPath.row) {
+            var search:PFObject
+            var book:PFObject
+            (search,book)=searches[indexPath.row]!            //book.fetchIfNeeded()
             //print("book \(book)")
             let imageUrl=book["imageUrl"] as! String
             //print(imageUrl)
@@ -78,11 +89,11 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
         query.includeKeys(["author", "title"])
         query.whereKey("user", equalTo: PFUser.current()!)
         query.addDescendingOrder("createdAt")
-        query.findObjectsInBackground { (searches, error) in
-            if (searches != nil) {
+        query.findObjectsInBackground { (searchResults, error) in
+            if (searchResults != nil) {
                 print("searching...")
-                self.searches = searches!
-                self.loadBooks()
+                //self.searches = searches!
+                self.loadBooks(searchResults:searchResults!)
                 print("searched")
             } else {
                 let message = error?.localizedDescription ?? "error loading search records"
@@ -90,13 +101,15 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
             }
         }
     }
-
-    func loadBooks() {
+    
+    func loadBooks(searchResults:[PFObject]) {
+        self.searches=[Int:(PFObject,PFObject)]()
         print("RecentViewController.swift: loadBooks()")
-        self.books = [] // reset books array before appending
-        for search in self.searches{
+        //self.books = [] // reset books array before appending
+        var idx=0
+        for search in searchResults{
             let query = PFQuery(className: "Book")
-            query.whereKey("objectId", equalTo: search["bookId"])
+            query.whereKey("objectId", equalTo: search["bookId"]!)
             //query.addDescendingOrder("createdAt")
             query.findObjectsInBackground { (data, error) in
                 if let error = error {
@@ -104,7 +117,10 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
                 }
                 if data != nil {
                     //print(data!.count)
-                    self.books.append(data![0])
+                    //self.books.append(data![0])
+                    self.searches[idx]=(search,data![0])
+                    print(self.searches[idx])
+                    idx=idx+1
                     self.index = self.index + 1
                     if self.index >= self.searches.count {
                         print("here")
@@ -135,7 +151,9 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
         //find the selected search
         if let cell=sender as? RecentTableViewCell{
             let indexPath=recentTableView.indexPath(for: cell)!
-            let search=searches[indexPath.row]
+            var search:PFObject
+            var book:PFObject
+            (search,book)=searches[indexPath.row]!
             //pass the selected search's isbn to the reviews view controller
             let reviewsViewController=segue.destination as! ReviewsViewController
             reviewsViewController.gtin=search["isbn"] as! String
@@ -145,14 +163,16 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
         if (sender as? UIButton) != nil{
             if let indexPath=getIndexPath(sender as! UIButton){
                 let ratingController=segue.destination as! RatingViewController
-                let search=self.searches[indexPath.row]
+                var search:PFObject
+                var book:PFObject
+                (search,book)=searches[indexPath.row]!
                 ratingController.bookId = search["bookId"] as! String
                 print("bookId")
                 print(ratingController.bookId)
                 ratingController.isbn = search["isbn"] as! String
                 print("isbn")
                 print(ratingController.isbn)
-                ratingController.imageUrl=self.books[indexPath.row]["imageUrl"] as! String
+                ratingController.imageUrl=book["imageUrl"] as! String
                 //var url=URL(string:imageUrl)!
                 //ratingController.bookCover.af_setImage(withURL: url)
                 //print(ratingController.isbn)
