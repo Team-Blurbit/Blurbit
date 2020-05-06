@@ -41,6 +41,7 @@ class RatingViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDa
     @IBOutlet weak var pickerView: UIPickerView!
     var pickerData:Array<String> = ["Awesome read!","Good read","Okay to pass time","Not worth reading","Waste of money"]
     var pickerRatings:Array<Int> = [5,4,3,2,1]
+    var reverseRatings:Array<Int> = [1,2,3,4,5]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +57,37 @@ class RatingViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDa
         self.pickerView.delegate=self
         self.pickerView.dataSource=self
         print(self.isbn)
+        self.loadReview()
+    }
+    
+    func loadReview(){
+        print("loading review")
+        var query=PFQuery(className:"Review")
+        query=query.whereKey("bookId", equalTo: self.bookId)
+        query=query.whereKey("userId",equalTo:PFUser.current()!)
+        query.findObjectsInBackground { (data, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else{
+                print("data")
+                print(data != nil && data!.count > 0)
+            }
+            if data != nil&&data!.count != 0{
+                print("else")
+                if let review=data![0] as? PFObject{
+                    print(review)
+                    self.reviewtitle.text=review["title"] as! String
+                    self.comment.text=review["comment"] as! String
+                    var rating=review["rating"] as! Int
+                    rating=rating-1
+                    print(rating)
+                    rating=self.pickerRatings[rating]-1
+                    print(rating)
+                    self.pickerView.selectRow(rating, inComponent: 0, animated: true)
+                }
+            }
+        }
     }
     
     @IBAction func onTap(_ sender: Any) {

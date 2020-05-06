@@ -123,7 +123,7 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
                     print(self.searches[idx])
                     idx=idx+1
                     self.index = self.index + 1
-                    if self.index >= self.searches.count {
+                    if /*self.index >= self.searches.count*/idx >= searchResults.count-1{
                         print("here")
                         self.recentTableView.reloadData()
                         return
@@ -131,11 +131,13 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
                 } else {
                     let message = "something unexpected happened"
                     print("FeedViewController.swift: \(message)")
+                    self.recentTableView.reloadData()
+                    return
+                    
                 }
             }
         }
-        self.recentTableView.reloadData()
-        return
+        
     }
 
     @IBAction func onLogout(_ sender: Any) {
@@ -156,9 +158,9 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
             var book:PFObject
             (search,book)=searches[indexPath.row]!
             print("searching for user reviews...")
-            let query=PFQuery(className: "Review")
+            //let query=PFQuery(className: "Review")
             let gtin=search["isbn"] as! String
-            query.includeKey("userId")
+            /*query.includeKey("userId")
             query.whereKey("bookId", equalTo: search["bookId"]!)
             query.findObjectsInBackground { (data, error) in
                 print("data")
@@ -166,15 +168,15 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
                 if let data=data{
                     let reviewsd=data
                     print("reviews2:")
-                    print(reviewsd)
+                    print(reviewsd)*/
                     let reviewsViewController=segue.destination as! ReviewsViewController
-                    print("search")
-                    print(search["isbn"] as! String)
+                    //print("search")
+                    //print(search["isbn"] as! String)
                     reviewsViewController.gtin=gtin
                     reviewsViewController.isRecentSearch = true
                     //reviewsViewController.reviews2=reviewsd
                     self.recentTableView.deselectRow(at: indexPath, animated: true)
-                }
+                /*}
                 else{
                     let reviewsViewController=segue.destination as! ReviewsViewController
                     reviewsViewController.gtin=gtin
@@ -182,7 +184,7 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
                     self.recentTableView.deselectRow(at: indexPath, animated: true)
                     
                 }
-            }
+            }*/
                 //pass the selected search's isbn to the reviews view controller
             
         }
