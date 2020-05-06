@@ -10,12 +10,13 @@ import UIKit
 import Parse
 import AlamofireImage
 
-class RatingViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
+class RatingViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource,UITextViewDelegate {
     
     var isbn=""
     var bookId=""
     var imageUrl=""
     var reviTitle="review"
+    var placeholder="Write a review..."
     var reviewExists=false
     var rowSelected=5
     
@@ -45,6 +46,9 @@ class RatingViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDa
         super.viewDidLoad()
         self.comment.layer.borderWidth=1
         self.comment.layer.borderColor=UIColor.lightGray.cgColor
+        self.comment.delegate = self
+        self.comment.textColor = UIColor.lightGray
+        self.comment.text = placeholder
         if let url=URL(string:imageUrl){
             bookCover.af_setImage(withURL: url)
         }
@@ -128,5 +132,26 @@ class RatingViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDa
     self.dismiss(animated: true, completion: nil)
     }
     
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == .lightGray {
+            textView.text = ""
+            textView.textColor = .black
+        }
+    }
+
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Write a review..."
+            textView.textColor = UIColor.lightGray
+            placeholder = ""
+        }
+        else {
+            placeholder = textView.text
+        }
+    }
+
+    func textViewDidChange(_ textView: UITextView) {
+        placeholder = textView.text
+    }
 }
 
