@@ -10,12 +10,13 @@ import UIKit
 import Parse
 import AlamofireImage
 
-class RatingViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
+class RatingViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource,UITextViewDelegate {
     
     var isbn=""
     var bookId=""
     var imageUrl=""
     var reviTitle="review"
+    var placeholder="Write a review..."
     var reviewExists=false
     var rowSelected=5
     
@@ -40,11 +41,15 @@ class RatingViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDa
     @IBOutlet weak var pickerView: UIPickerView!
     var pickerData:Array<String> = ["Awesome read!","Good read","Okay to pass time","Not worth reading","Waste of money"]
     var pickerRatings:Array<Int> = [5,4,3,2,1]
+    var reverseRatings:Array<Int> = [1,2,3,4,5]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.comment.layer.borderWidth=1
         self.comment.layer.borderColor=UIColor.lightGray.cgColor
+        self.comment.delegate = self
+        self.comment.textColor = UIColor.lightGray
+        self.comment.text = placeholder
         if let url=URL(string:imageUrl){
             bookCover.af_setImage(withURL: url)
         }
@@ -52,6 +57,37 @@ class RatingViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDa
         self.pickerView.delegate=self
         self.pickerView.dataSource=self
         print(self.isbn)
+        self.loadReview()
+    }
+    
+    func loadReview(){
+        print("loading review")
+        var query=PFQuery(className:"Review")
+        query=query.whereKey("bookId", equalTo: self.bookId)
+        query=query.whereKey("userId",equalTo:PFUser.current()!)
+        query.findObjectsInBackground { (data, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else{
+                print("data")
+                print(data != nil && data!.count > 0)
+            }
+            if data != nil&&data!.count != 0{
+                print("else")
+                if let review=data![0] as? PFObject{
+                    print(review)
+                    self.reviewtitle.text=review["title"] as! String
+                    self.comment.text=review["comment"] as! String
+                    var rating=review["rating"] as! Int
+                    rating=rating-1
+                    print(rating)
+                    rating=self.pickerRatings[rating]-1
+                    print(rating)
+                    self.pickerView.selectRow(rating, inComponent: 0, animated: true)
+                }
+            }
+        }
     }
     
     @IBAction func onTap(_ sender: Any) {
@@ -111,22 +147,62 @@ class RatingViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDa
                     self.dismiss(animated: true, completion: nil)
                     }
                 }
-                    else {
+                
+                else {
                     let message = error?.localizedDescription ?? "error creating search record"
                     print("ReviewsViewController.swift: \(message)")
                     self.dismiss(animated: true, completion: nil)
                     
-                    }
+                }
                 
             }
         }
-            else{
-                print("else")
+        else if data != nil {
+            if let dataId=data![0].objectId{
+                print("updating")
+                print(dataId)
+                query.getObjectInBackground(withId: dataId) { (review, error) in
+                    if let review = review{
+                        print("found to update")
+                        review["comment"] = self.comment.text
+                        review["title"] = self.reviewtitle.text!
+                        review["rating"]=self.pickerRatings[self.rowSelected]
+                        review.saveInBackground { (success, error) in
+                            if success{
+                                print("data saved")
+                            }
+                            else{
+                                print("error saving data")
+                            }
+                        }
+                    }
+                }
             }
-
+        }
     }
     self.dismiss(animated: true, completion: nil)
     }
     
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == .lightGray {
+            textView.text = ""
+            textView.textColor = .black
+        }
+    }
+
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Write a review..."
+            textView.textColor = UIColor.lightGray
+            placeholder = ""
+        }
+        else {
+            placeholder = textView.text
+        }
+    }
+
+    func textViewDidChange(_ textView: UITextView) {
+        placeholder = textView.text
+    }
 }
 

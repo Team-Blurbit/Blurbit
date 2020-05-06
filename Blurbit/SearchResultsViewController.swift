@@ -20,6 +20,7 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
         let book = search_results[indexPath.row]
         let book_title = book["title"] as! String
         let book_asin = book["asin"] as! String
+        var book_author="unknown"
         let fallback_image_url = URL(string: "https://adazing.com/wp-content/uploads/2019/02/closed-book-clipart-01-300x300.png")
         let image_url = (URL(string: book["image"] as! String) ?? fallback_image_url)!
         
@@ -28,7 +29,7 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
         //cell.textLabel!.text = "row: \(indexPath.row)"
         //cell.textLabel!.text = book_title
         cell.bookTitleLabel.text = book_title
-        cell.bookAsin.text = book_asin
+        //cell.bookAsin.text = book_asin
         
         return cell
     }
@@ -57,7 +58,7 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func loadBooks(){
-        let url = URL(string: "https://api.rainforestapi.com/request?api_key=379913B5856E4E079E13E66CDD814EB9&type=search&amazon_domain=amazon.com&rh=n:266239&search_term="+searchterm+"&sort_by=featured")!
+        let url = URL(string: "https://api.rainforestapi.com/request?api_key=379913B5856E4E079E13E66CDD814EB9&type=search&amazon_domain=amazon.com&category_id=n:283155&search_term="+searchterm+"&sort_by=featured")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
         let task = session.dataTask(with: request) { (data, response, error) in

@@ -15,4 +15,5 @@ class BookCell: UITableViewCell {
     @IBOutlet weak var bookImage: UIImageView!
     
     @IBOutlet weak var bookAsin: UILabel!
+    var asin=""
 }

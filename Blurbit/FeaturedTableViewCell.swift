@@ -10,10 +10,11 @@ import UIKit
 
 class FeaturedTableViewCell: UITableViewCell {
 
+    
+    @IBOutlet weak var rating: UILabel!
     @IBOutlet weak var author: UILabel!
     @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var rating: UILabel!
-
+    @IBOutlet weak var coverView: UIImageView!
     override func awakeFromNib() {
         print("FeaturedTableViewCell.swift: awakeFromNib()")
         super.awakeFromNib()
