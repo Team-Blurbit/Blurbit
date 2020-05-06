@@ -147,19 +147,38 @@ class RatingViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDa
                     self.dismiss(animated: true, completion: nil)
                     }
                 }
-                    else {
+                
+                else {
                     let message = error?.localizedDescription ?? "error creating search record"
                     print("ReviewsViewController.swift: \(message)")
                     self.dismiss(animated: true, completion: nil)
                     
-                    }
+                }
                 
             }
         }
-            else{
-                print("else")
+        else if data != nil {
+            if let dataId=data![0].objectId{
+                print("updating")
+                print(dataId)
+                query.getObjectInBackground(withId: dataId) { (review, error) in
+                    if let review = review{
+                        print("found to update")
+                        review["comment"] = self.comment.text
+                        review["title"] = self.reviewtitle.text!
+                        review["rating"]=self.pickerRatings[self.rowSelected]
+                        review.saveInBackground { (success, error) in
+                            if success{
+                                print("data saved")
+                            }
+                            else{
+                                print("error saving data")
+                            }
+                        }
+                    }
+                }
             }
-
+        }
     }
     self.dismiss(animated: true, completion: nil)
     }
