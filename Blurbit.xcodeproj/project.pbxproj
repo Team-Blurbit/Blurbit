@@ -36,7 +36,7 @@
 		C3349CB82450FEA60092BE74 /* WeekdayTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3349CB72450FEA60092BE74 /* WeekdayTextTableViewCell.swift */; };
 		C391C1CD24442571006454BC /* RecentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C391C1CC24442571006454BC /* RecentViewController.swift */; };
 		C391C1CF24442658006454BC /* RecentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C391C1CE24442658006454BC /* RecentTableViewCell.swift */; };
-		C3FD104024569AA900FEF540 /* ItemSimilarityRecommender.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3FD103F24569AA900FEF540 /* ItemSimilarityRecommender.mlmodel */; };
+		C3D548E82463678A001A7B70 /* ItemSimilarityRecommender.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3D548E72463678A001A7B70 /* ItemSimilarityRecommender.mlmodel */; };
 		C3FD17422457AA6800410678 /* FeaturedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FD17412457AA6800410678 /* FeaturedTableViewCell.swift */; };
 		DA356292A594F0420A794C5F /* Pods_Blurbit_BlurbitUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B114ADA75A2027E630FEE5C7 /* Pods_Blurbit_BlurbitUITests.framework */; };
 /* End PBXBuildFile section */
@@ -100,7 +100,7 @@
 		C3349CB72450FEA60092BE74 /* WeekdayTextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekdayTextTableViewCell.swift; sourceTree = "<group>"; };
 		C391C1CC24442571006454BC /* RecentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentViewController.swift; sourceTree = "<group>"; };
 		C391C1CE24442658006454BC /* RecentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentTableViewCell.swift; sourceTree = "<group>"; };
-		C3FD103F24569AA900FEF540 /* ItemSimilarityRecommender.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ItemSimilarityRecommender.mlmodel; sourceTree = "<group>"; };
+		C3D548E72463678A001A7B70 /* ItemSimilarityRecommender.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ItemSimilarityRecommender.mlmodel; sourceTree = "<group>"; };
 		C3FD17412457AA6800410678 /* FeaturedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedTableViewCell.swift; sourceTree = "<group>"; };
 		CB02BC846CE5301A248E34B3 /* Pods_Blurbit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Blurbit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -171,6 +171,7 @@
 		84EAF1A1242980D3001EADA0 /* Blurbit */ = {
 			isa = PBXGroup;
 			children = (
+				C3D548E72463678A001A7B70 /* ItemSimilarityRecommender.mlmodel */,
 				4E5A008C243DABA30059BC53 /* Assets.xcassets */,
 				84EAF1B0242980D4001EADA0 /* Info.plist */,
 				84EAF1A2242980D3001EADA0 /* AppDelegate.swift */,
@@ -195,7 +196,6 @@
 				C3349CB72450FEA60092BE74 /* WeekdayTextTableViewCell.swift */,
 				4E50F7F4244719CE0048031B /* FeaturedViewController.swift */,
 				C3FD17412457AA6800410678 /* FeaturedTableViewCell.swift */,
-				C3FD103F24569AA900FEF540 /* ItemSimilarityRecommender.mlmodel */,
 				4E6BB50824595B000090237E /* RatingViewController.swift */,
 				4EAC883F2459B9760087DCA1 /* Book.swift */,
 				4E2C663F245658FB00F366C9 /* LoadingOverlay.swift */,
@@ -506,6 +506,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3D548E82463678A001A7B70 /* ItemSimilarityRecommender.mlmodel in Sources */,
 				795841902455573700C61802 /* BookCell.swift in Sources */,
 				4E6BB50924595B000090237E /* RatingViewController.swift in Sources */,
 				4E50F7F3244719BB0048031B /* MapViewController.swift in Sources */,
@@ -522,7 +523,6 @@
 				4E4D0B94244426B000308364 /* LoginViewController.swift in Sources */,
 				C391C1CF24442658006454BC /* RecentTableViewCell.swift in Sources */,
 				4E5A0085243D9F1C0059BC53 /* SearchViewController.swift in Sources */,
-				C3FD104024569AA900FEF540 /* ItemSimilarityRecommender.mlmodel in Sources */,
 				C391C1CD24442571006454BC /* RecentViewController.swift in Sources */,
 				C3349CB82450FEA60092BE74 /* WeekdayTextTableViewCell.swift in Sources */,
 				4E299E28244FD7EC00FC9B49 /* PlaceMarker.swift in Sources */,

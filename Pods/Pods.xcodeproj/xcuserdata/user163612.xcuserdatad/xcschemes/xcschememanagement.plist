@@ -35,7 +35,7 @@
 		<key>GoogleMaps.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>10</integer>
+			<integer>9</integer>
 		</dict>
 		<key>GooglePlaces.xcscheme</key>
 		<dict>
@@ -47,7 +47,7 @@
 		<key>GooglePlaces.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>11</integer>
+			<integer>10</integer>
 		</dict>
 		<key>MTBBarcodeScanner.xcscheme</key>
 		<dict>
