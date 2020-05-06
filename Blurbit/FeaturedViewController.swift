@@ -35,13 +35,19 @@ class FeaturedViewController: UIViewController, UITableViewDataSource, UITableVi
         self.featuredTableView.dataSource = self
         self.featuredTableView.delegate = self
         self.loadReviews()
-        self.loadPredictions()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         print("FeaturedViewController.swift: viewDidAppear()")
         self.loadPredictions()
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        self.recommendations = []
+        self.reviews = [:]
+    }
+    
+    
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("FeaturedViewController.swift: tableView(cellForRowAt)")
@@ -76,10 +82,14 @@ class FeaturedViewController: UIViewController, UITableViewDataSource, UITableVi
         guard let prediction = try? model.prediction(input: ItemSimilarityRecommenderInput(items: self.reviews, k: 5, restrict_: ["None"], exclude: ["None"])) else {
             fatalError("FeaturedViewController.swift: runtime error while generating prediction")
         }
+        var ct=0
         print("prediction.recommendations=<\(prediction.recommendations)>")
         for recommendation in prediction.recommendations {
+            ct=ct+1
             self.getBookById(bookId: recommendation)
         }
+        print("count:")
+        print(ct)
         self.featuredTableView.reloadData()
     }
 
@@ -107,6 +117,7 @@ class FeaturedViewController: UIViewController, UITableViewDataSource, UITableVi
                     print("detailedBook=<\(detailedBook)>")
                     self.recommendations.append(detailedBook)
                     self.featuredTableView.reloadData()
+                    return
                 }
             } else {
                 let message = error?.localizedDescription ?? "error loading book record"
