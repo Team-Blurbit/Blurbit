@@ -7,37 +7,33 @@
 //
 
 import UIKit
+import AlamofireImage
+import GooglePlaces
+import GoogleMaps
 
-class MapDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MapDetailsViewController: UIViewController {
 
+    @IBOutlet weak var bookstoreView: UIImageView!
     @IBOutlet weak var hours: UILabel!
     @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var weekdayTextTableView: UITableView!
-
+    @IBOutlet weak var phoneLabel: UILabel!
+    @IBOutlet weak var hoursOpLabel: UILabel!
+    @IBOutlet weak var websiteLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+    
     var detailsTask: URLSessionDataTask!
     var key: String = "AIzaSyAiPLeK9PFJzvGlAugRivosfuBjsk9ixSE"
     var weekdayTexts = [String]()
+    var weekdayTextString = ""
     var placeId: String = ""
+    var imageUrl=""
+    var phone=""
+    var location=""
 
     override func viewDidLoad() {
         print("MapDetailsViewController.swift: viewDidLoad()")
         super.viewDidLoad()
-        self.weekdayTextTableView.dataSource = self
-        self.weekdayTextTableView.delegate = self
         self.loadDetails()
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("MapDetailsViewController.swift: tableView(cellForRowAt)")
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WeekdayTextTableViewCell") as! WeekdayTextTableViewCell
-        let weekdayText = weekdayTexts[indexPath.row]
-        cell.weekdayText.text = weekdayText as? String
-        return cell
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("MapDetailsViewController.swift: tableView(numberOfRowsInSection)")
-        return self.weekdayTexts.count
     }
 
     func loadDetails() {
@@ -70,15 +66,72 @@ class MapDetailsViewController: UIViewController, UITableViewDataSource, UITable
                             if let weekdayTexts = openingHours["weekday_text"] as? NSArray {
                                 for index in 0 ..< weekdayTexts.count {
                                     if let weekdayText = weekdayTexts[index] as? String {
-                                        self.weekdayTexts.append(weekdayText)
+                                            self.weekdayTextString.append(weekdayText+"\n")
                                     }
                                 }
-                                DispatchQueue.main.async {
-                                    self.weekdayTextTableView.reloadData()
+                                DispatchQueue.main.async{
+                                    self.hoursOpLabel.text=self.weekdayTextString
                                 }
                             }
                         }
-                    }
+                        if let website = result["website"] as? String{
+                            DispatchQueue.main.async{
+                                self.websiteLabel.text=website
+                            }
+                        }
+                        if let phoneText = result["formatted_phone_number"] as? String{
+                            DispatchQueue.main.async{                            self.phoneLabel.text=phoneText
+                            }
+                        }
+                        if let locationText = result["formatted_address"] as? String{
+                            DispatchQueue.main.async{                            self.locationLabel.text=locationText
+                            }
+                        }
+                        /*if let photos=result["photos"] as? [[String:Any]]{
+                            if let photo=photos[0]["photo_reference"] as? String{
+                                let imgUrlString="https://maps.googleapis.com/maps/api/place?maxwidth=200&key=\(self.key)&photoreference=\(photo)"
+                                    print(imgUrlString)
+                                    if let imgUrl=URL(string: imgUrlString){
+                                        let urlRequest=URLRequest(url:imgUrl)
+                                        let dataTask=URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+                                            if let data = data{
+                                                print(response)
+                                                if let image=UIImage(data:data){
+                                                DispatchQueue.main.async{
+                                                    self.bookstoreView.image=image
+                                                    print("image set")
+                                                }
+                                                }
+                                            }
+                                        }
+                                        dataTask.resume()
+                    
+                                    }
+                            }
+                        }*/
+                        let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.photos.rawValue))!
+                        let placesClient=GMSPlacesClient()
+                        placesClient.fetchPlace(fromPlaceID: self.placeId,
+                                                 placeFields: fields,
+                                                 sessionToken: nil, callback: {
+                          (place: GMSPlace?, error: Error?) in
+                          if let error = error {
+                            print("An error occurred: \(error.localizedDescription)")
+                            return
+                          }
+                          if let place = place {
+                            let photoMetadata: GMSPlacePhotoMetadata = place.photos![0]
+
+                            placesClient.loadPlacePhoto(photoMetadata, callback: { (photo, error) -> Void in
+                              if let error = error {
+                                print("Error loading photo metadata: \(error.localizedDescription)")
+                                return
+                              } else {
+                                self.bookstoreView?.image = photo;
+                              }
+                            })
+                          }
+                        })                    }
                 }
             }
         }
