@@ -17,7 +17,7 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
     var bookTitle = "Unknown Title"
     var authorName="Unknown"
     var isRecentSearch = false
-    var ratingNum = 0
+    var ratingNum:Double = 0.0
     var ratingsTotal = 0
     var reviews=[[String:Any]]()
     var reviews2=[PFObject]()
@@ -101,8 +101,8 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
                     }
                         
                     let ratings=dataDictionary["summary"] as! [String:Any]
-                    if let ratingNumber=ratings["rating"] as? Double{
-                        self.ratingNum=Int(ratingNumber)
+                    if var ratingNumber=ratings["rating"] as? Double{
+                        self.ratingNum=ceil(ratingNumber*2)/2
                     }
                     if let ratingtotal=ratings["ratings_total"] as? Int{
                         self.ratingsTotal=ratingtotal
@@ -133,7 +133,7 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
             cell.bookAuthor.text="By "+self.authorName
             
             // print(self.ratingNum)
-            let ratingImageName="stars_\(self.ratingNum).png" as String
+            let ratingImageName=getRatingImageName(ratingNum: self.ratingNum)
             cell.ratingView.image=UIImage(named:ratingImageName)
             let ratingText="\(self.ratingsTotal) customer ratings"
             cell.ratingLabel.text=ratingText
@@ -363,7 +363,34 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
             }
         }
     }
-
+    
+    func getRatingImageName(ratingNum:Double) -> String{
+        switch ratingNum{
+            case 0.5:
+                return "stars_05.png"
+            case 1:
+                return "stars_1.png"
+            case 1.5:
+                return "stars_15.png"
+            case 2:
+                return "stars_2.png"
+            case 2.5:
+                return "stars_25.png"
+            case 3:
+                return "stars_3.png"
+            case 3.5:
+                return "stars_35.png"
+            case 4:
+                return "stars_4.png"
+            case 4.5:
+                return "stars_45.png"
+            case 5:
+                return "stars_5.png"
+            default:
+                return "stars_05.png"
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if(segue.identifier != "NoReviews") {

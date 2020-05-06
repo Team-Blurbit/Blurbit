@@ -45,6 +45,7 @@ class FeaturedViewController: UIViewController, UITableViewDataSource, UITableVi
         print("FeaturedViewController.swift: tableView(cellForRowAt)")
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeaturedTableViewCell") as! FeaturedTableViewCell
         let recommendation = self.recommendations[indexPath.row]
+        print(recommendation)
         cell.author.text = recommendation["author"] as? String
         cell.rating.text = "5"
         cell.title.text = recommendation["title"] as? String
@@ -54,6 +55,10 @@ class FeaturedViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("FeaturedViewController.swift: tableView(numberOfRowsInSection)")
         return self.recommendations.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150.0
     }
 
     func loadPredictions() {
