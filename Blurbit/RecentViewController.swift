@@ -77,6 +77,7 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
         query.limit = 10
         query.includeKeys(["author", "title"])
         query.whereKey("user", equalTo: PFUser.current()!)
+        query.addDescendingOrder("createdAt")
         query.findObjectsInBackground { (searches, error) in
             if (searches != nil) {
                 print("searching...")
@@ -96,7 +97,7 @@ class RecentViewController: UIViewController, UITableViewDataSource, UITableView
         for search in self.searches{
             let query = PFQuery(className: "Book")
             query.whereKey("objectId", equalTo: search["bookId"])
-            query.addDescendingOrder("createdAt")
+            //query.addDescendingOrder("createdAt")
             query.findObjectsInBackground { (data, error) in
                 if let error = error {
                     print("FeedViewController.swift: \(error.localizedDescription)")

@@ -20,6 +20,7 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
     var ratingNum = 0
     var ratingsTotal = 0
     var reviews=[[String:Any]]()
+    var reviews2=[PFObject]()
     var useASIN = false
     var genre="unknown"
 
@@ -109,6 +110,17 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
         }
         task.resume()
     }
+    
+    func loadAppReviews(bookId:String){
+        let query=PFQuery(className: "Review")
+        query.includeKey("userId")
+        query.whereKey("bookId", equalTo: bookId)
+        query.findObjectsInBackground { (data, error) in
+            if let data=data{
+                self.reviews2=data
+            }
+        }
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("ReviewsViewController.swift: tableView(numberOfRowsInSection)")
@@ -130,7 +142,21 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
             cell.bookImage.af_setImage(withURL: self.imageURL)
             return cell
         }
-        else {
+        /*else if indexPath.row <= self.reviews2.count{
+            let cell=tableView.dequeueReusableCell(withIdentifier: "ReviewCell") as! ReviewViewCell
+            let review=reviews2[indexPath.row]
+            // print(review)
+            let ratingNumb=review["rating"] as! Int
+            cell.titleLabel.text=review["title"] as? String
+            let imageName="stars_\(ratingNumb).png" as String
+            cell.ratingView.image=UIImage(named:imageName)!
+            let profile=review["username"] as? String
+            print(profile)
+            cell.usernameLabel.text=profile as? String
+            cell.reviewLabel.text=review["comment"] as? String
+            return cell
+        }*/
+        else{
             let cell=tableView.dequeueReusableCell(withIdentifier: "ReviewCell") as! ReviewViewCell
             let review=reviews[indexPath.row]
             // print(review)
@@ -161,6 +187,7 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
         query.findObjectsInBackground { (data, error) in
             if let error = error {
                 print(error.localizedDescription)
+                return
             }
             else{
                 print("data")
@@ -203,6 +230,7 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
         let task = session.dataTask(with: url) { (data, response, error) in
             if let error = error {
                 print(error.localizedDescription)
+                return
             } else if let data = data,
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
                 //print("json got through")
@@ -320,6 +348,7 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
                 if self.isRecentSearch == false {
                     bookId = data![0].objectId!
                     self.createSearch(bookId: bookId)
+                    //self.loadAppReviews(bookId:bookId)
                 }
             }
         }
