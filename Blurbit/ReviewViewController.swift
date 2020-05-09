@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class ReviewViewController: UIViewController {
 
@@ -17,18 +18,33 @@ class ReviewViewController: UIViewController {
     @IBOutlet var reviewView: UITextView!
     
     var reviewOBJ: [String:Any]!
+    var reviewParseOBJ = PFObject(className:"Review")
+    var isParse = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let profile = reviewOBJ["profile"] as! [String: Any]
-        let ratingNumb = reviewOBJ["rating"] as! Int
-        let imgName = "stars_\(ratingNumb).png" as String
-        
-        rating.image = UIImage(named: imgName)
-        reviewTitle.text = reviewOBJ["title"] as! String
-        username.text = profile["name"] as! String
-        reviewView.text = reviewOBJ["body"] as! String
+        if isParse{
+            let user = reviewParseOBJ["userId"] as! PFUser
+            let profile = user["username"] as! String
+            let ratingNumb = reviewParseOBJ["rating"] as! Int
+            let imgName = "stars_\(ratingNumb).png" as String
+            
+            rating.image = UIImage(named: imgName)
+            reviewTitle.text = reviewParseOBJ["title"] as! String
+            username.text = profile
+            reviewView.text = reviewParseOBJ["comment"] as! String
+        }
+        else{
+            let profile = reviewOBJ["profile"] as! [String: Any]
+            let ratingNumb = reviewOBJ["rating"] as! Int
+            let imgName = "stars_\(ratingNumb).png" as String
+            
+            rating.image = UIImage(named: imgName)
+            reviewTitle.text = reviewOBJ["title"] as! String
+            username.text = profile["name"] as! String
+            reviewView.text = reviewOBJ["body"] as! String
+        }
         
         
         

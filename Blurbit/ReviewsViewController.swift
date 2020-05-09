@@ -419,10 +419,17 @@ class ReviewsViewController: UIViewController,UITableViewDelegate,UITableViewDat
             let expandedReview = segue.destination as! ReviewViewController
             let cell = sender as! UITableViewCell
             let indexPath = tableView.indexPath(for: cell)!
-            let review = reviews[indexPath.row]
-            
-            expandedReview.reviewOBJ = review
-            tableView.deselectRow(at: indexPath, animated: true)
+            if indexPath.row <= reviews2.count{
+                let review = reviews2[indexPath.row-1]
+                expandedReview.reviewParseOBJ = review
+                expandedReview.isParse = true
+                tableView.deselectRow(at: indexPath, animated: true)
+            }
+            else{
+                let review = reviews[indexPath.row-reviews2.count]
+                expandedReview.reviewOBJ = review
+                tableView.deselectRow(at: indexPath, animated: true)
+            }            //tableView.deselectRow(at: indexPath, animated: true)
         }
         else {
             let noReviewsView = segue.destination as! NoReviewsViewController
