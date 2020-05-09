@@ -34,30 +34,27 @@ class FeaturedViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         self.featuredTableView.dataSource = self
         self.featuredTableView.delegate = self
-        self.loadReviews()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         print("FeaturedViewController.swift: viewDidAppear()")
-        self.loadPredictions()
+        self.loadReviews()
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         self.recommendations = []
         self.reviews = [:]
     }
-    
-    
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("FeaturedViewController.swift: tableView(cellForRowAt)")
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeaturedTableViewCell") as! FeaturedTableViewCell
         let recommendation = self.recommendations[indexPath.row]
-        print("recommendation=<\(recommendation)>")
+        //print("recommendation=<\(recommendation)>")
         cell.author.text = recommendation["author"] as? String
         let url = URL(string: recommendation["imageUrl"]! as! String)
         cell.coverView.af_setImage(withURL: url!)
-        cell.rating.text = "5"
+        cell.rating.text = ""
         cell.title.text = recommendation["title"] as? String
         return cell
     }
@@ -76,20 +73,21 @@ class FeaturedViewController: UIViewController, UITableViewDataSource, UITableVi
         // exclude = A sequence of items to exclude from recommendations.  Defaults to the input item list if not given.
         // if user has no reviews add a dummy review to seed the recommender
         if self.reviews.count < 1 {
-            print("user has no reviews")
-            //self.reviews["foo"] = 5.0
+            print("FeaturedViewController.swift: user has no reviews")
+        } else {
+            print("FeaturedViewController.swift: user has at least one review")
         }
         guard let prediction = try? model.prediction(input: ItemSimilarityRecommenderInput(items: self.reviews, k: 5, restrict_: ["None"], exclude: ["None"])) else {
             fatalError("FeaturedViewController.swift: runtime error while generating prediction")
         }
         var ct=0
-        print("prediction.recommendations=<\(prediction.recommendations)>")
+        //print("prediction.recommendations=<\(prediction.recommendations)>")
         for recommendation in prediction.recommendations {
             ct=ct+1
             self.getBookById(bookId: recommendation)
         }
-        print("count:")
-        print(ct)
+        //print("count:")
+        //print(ct)
         self.featuredTableView.reloadData()
     }
 
@@ -103,18 +101,18 @@ class FeaturedViewController: UIViewController, UITableViewDataSource, UITableVi
         query.whereKey("objectId", equalTo: bookId)
         query.findObjectsInBackground { (books, error) in
             if books != nil {
-                print("found books")
-                print("books=<\(books!)>")
+                //print("found books")
+                //print("books=<\(books!)>")
                 for book in books! {
-                    print("book[\"author\"]=<\(book["author"]!)>")
-                    print("book[\"imageUrl\"]!=<\(book["imageUrl"]!)>")
-                    print("book[\"isbn\"]=<\(book["isbn"]!)>")
-                    print("book[\"title\"]=<\(book["title"]!)>")
+                    //print("book[\"author\"]=<\(book["author"]!)>")
+                    //print("book[\"imageUrl\"]!=<\(book["imageUrl"]!)>")
+                    //print("book[\"isbn\"]=<\(book["isbn"]!)>")
+                    //print("book[\"title\"]=<\(book["title"]!)>")
                     detailedBook["author"] = book["author"]!
                     detailedBook["imageUrl"] = book["imageUrl"]!
                     detailedBook["isbn"] = book["isbn"]!
                     detailedBook["title"] = book["title"]!
-                    print("detailedBook=<\(detailedBook)>")
+                    //print("detailedBook=<\(detailedBook)>")
                     self.recommendations.append(detailedBook)
                     self.featuredTableView.reloadData()
                     return
@@ -124,7 +122,7 @@ class FeaturedViewController: UIViewController, UITableViewDataSource, UITableVi
                 print("FeaturedViewController.swift: \(message)")
             }
         }
-        print("detailedBook=<\(detailedBook)>")
+        //print("detailedBook=<\(detailedBook)>")
         //return detailedBook
     }
 
@@ -138,12 +136,12 @@ class FeaturedViewController: UIViewController, UITableViewDataSource, UITableVi
             if reviews != nil {
                 for review in reviews! {
                     self.reviews["\(review["bookId"]!)"] = review["rating"] as? Double
-                    print("self.reviews=<\(self.reviews)>")
                 }
             } else {
                 let message = error?.localizedDescription ?? "error loading review records"
                 print("FeaturedViewController.swift: \(message)")
             }
+            self.loadPredictions()
         }
     }
 
